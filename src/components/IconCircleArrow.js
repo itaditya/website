@@ -10,6 +10,8 @@ export default function IconCircleArrow(props) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      focusable="false"
+      aria-hidden="true"
       {...props}
     >
       <circle cx="12" cy="12" r="10"></circle>

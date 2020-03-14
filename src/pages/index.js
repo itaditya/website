@@ -1,6 +1,12 @@
 import Head from 'next/head';
 
-import IconTwitter from '../components/IconTwitter';
+import IconWebpack from '../components/IconWebpack';
+import IconBabel from '../components/IconBabel';
+import IconVue from '../components/IconVue';
+import IconJS from '../components/IconJS';
+import IconHTML from '../components/IconHTML';
+import IconCSS from '../components/IconCSS';
+import IconReact from '../components/IconReact';
 import IconCircleArrow from '../components/IconCircleArrow';
 
 const Home = () => (
@@ -23,98 +29,85 @@ const Home = () => (
         <span className="ml-1">_adi</span>
       </h4>
       <ul className="flex items-center">
-        <li>Project Showcase</li>
-        <li className="ml-8">Reading List</li>
+        <li>Projects</li>
+        <li className="ml-8">Open Source</li>
         <li className="ml-8">
-          <a href="/blog" className="border border-gray-700 block py-1 px-4">
-            My Articles
+          <a href="/blog" className="bg-white border border-gray-500 block py-2 px-5">
+            My Blog
           </a>
         </li>
       </ul>
     </nav>
 
     <main className="col-start-2 col-span-10 row-auto py-8 mt-10">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center" style={{ height: '50vh' }}>
         <div className="w-7/12">
           <h1 className="text-6xl font-sans font-heading font-bold tracking-tighter text-gray-700">
-            Hey, I'm <span className="text-gray-900">Aditya!</span>
+            Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
           </h1>
           <p className="mt-2 text-xl">
-            I'm a frontend web developer working on React.js, Node.js.
+            Currently working at <span className="font-bold text-primary-700">HackerRank</span> as a frontend web developer.
             <br />I love open-sourcing my knowledge, be it through building projects on GitHub, giving talks or writing
             blogs.
           </p>
           <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-800 border border-primary-600 text-lg shadow-lg transition-colors ease-in duration-200">
-            Check my work
+            Go to Portfolio
           </button>
         </div>
-        <div className="w-4/12 ml-20 pl-20">
-          <article className="flex flex-col items-center bg-twitter-background text-white py-8 px-6 rounded-md shadow-2xl">
-            <img src="https://via.placeholder.com/150" className="w-36 h-36 rounded-full shadow-xl" />
-            <ul className="mt-10 text-white">
-              <li className="flex items-center">
-                <img
-                  src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/round-pushpin_1f4cd.png"
-                  alt="Location"
-                  className="w-6 h-6"
-                />
-                <span className="ml-3 text-lg">Bengaluru, India</span>
-              </li>
-              <li className="flex items-center mt-1">
-                <img
-                  src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/hourglass_231b.png"
-                  alt="Experience"
-                  className="w-6 h-6"
-                />
-                <span className="ml-3 text-lg">2 years of experience</span>
-              </li>
-              <li className="flex items-center mt-1">
-                <img
-                  src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/236/envelope_2709.png"
-                  alt="Email Address"
-                  className="w-6 h-6"
-                />
-                <span className="ml-3 text-lg">adityaa803@gmail.com</span>
-              </li>
-            </ul>
-            <a
-              href="https://twitter.com/dev__adi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
-            >
-              <IconTwitter className="text-2xl" />
-              <strong className="ml-1 font-bold">Follow</strong>
-            </a>
-          </article>
+      </div>
+      <div className="absolute right-0 pr-10 text-gray-400 text-6xl animation-fade-in" style={{ top: '20vh' }}>
+        <div className="flex justify-center text-gray-500">
+          <IconReact width="4em" height="4em" />
+        </div>
+        <div className="mt-10 overflow-x-hidden" style={{ width: '440px' }}>
+          <ul className="flex animation-sliding">
+            <li>
+              <IconHTML width="2em" height="2em" />
+            </li>
+            <li>
+              <IconCSS width="2em" height="2em" />
+            </li>
+            <li className="ml-5">
+              <IconVue width="2em" height="2em" />
+            </li>
+            <li className="ml-5">
+              <IconWebpack width="2em" height="2em" />
+            </li>
+            <li className="ml-5">
+              <IconBabel width="2em" height="2em" />
+            </li>
+            <li className="ml-8">
+              <IconJS width="2em" height="2em" />
+            </li>
+          </ul>
         </div>
       </div>
-      <section className="mt-40 flex justify-between group">
+      <section className="mt-32 flex justify-between">
         <div>
           <h2 className="text-4xl font-bold">Popular Articles</h2>
           <ul className="mt-4">
-            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md">
-              <a href="/" className="flex items-center">
+            <li className="py-2 pl-3 pr-6 rounded-md">
+              <a href="/blog" className="flex items-center">
                 <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Escaping from Async/Await Hell</span>
+                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">Escaping from Async/Await Hell</span>
                 <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
                   20 mins read
                 </span>
               </a>
             </li>
-            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md mt-4">
-              <a href="/" className="flex items-center">
+            <li className="py-2 pl-3 pr-6 rounded-md mt-4">
+              <a href="/blog" className="flex items-center">
                 <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Things I wish I knew before using MongoDB</span>
+                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">Things I wish I knew before using MongoDB</span>
                 <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
                   20 mins read
                 </span>
               </a>
             </li>
-            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md mt-4">
-              <a href="/" className="flex items-center">
+            <li className="py-2 pl-3 pr-6 rounded-md mt-4">
+              <a href="/blog" className="flex items-center">
                 <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Building a game with React Hooks</span>
+                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">Building a game with React Hooks</span>
                 <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
                   20 mins read
                 </span>
@@ -122,16 +115,37 @@ const Home = () => (
             </li>
           </ul>
         </div>
-        <a href="/blog" className="bg-blue-300 w-48 rounded-lg flex flex-col opacity-0 group-hover:opacity-100 text-center items-center justify-center text-3xl shadow-xl transition ease-in-out duration-300">
+        <a href="/blog" className="bg-blue-300 w-56 mt-4 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl">
           <span className="text-4xl text-gray-800">
             <IconCircleArrow />
           </span>
           <span className="mt-3 font-bold text-gray-900">
-            View all
+            Checkout
             <br />
-            articles
+            more articles
           </span>
         </a>
+      </section>
+      <section className="mt-8 text-xl flex">
+        <h1 className="font-bold text-primary-600">Hot off the press:</h1><a href="/blog" className="ml-2 hover:underline">How to do Visual Testing in React</a>
+      </section>
+      <section className="mt-40 flex flex-col items-center">
+        <h2 className="text-4xl font-bold">Open Source Tools</h2>
+        <div className="grid grid-cols-4 col-gap-8 row-gap-12 w-full mt-16">
+          {
+            Array(8).fill({}).map(() => (
+              <article className="bg-white shadow-xl p-4 rounded-lg text-center">
+                <h3 className="w-full text-2xl">Birla</h3>
+                <p className="text-gray-700 mt-3">Generate React components in one command</p>
+                <ul className="flex justify-evenly px-8 mt-6">
+                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
+                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
+                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
+                </ul>
+              </article>
+            ))
+          }
+        </div>
       </section>
     </main>
 
