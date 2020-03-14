@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import IconTwitter from '../components/IconTwitter';
+import IconCircleArrow from '../components/IconCircleArrow';
 
 const Home = () => (
   <div
@@ -21,10 +22,14 @@ const Home = () => (
         <span>@dev_</span>
         <span className="ml-1">_adi</span>
       </h4>
-      <ul className="flex">
-        <li>My Projects</li>
+      <ul className="flex items-center">
+        <li>Project Showcase</li>
         <li className="ml-8">Reading List</li>
-        <li className="ml-8">Blog</li>
+        <li className="ml-8">
+          <a href="/blog" className="border border-gray-700 block py-1 px-4">
+            My Articles
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -39,14 +44,14 @@ const Home = () => (
             <br />I love open-sourcing my knowledge, be it through building projects on GitHub, giving talks or writing
             blogs.
           </p>
-          <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-900 text-lg shadow-lg transition-colors ease-in duration-200">
+          <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-800 border border-primary-600 text-lg shadow-lg transition-colors ease-in duration-200">
             Check my work
           </button>
         </div>
-        <div className="w-4/12 ml-20 px-8">
+        <div className="w-4/12 ml-20 pl-20">
           <article className="flex flex-col items-center bg-twitter-background text-white py-8 px-6 rounded-md shadow-2xl">
             <img src="https://via.placeholder.com/150" className="w-36 h-36 rounded-full shadow-xl" />
-            <ul className="mt-5 text-white">
+            <ul className="mt-10 text-white">
               <li className="flex items-center">
                 <img
                   src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/round-pushpin_1f4cd.png"
@@ -76,7 +81,7 @@ const Home = () => (
               href="https://twitter.com/dev__adi"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md"
+              className="mt-8 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
             >
               <IconTwitter className="text-2xl" />
               <strong className="ml-1 font-bold">Follow</strong>
@@ -84,10 +89,49 @@ const Home = () => (
           </article>
         </div>
       </div>
-      <section>
-        <h2 className="text-4xl">
-          My Articles
-        </h2>
+      <section className="mt-40 flex justify-between group">
+        <div>
+          <h2 className="text-4xl font-bold">Popular Articles</h2>
+          <ul className="mt-4">
+            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md">
+              <a href="/" className="flex items-center">
+                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Escaping from Async/Await Hell</span>
+                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                  20 mins read
+                </span>
+              </a>
+            </li>
+            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md mt-4">
+              <a href="/" className="flex items-center">
+                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Things I wish I knew before using MongoDB</span>
+                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                  20 mins read
+                </span>
+              </a>
+            </li>
+            <li className="hover:bg-overlay-100 py-2 pl-3 pr-6 rounded-md mt-4">
+              <a href="/" className="flex items-center">
+                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                <span className="text-2xl text-gray-800 ml-4 max-w-2xl">Building a game with React Hooks</span>
+                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                  20 mins read
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a href="/blog" className="bg-blue-300 w-48 rounded-lg flex flex-col opacity-0 group-hover:opacity-100 text-center items-center justify-center text-3xl shadow-xl transition ease-in-out duration-300">
+          <span className="text-4xl text-gray-800">
+            <IconCircleArrow />
+          </span>
+          <span className="mt-3 font-bold text-gray-900">
+            View all
+            <br />
+            articles
+          </span>
+        </a>
       </section>
     </main>
 

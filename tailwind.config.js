@@ -15,6 +15,20 @@ module.exports = {
           700: 'hsl(202.8, 78.8%, 42.5%)',
         },
         'twitter-background': 'hsl(208.9, 35.1%, 15.1%)',
+        overlay: {
+          100: 'rgba(0, 0, 0, 0.1)',
+          200: 'rgba(0, 0, 0, 0.2)',
+          300: 'rgba(0, 0, 0, 0.3)',
+          400: 'rgba(0, 0, 0, 0.4)',
+          500: 'rgba(0, 0, 0, 0.5)',
+          600: 'rgba(0, 0, 0, 0.6)',
+          700: 'rgba(0, 0, 0, 0.7)',
+          800: 'rgba(0, 0, 0, 0.8)',
+          900: 'rgba(0, 0, 0, 0.9)',
+        },
+      },
+      width: {
+        'max-content': 'max-content',
       },
       fontFamily: {
         heading: ['Lora'],
@@ -22,6 +36,8 @@ module.exports = {
       }
     },
   },
-  variants: {},
+  variants: {
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+  },
   plugins: [],
 };
