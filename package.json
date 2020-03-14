@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 7991",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 7991"
   },
   "dependencies": {
     "next": "9.3.0",
     "react": "16.13.0",
     "react-dom": "16.13.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.2.0"
   }
 }
