@@ -7,7 +7,70 @@ import IconJS from '../components/IconJS';
 import IconHTML from '../components/IconHTML';
 import IconCSS from '../components/IconCSS';
 import IconReact from '../components/IconReact';
+import IconNpm from '../components/IconNpm';
+import IconGitHub from '../components/IconGitHub';
+import IconGlobe from '../components/IconGlobe';
 import IconCircleArrow from '../components/IconCircleArrow';
+import IconTwitter from '../components/IconTwitter';
+import IconMedium from '../components/IconMedium';
+import IconYouTube from '../components/IconYouTube';
+
+const myPackages = [
+  {
+    name: 'Birla',
+    description: 'Generate React component files in one command',
+    links: {
+      github: 'https://github.com/itaditya/birla',
+      website: 'https://github.com/itaditya/birla/blob/master/README.md',
+      npm: 'https://www.npmjs.com/package/birla',
+    },
+  },
+  {
+    name: 'Circlebars',
+    description: 'Circular progress bars made easy',
+    links: {
+      github: 'https://github.com/itaditya/circlebars',
+      website: 'http://circlebar.surge.sh/',
+      npm: 'https://www.npmjs.com/package/circlebars',
+    },
+  },
+  {
+    name: 'Optimisitc Toggle',
+    description: 'Respond to user actions without waiting on API',
+    links: {
+      github: 'https://github.com/interviewstreet/react-optimistic-toggle',
+      website: 'https://react-optimistic-toggle.netlify.com/',
+      npm: 'https://www.npmjs.com/package/react-optimistic-toggle',
+    },
+  },
+  {
+    name: 'Mentions Plugin',
+    description: 'Detects if a GitHub user is mentioned in a comment.',
+    links: {
+      github: 'https://github.com/itaditya/probot-on-mention',
+      website: 'https://github.com/itaditya/probot-on-mention/blob/master/README.md',
+      npm: 'https://www.npmjs.com/package/probot-on-mention',
+    },
+  },
+  {
+    name: 'Windows Hotspot',
+    description: 'Setup a Wi-Fi Hotspot with ease',
+    links: {
+      github: 'https://github.com/itaditya/hotspot',
+      website: 'https://github.com/itaditya/hotspot/blob/master/README.md',
+      npm: 'https://www.npmjs.com/package/whotspot',
+    },
+  },
+  {
+    name: 'Material React Icons',
+    description: 'Import Material Icons as React components',
+    links: {
+      github: 'https://github.com/itaditya/material-design-icons',
+      website: 'https://github.com/itaditya/material-design-icons/blob/master/README.md',
+      npm: 'https://www.npmjs.com/package/material-svg-react-icons',
+    },
+  },
+];
 
 const Home = () => (
   <div
@@ -25,15 +88,34 @@ const Home = () => (
 
     <nav className="col-span-12 py-4 px-6 flex items-center justify-between">
       <h4 className="text-2xl font-bold" aria-label="@dev__adi">
-        <span>@dev_</span>
-        <span className="ml-1">_adi</span>
+        <a href="/">
+          <span>@dev_</span>
+          <span className="ml-1">_adi</span>
+        </a>
       </h4>
       <ul className="flex items-center">
-        <li>Projects</li>
-        <li className="ml-8">Open Source</li>
+        <li className="">
+          <a
+            href="/work"
+            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
+          >
+            Work
+          </a>
+        </li>
         <li className="ml-8">
-          <a href="/blog" className="block">
-            My Blog
+          <a
+            href="/projects"
+            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
+          >
+            Projects
+          </a>
+        </li>
+        <li className="ml-8">
+          <a
+            href="/blog"
+            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
+          >
+            Blog
           </a>
         </li>
       </ul>
@@ -51,7 +133,7 @@ const Home = () => (
             <br />I love open-sourcing my knowledge, be it through building projects on GitHub, giving talks or writing
             blogs.
           </p>
-          <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-800 border border-primary-600 text-lg shadow-lg transition-colors ease-in duration-200">
+          <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-800 border border-primary-600 text-lg shadow-lg hover:shadow-xl transition ease-in duration-200">
             Go to Portfolio
           </button>
         </div>
@@ -77,7 +159,7 @@ const Home = () => (
             <li className="ml-8">
               <IconJS width="2em" height="2em" />
             </li>
-            <li className="ml-5">
+            <li className="ml-8">
               <IconReact width="2em" height="2em" />
             </li>
           </ul>
@@ -124,12 +206,12 @@ const Home = () => (
         </div>
         <a
           href="/blog"
-          className="bg-blue-300 w-56 mt-4 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl"
+          className="bg-blue-300 hover:bg-blue-400 w-56 mt-auto py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in"
         >
-          <span className="text-4xl text-gray-800">
+          <span className="text-4xl text-blue-700">
             <IconCircleArrow />
           </span>
-          <span className="mt-3 font-bold text-gray-900">
+          <span className="mt-3 font-bold text-blue-800">
             Checkout
             <br />
             more articles
@@ -142,35 +224,119 @@ const Home = () => (
           How to do Visual Testing in React
         </a>
       </section>
-      <section className="mt-40 flex flex-col items-center">
+      <section className="mt-56 flex flex-col items-center">
         <h2 className="text-4xl font-bold">Open Source Tools</h2>
         <div className="grid grid-cols-4 col-gap-8 row-gap-12 w-full mt-16">
-          {Array(8)
-            .fill({})
-            .map(() => (
-              <article className="bg-white shadow-xl p-4 rounded-lg text-center">
-                <h3 className="w-full text-2xl">Birla</h3>
-                <p className="text-gray-700 mt-3">Generate React components in one command</p>
-                <ul className="flex justify-evenly px-8 mt-6">
-                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
-                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
-                  <li className="w-10 h-10 bg-red-500 hover:bg-red-600 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"></li>
-                </ul>
-              </article>
-            ))}
+          {myPackages.map(pkg => (
+            <article className="p-4 bg-white shadow-xl rounded-lg text-center" key={pkg.name}>
+              <h3 className="w-full text-2xl">{pkg.name}</h3>
+              <p className="text-gray-700 mt-3">{pkg.description}</p>
+              <ul className="flex justify-evenly items-center px-8 mt-6">
+                <li>
+                  <a
+                    href={pkg.links.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-2 text-white text-2xl"
+                  >
+                    <span className="block p-1 bg-blue-500 rounded-full hover:shadow-lg transition duration-200 ease-in">
+                      <IconGlobe />
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href={pkg.links.npm} target="_blank" rel="noopener noreferrer" className="block p-2 text-2xl">
+                    <span
+                      className="block p-1 rounded-full hover:shadow-lg transition duration-200 ease-in"
+                      style={{ backgroundColor: 'hsl(3.2, 52.4%, 48.6%)' }}
+                    >
+                      <IconNpm />
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href={pkg.links.github} target="_blank" rel="noopener noreferrer" className="block p-2 text-3xl">
+                    <span className="rounded-full hover:shadow-lg transition duration-200 ease-in">
+                      <IconGitHub />
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </article>
+          ))}
+          <article
+            className="py-4 px-8 col-span-2 bg-blue-700 shadow-xl rounded-lg"
+            style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
+          >
+            <h3 className="w-full text-2xl text-white font-bold">Other Projects</h3>
+            <p className="text-gray-100 text-lg mt-1">
+              I make lots of side projects whenever I'm <br /> learning new things.
+            </p>
+            <a
+              href="/projects"
+              className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
+            >
+              See All Projects
+            </a>
+          </article>
         </div>
+      </section>
+      <section className="mt-40 flex items-center justify-between">
+        <div className="max-w-md">
+          <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
+          <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
+        </div>
+        <iframe
+          title="Subscribe to Aditya's newsletter"
+          scrolling="no"
+          src="https://buttondown.email/itaditya?as_embed=true"
+          className="w-full md:w-3/4 lg:w-1/2 h-56 bg-gray-300"
+        ></iframe>
       </section>
     </main>
 
     <aside className="fixed left-0 h-screen px-4 flex flex-col justify-center items-center" style={{ top: '0' }}>
       <ul>
-        <li className="bg-white rounded-full w-10 h-10 shadow-md"></li>
-        <li className="bg-white rounded-full w-10 h-10 mt-4 shadow-md"></li>
-        <li className="bg-white rounded-full w-10 h-10 mt-4 shadow-md"></li>
+        <li>
+          <a
+            href="https://twitter.com/dev__adi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-2 text-white text-3xl"
+          >
+            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: 'hsl(202.8, 89.1%, 53.1%)' }}>
+              <IconTwitter />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://medium.com/@adityaa803"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-2 text-gray-700 text-3xl"
+          >
+            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: '#12100E' }}>
+              <IconMedium />
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.youtube.com/channel/UCk5cWNVIgtW_rpR7J_VSiWw?view_as=subscriber"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-2 text-gray-700 text-3xl"
+          >
+            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: 'hsl(0, 75.4%, 50.6%)' }}>
+              <IconYouTube />
+            </span>
+          </a>
+        </li>
       </ul>
     </aside>
 
-    <footer className="col-span-12 py-3 px-4 mt-16">
+    <footer className="col-span-12 py-3 px-4 mt-16 flex justify-between items-center">
       <span className="flex items-center">
         <img
           src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/htc/37/envelope_2709.png"
@@ -179,6 +345,21 @@ const Home = () => (
         />
         <span className="ml-2 text-lg">adityaa803@gmail.com</span>
       </span>
+      <ul className="flex">
+        <li>
+          <a href="/labs" className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">
+            Experiments
+          </a>
+        </li>
+        <li className="ml-10">
+          <a
+            href="/social"
+            className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in"
+          >
+            Connect with me
+          </a>
+        </li>
+      </ul>
     </footer>
   </div>
 );
