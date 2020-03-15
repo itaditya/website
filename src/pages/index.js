@@ -32,7 +32,7 @@ const Home = () => (
         <li>Projects</li>
         <li className="ml-8">Open Source</li>
         <li className="ml-8">
-          <a href="/blog" className="bg-white border border-gray-500 block py-2 px-5">
+          <a href="/blog" className="block">
             My Blog
           </a>
         </li>
@@ -56,10 +56,7 @@ const Home = () => (
           </button>
         </div>
       </div>
-      <div className="absolute right-0 pr-10 text-gray-400 text-6xl animation-fade-in" style={{ top: '20vh' }}>
-        <div className="flex justify-center text-gray-500">
-          <IconReact width="4em" height="4em" />
-        </div>
+      <div className="absolute pr-10 text-gray-400 text-6xl animation-fade-in" style={{ top: '50vh', right: '100px' }}>
         <div className="mt-10 overflow-x-hidden" style={{ width: '440px' }}>
           <ul className="flex animation-sliding">
             <li>
@@ -79,6 +76,9 @@ const Home = () => (
             </li>
             <li className="ml-8">
               <IconJS width="2em" height="2em" />
+            </li>
+            <li className="ml-5">
+              <IconReact width="2em" height="2em" />
             </li>
           </ul>
         </div>
