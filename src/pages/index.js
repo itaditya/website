@@ -1,19 +1,23 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
-import IconWebpack from '../components/IconWebpack';
-import IconBabel from '../components/IconBabel';
-import IconVue from '../components/IconVue';
-import IconJS from '../components/IconJS';
-import IconHTML from '../components/IconHTML';
-import IconCSS from '../components/IconCSS';
-import IconReact from '../components/IconReact';
-import IconNpm from '../components/IconNpm';
-import IconGitHub from '../components/IconGitHub';
-import IconGlobe from '../components/IconGlobe';
-import IconCircleArrow from '../components/IconCircleArrow';
-import IconTwitter from '../components/IconTwitter';
-import IconMedium from '../components/IconMedium';
-import IconYouTube from '../components/IconYouTube';
+import SiteNavbar from '_components/SiteNavbar';
+import SiteFooter from '_components/SiteFooter';
+
+import IconWebpack from '_components/IconWebpack';
+import IconBabel from '_components/IconBabel';
+import IconVue from '_components/IconVue';
+import IconJS from '_components/IconJS';
+import IconHTML from '_components/IconHTML';
+import IconCSS from '_components/IconCSS';
+import IconReact from '_components/IconReact';
+import IconNpm from '_components/IconNpm';
+import IconGitHub from '_components/IconGitHub';
+import IconGlobe from '_components/IconGlobe';
+import IconCircleArrow from '_components/IconCircleArrow';
+import IconTwitter from '_components/IconTwitter';
+import IconMedium from '_components/IconMedium';
+import IconYouTube from '_components/IconYouTube';
 
 const myPackages = [
   {
@@ -74,54 +78,21 @@ const myPackages = [
 
 const Home = () => (
   <div
-    className="relative min-h-screen bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+    className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
     style={{ gridTemplateRows: 'auto 1fr auto' }}
   >
     <Head>
-      <title>Homepage | Aditya Agarwal</title>
+      <title>Home | Aditya Agarwal</title>
       <link rel="icon" href="/favicon.ico" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
     </Head>
 
-    <nav className="col-span-12 py-4 px-6 flex items-center justify-between">
-      <h4 className="text-2xl font-bold" aria-label="@dev__adi">
-        <a href="/">
-          <span>@dev_</span>
-          <span className="ml-1">_adi</span>
-        </a>
-      </h4>
-      <ul className="flex items-center">
-        <li className="">
-          <a
-            href="/work"
-            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
-          >
-            Work
-          </a>
-        </li>
-        <li className="ml-8">
-          <a
-            href="/projects"
-            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
-          >
-            Projects
-          </a>
-        </li>
-        <li className="ml-8">
-          <a
-            href="/blog"
-            className="block text-xl text-gray-800 hover:text-primary-600 border-b-2 border-transparent hover:border-primary py-2 px-2 transition-colors duration-200 ease-in"
-          >
-            Blog
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <SiteNavbar />
 
-    <main className="col-start-2 col-span-10 row-auto py-8 mt-10">
+    <main className="col-start-2 col-span-10 row-auto mt-24">
       <div className="flex items-center" style={{ height: '50vh' }}>
         <div className="w-7/12">
           <h1 className="text-6xl font-sans font-heading font-bold tracking-tighter text-gray-700">
@@ -170,53 +141,58 @@ const Home = () => (
           <h2 className="text-4xl font-bold">Popular Articles</h2>
           <ul className="mt-4">
             <li className="py-2 pl-3 pr-6 rounded-md">
-              <a href="/blog" className="flex items-center">
-                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                  Escaping from Async/Await Hell
-                </span>
-                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                  20 mins read
-                </span>
-              </a>
+              <Link href="/blog/second-blog">
+                <a className="flex items-center">
+                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+                    Escaping from Async/Await Hell
+                  </span>
+                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                    20 mins read
+                  </span>
+                </a>
+              </Link>
             </li>
             <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-              <a href="/blog" className="flex items-center">
-                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                  Things I wish I knew before using MongoDB
-                </span>
-                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                  14 mins read
-                </span>
-              </a>
+              <Link href="/blog/first-blog">
+                <a className="flex items-center">
+                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+                    Things I wish I knew before using MongoDB
+                  </span>
+                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                    14 mins read
+                  </span>
+                </a>
+              </Link>
             </li>
             <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-              <a href="/blog" className="flex items-center">
-                <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                  Building a game with React Hooks
-                </span>
-                <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                  9 mins read
-                </span>
-              </a>
+              <Link href="/blog/first-blog">
+                <a className="flex items-center">
+                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
+                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+                    Building a game with React Hooks
+                  </span>
+                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+                    9 mins read
+                  </span>
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
-        <a
-          href="/blog"
-          className="bg-blue-300 hover:bg-blue-400 w-56 mt-auto py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in"
-        >
-          <span className="text-4xl text-blue-700">
-            <IconCircleArrow />
-          </span>
-          <span className="mt-3 font-bold text-blue-800">
-            Checkout
-            <br />
-            more articles
-          </span>
-        </a>
+        <Link href="/blog">
+          <a className="bg-blue-300 hover:bg-blue-400 w-56 mt-auto py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in">
+            <span className="text-4xl text-blue-700">
+              <IconCircleArrow />
+            </span>
+            <span className="mt-3 font-bold text-blue-800">
+              Checkout
+              <br />
+              more articles
+            </span>
+          </a>
+        </Link>
       </section>
       <section className="mt-8 text-xl flex">
         <h1 className="font-bold text-primary-600">Hot off the press:</h1>
@@ -281,7 +257,7 @@ const Home = () => (
           </article>
         </div>
       </section>
-      <section className="mt-40 flex items-center justify-between">
+      <section className="mt-56 flex items-center justify-between">
         <div className="max-w-md">
           <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
           <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
@@ -304,7 +280,10 @@ const Home = () => (
             rel="noopener noreferrer"
             className="block p-2 text-white text-3xl"
           >
-            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: 'hsl(202.8, 89.1%, 53.1%)' }}>
+            <span
+              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
+              style={{ backgroundColor: 'hsl(202.8, 89.1%, 53.1%)' }}
+            >
               <IconTwitter />
             </span>
           </a>
@@ -316,7 +295,10 @@ const Home = () => (
             rel="noopener noreferrer"
             className="block p-2 text-gray-700 text-3xl"
           >
-            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: '#12100E' }}>
+            <span
+              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
+              style={{ backgroundColor: '#12100E' }}
+            >
               <IconMedium />
             </span>
           </a>
@@ -328,39 +310,17 @@ const Home = () => (
             rel="noopener noreferrer"
             className="block p-2 text-gray-700 text-3xl"
           >
-            <span className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in" style={{ backgroundColor: 'hsl(0, 75.4%, 50.6%)' }}>
+            <span
+              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
+              style={{ backgroundColor: 'hsl(0, 75.4%, 50.6%)' }}
+            >
               <IconYouTube />
             </span>
           </a>
         </li>
       </ul>
     </aside>
-
-    <footer className="col-span-12 py-3 px-4 mt-16 flex justify-between items-center">
-      <span className="flex items-center">
-        <img
-          src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/htc/37/envelope_2709.png"
-          alt="Email Address"
-          className="w-6 h-6"
-        />
-        <span className="ml-2 text-lg">adityaa803@gmail.com</span>
-      </span>
-      <ul className="flex">
-        <li>
-          <a href="/labs" className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">
-            Experiments
-          </a>
-        </li>
-        <li className="ml-10">
-          <a
-            href="/social"
-            className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in"
-          >
-            Connect with me
-          </a>
-        </li>
-      </ul>
-    </footer>
+    <SiteFooter />
   </div>
 );
 
