@@ -37,8 +37,8 @@ const Blog = props => {
         <ul className="xl:w-1/2">
           {posts.map((post) => (
             <Link key={post.slug} href={'/blog/' + post.slug}>
-              <li className="mt-8 pl-3 cursor-pointer">
-                <h3 className="text-2xl font-medium text-gray-800">
+              <li className="group mt-8 pl-3 cursor-pointer">
+                <h3 className="text-2xl font-medium text-gray-800 group-hover:underline">
                   <a>
                     {post.title}
                   </a>
