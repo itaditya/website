@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { PostsPopular } from '_components/PostsList';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 
@@ -139,47 +140,7 @@ const Home = () => (
       <section className="mt-32 flex justify-between">
         <div>
           <h2 className="text-4xl font-bold">Popular Articles</h2>
-          <ul className="mt-4">
-            <li className="py-2 pl-3 pr-6 rounded-md">
-              <Link href="/blog/second-blog">
-                <a className="flex items-center">
-                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                    Escaping from Async/Await Hell
-                  </span>
-                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                    20 mins read
-                  </span>
-                </a>
-              </Link>
-            </li>
-            <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-              <Link href="/blog/first-blog">
-                <a className="flex items-center">
-                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                    Things I wish I knew before using MongoDB
-                  </span>
-                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                    14 mins read
-                  </span>
-                </a>
-              </Link>
-            </li>
-            <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-              <Link href="/blog/first-blog">
-                <a className="flex items-center">
-                  <img src="https://via.placeholder.com/20" alt="" className="rounded-full w-10 h-10" />
-                  <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-                    Building a game with React Hooks
-                  </span>
-                  <span className="ml-4 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-                    9 mins read
-                  </span>
-                </a>
-              </Link>
-            </li>
-          </ul>
+          <PostsPopular />
         </div>
         <Link href="/blog">
           <a className="bg-blue-300 hover:bg-blue-400 w-56 mt-auto py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in">
@@ -196,9 +157,11 @@ const Home = () => (
       </section>
       <section className="mt-8 text-xl flex">
         <h1 className="font-bold text-primary-600">Hot off the press:</h1>
-        <a href="/blog" className="ml-2 hover:underline">
-          How to do Visual Testing in React
-        </a>
+        <Link href="/blog">
+          <a className="ml-2 hover:underline">
+            How to do Visual Testing in React
+          </a>
+        </Link>
       </section>
       <section className="mt-56 flex flex-col items-center">
         <h2 className="text-4xl font-bold">Open Source Tools</h2>

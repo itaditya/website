@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "intro-to-react-hooks",
+    "title": "Intro to React Hooks",
+    "date": "2017-11-17T18:17:50.582Z",
+    "description": "React Hooks make composition so much easier now that I can't imagine writing a class component",
+    "readingTime": "5 mins"
+  },
+  {
+    "slug": "better-components-with-tailwindcss",
+    "title": "Better Components with TailwindCSS",
+    "date": "2020-03-17T18:17:50.582Z",
+    "description": "TailwindCSS is great for building reusable components of your design system. The component itself can be written in ReactJs or VueJs",
+    "readingTime": "3 mins"
+  },
+  {
+    "slug": "async-await-hell",
+    "title": "Escaping the Async Await hell",
+    "date": "2019-11-17T18:17:50.582Z",
+    "description": "Async Await is great but you might be using it wrong.",
+    "readingTime": "7 mins"
+  }
+]
