@@ -318,6 +318,20 @@ const Home = () => (
             </span>
           </a>
         </li>
+        <li>
+          <a
+            href="https://github.com/itaditya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-2 text-white text-4xl"
+          >
+            <span
+              className="rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
+            >
+              <IconGitHub />
+            </span>
+          </a>
+        </li>
       </ul>
     </aside>
     <SiteFooter />

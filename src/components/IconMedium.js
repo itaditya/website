@@ -1,4 +1,4 @@
-export default function IconTwitter(props) {
+export default function IconMedium(props) {
   return (
     <svg
       viewBox="0 0 256 256"

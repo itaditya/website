@@ -37,8 +37,9 @@ module.exports = {
     },
   },
   variants: {
-    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     textDecoration: ['hover', 'focus', 'group-hover'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
     borderWidth: ['responsive', 'hover', 'focus'],
   },
   plugins: [],

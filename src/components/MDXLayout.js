@@ -3,7 +3,7 @@ import Head from 'next/head';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 
-export default function Layout(props) {
+export default function MDXLayout(props) {
   const { children, ...restProps } = props;
   return (
     <div
