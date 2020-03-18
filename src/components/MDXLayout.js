@@ -20,7 +20,9 @@ export default function MDXLayout(props) {
         />
       </Head>
       <SiteNavbar />
-      <main className="col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto py-8 mt-10">{children}</main>
+      <main className="col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto py-8 mt-10">
+        {children}
+      </main>
       <SiteFooter />
     </div>
   );

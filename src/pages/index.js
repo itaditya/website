@@ -139,7 +139,7 @@ const Home = () => (
       </div>
       <section className="mt-32 flex justify-between">
         <div>
-          <h2 className="text-4xl font-bold">Popular Articles</h2>
+          <h2 className="text-4xl font-bold mb-8">Popular Articles</h2>
           <PostsPopular />
         </div>
         <Link href="/blog">

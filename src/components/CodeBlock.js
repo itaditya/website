@@ -34,12 +34,12 @@ export default ({ metastring, className, children }) => {
   return (
     <Highlight {...defaultProps} code={children} language={language} theme={theme}>
       {({ className = '', style, tokens, getLineProps, getTokenProps }) => {
-        const fullClassName = `mb-2 pt-10 pb-6 rounded-md match-braces ${className}`;
+        const fullClassName = `mb-2 pt-10 rounded-md match-braces overflow-scroll ${className}`;
         return (
           <pre className={fullClassName} style={style}>
             {tokens.map((line, i) => {
               const lineProps = getLineProps({ line, key: i });
-              let newClassNames = `${lineProps.className} px-8`;
+              let newClassNames = `${lineProps.className} px-8 leading-relaxed`;
               if (shouldHighlightLine(i)) {
                 newClassNames += ' bg-overlay-200 py-1';
                 highlightIndex += 1;

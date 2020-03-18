@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { PostsPopular } from '_components/PostsList';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
+import { PublishAndReadTime } from '_components/PostExtraInfo';
 import { getLatestPosts } from '_utils/posts';
-import { getShortDate } from '_utils/dateConvert';
 
 export async function getStaticProps() {
   const posts = getLatestPosts();
@@ -31,7 +31,7 @@ const Blog = props => {
       <SiteNavbar activeLink="blog" />
 
       <main className="col-start-2 col-span-10 row-auto mt-24">
-        <h2 className="text-4xl mb-1 font-bold text-gray-800">Popular Posts</h2>
+        <h2 className="text-4xl mb-8 font-bold text-gray-800">Popular Posts</h2>
         <PostsPopular />
         <h2 className="text-4xl mt-16 mb-1 font-bold text-gray-800">Latest Posts</h2>
         <ul className="xl:w-1/2">
@@ -43,16 +43,7 @@ const Blog = props => {
                     {post.title}
                   </a>
                 </h3>
-                <div className="text-gray-700 text-sm flex mt-1">
-                  <div>
-                    Published on {' '}
-                    <span>{getShortDate(post.date)}</span>
-                  </div>
-                  <div className="ml-4">
-                    <span>{post.readingTime}</span>
-                    {' '} read
-                  </div>
-                </div>
+                <PublishAndReadTime post={post} />
                 <p className="text-lg text-gray-800 mt-3">
                   {post.description}
                 </p>

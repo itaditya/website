@@ -1,57 +1,178 @@
-import CardTwitter from '_components/CardTwitter.js';
+import { PublishAndReadTime } from '_components/PostExtraInfo';
+import CodeDescription from '_components/CodeDescription';
+import IllustrationDescription from '_components/IllustrationDescription';
+import CardTwitter from '_components/CardTwitter';
 
-# JavaScript React from a designer's view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+# How to escape from the async/await hell
 
-React is basically `ui = f(state)`.
+<PublishAndReadTime post={{ date: '2018-04-06T00:12:00.000Z', readingTime: '10 mins' }} className="mt-3 mb-8" />
 
-## JavaScript & React Development from a designer's view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+async/await freed us from callback hell, but people have started abusing it — leading to the birth of async/await hell.
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+In this article, I will try to explain what async/await hell is, and I’ll also share some tips to escape it.
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+![Cover Photo](https://cdn-media-1.freecodecamp.org/images/1*_3nDjjPTWn4ohLt96IcwCA.png)
+<IllustrationDescription>Nesting awaits one after other</IllustrationDescription>
 
-## JavaScript & React Development from a designer's view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+## What is async/await hell
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+While working with Asynchronous JavaScript, people often write multiple statements one after the other and slap an **await** before a function call. This causes performance issues, as many times one statement doesn’t depend on the previous one — but you still have to wait for the previous one to complete.
 
+## An example of async/await hell
 
-```jsx {1-4,9}
-import React from 'react'
-import Example from './place'
+Consider if you wrote a script to order a pizza and a drink. The script might look like this:
 
-function App() {
-  return (
-    <div>
-      <h1>Hello</h1>
-      {
-        cond && (
-          <button></button>
-        )
-      }
-    </div>
-  )
+On the surface it looks correct, and it does work. But this is not a good implementation, because it leaves concurrency out of the picture. Let’s understand what its doing so that we can nail down the issue.
+
+## Explanation
+
+We have wrapped our code in an async [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE). The following occurs in this exact order:
+
+1. Get the list of pizzas.
+1. Get the list of drinks.
+1. Choose one pizza from the list.
+1. Choose one drink from the list.
+1. Add the chosen pizza to the cart.
+1. Add the chosen drink to the cart.
+1. Order the items in the cart.
+
+## So what’s wrong ?
+
+As I stressed earlier, all these statements execute one by one. There is no concurrency here. Think carefully: why are we waiting to get the list of pizzas before trying to get the list of drinks? We should just try to get both the lists together. However when we need to choose a pizza, we do need to have the list of pizzas beforehand. The same goes for the drinks.
+
+So we can conclude that the pizza related work and drink related work can happen in parallel, but the individual steps involved in pizza related work need to happen sequentially (one by one).
+
+## Another example of bad implementation
+
+This JavaScript snippet will get the items in the cart and place a request to order them.
+
+```js
+async function orderItems() {
+  const items = await getCartItems()    // async call
+  const noOfItems = items.length
+  for(var i = 0; i < noOfItems; i++) {
+    await sendRequest(items[i])    // async call
+  }
 }
-
-export default () => <Example />
 ```
+<CodeDescription>Bad Implementation</CodeDescription>
 
-<span className="block text-center text-gray-700">Code for src/App.js</span>
+In this case, the for loop has to wait for the `sendRequest()` function to complete before continuing the next iteration. However, we don’t actually need to wait. We want to send all the requests as quickly as possible and then we can wait for all of them to complete.
 
-```css
-.btn:first-child {
-  background-color: #444;
-  filter: darken(20);
+I hope that now you are getting closer to understanding what is async/await hell and how severely it affects the performance of your program. Now I want to ask you a question.
+
+## What if we forget the await keyword ?
+
+If you forget to use **await** while calling an async function, the function starts executing. This means that await is not required for executing the function. The async function will return a promise, which you can use later.
+
+```js {2}
+(async () => {
+  const value = doSomeAsyncTask()
+  console.log(value) // an unresolved promise
+})()
+```
+<CodeDescription>Without await we get unresolved promise</CodeDescription>
+
+Another consequence is that the compiler won’t know that you want to wait for the function to execute completely. Thus the compiler will exit the program without finishing the async task. So we do need the **await** keyword.
+
+```js {3}
+(async () => {
+  const promise = doSomeAsyncTask()
+  const value = await promise
+  console.log(value) // the actual value
+})()
+```
+<CodeDescription>We can await separately</CodeDescription>
+
+One interesting property of promises is that you can get a promise in one line and wait for it to resolve in another. This is the key to escaping async/await hell.
+
+As you can see, `doSomeAsyncTask()` is returning a promise. At this point `doSomeAsyncTask()` has started its execution. To get the resolved value of the promise, we use the await keyword and that will tell JavaScript to not execute the next line immediately, but instead wait for the promise to resolve and then execute the next line.
+
+## How to get out of async/await hell ?
+
+You should follow these steps to escape async/await hell.
+
+### Find statements which depend on the execution of other statements
+
+In our first example, we were selecting a pizza and a drink. We concluded that, before choosing a pizza, we need to have the list of pizzas. And before adding the pizza to the cart, we’d need to choose a pizza. So we can say that these three steps depend on each other. We cannot do one thing until we have finished the previous thing.
+
+But if we look at it more broadly, we find that selecting a pizza doesn’t depend on selecting a drink, so we can select them in parallel. That is one thing that machines can do better than we can.
+
+Thus we have discovered some statements which depend on the execution of other statements and some which do not.
+
+### Group-dependent statements in async functions
+
+As we saw, selecting pizza involves dependent statements like getting the list of pizzas, choosing one, and then adding the chosen pizza to the cart. We should group these statements in an async function. This way we get two async functions, `selectPizza()` and `selectDrink()` .
+
+### Execute these async functions concurrently
+
+We then take advantage of the event loop to run these async non blocking functions concurrently. Two common patterns of doing this is **returning promises early** and the **Promise.all method**.
+
+## Let’s fix the examples
+
+Following the three steps, let’s apply them on our examples.
+
+```js {14,15}
+async function selectPizza() {
+  const pizzaData = await getPizzaData()    // async call
+  const chosenPizza = choosePizza()    // sync call
+  await addPizzaToCart(chosenPizza)    // async call
 }
 
-.btn:last-child {
-  color: pink;
+async function selectDrink() {
+  const drinkData = await getDrinkData()    // async call
+  const chosenDrink = chooseDrink()    // sync call
+  await addDrinkToCart(chosenDrink)    // async call
+}
+
+(async () => {
+  const pizzaPromise = selectPizza()
+  const drinkPromise = selectDrink()
+  await pizzaPromise
+  await drinkPromise
+  orderItems()    // async call
+})()
+
+// Although I prefer it this way
+
+Promise.all([
+  selectPizza(),
+  selectDrink(),
+]).then(orderItems)   // async call
+```
+<CodeDescription>Group functions & execute in parallel</CodeDescription>
+
+Now we have grouped the statements into two functions. Inside the function, each statement depends on the execution of the previous one. Then we concurrently execute both the functions `selectPizza()` and `selectDrink()`.
+
+In the second example, we need to deal with an unknown number of promises. Dealing with this situation is super easy: we just create an array and push the promises in it. Then using `Promise.all()` we concurrently wait for all the promises to resolve.
+
+```js {7,9,16,17}
+async function orderItems() {
+  const items = await getCartItems()    // async call
+  const noOfItems = items.length
+  const promises = []
+  for(var i = 0; i < noOfItems; i++) {
+    const orderPromise = sendRequest(items[i])    // async call
+    promises.push(orderPromise)    // sync call
+  }
+  await Promise.all(promises)    // async call
+}
+
+// Although I prefer it this way 
+
+async function orderItems() {
+  const items = await getCartItems()    // async call
+  const promises = items.map((item) => sendRequest(item))
+  await Promise.all(promises)    // async call
 }
 ```
+<CodeDescription>Promise.all to resolve array of promises</CodeDescription>
 
+----
+
+I hope this article helped you see beyond the basics of async/await, and also helped you improve the performance of your application.
+
+If you liked the article, please share this article in your network. If you’d like to get updates, follow me on [Twitter](https://twitter.com/dev__adi). If anything is not clear or you want to point out something, please comment down below.
+
+<span className="block mt-20"></span>
 <CardTwitter />
