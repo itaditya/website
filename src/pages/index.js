@@ -5,20 +5,20 @@ import { PostsPopular } from '_components/PostsList';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 
-import IconWebpack from '_components/IconWebpack';
-import IconBabel from '_components/IconBabel';
-import IconVue from '_components/IconVue';
-import IconJS from '_components/IconJS';
-import IconHTML from '_components/IconHTML';
-import IconCSS from '_components/IconCSS';
-import IconReact from '_components/IconReact';
-import IconNpm from '_components/IconNpm';
-import IconGitHub from '_components/IconGitHub';
-import IconGlobe from '_components/IconGlobe';
-import IconCircleArrow from '_components/IconCircleArrow';
-import IconTwitter from '_components/IconTwitter';
-import IconMedium from '_components/IconMedium';
-import IconYouTube from '_components/IconYouTube';
+import IconWebpack from '_components/icons/IconWebpack';
+import IconBabel from '_components/icons/IconBabel';
+import IconVue from '_components/icons/IconVue';
+import IconJS from '_components/icons/IconJS';
+import IconHTML from '_components/icons/IconHTML';
+import IconCSS from '_components/icons/IconCSS';
+import IconReact from '_components/icons/IconReact';
+import IconNpm from '_components/icons/IconNpm';
+import IconGitHub from '_components/icons/IconGitHub';
+import IconGlobe from '_components/icons/IconGlobe';
+import IconCircleArrow from '_components/icons/IconCircleArrow';
+import IconTwitter from '_components/icons/IconTwitter';
+import IconMedium from '_components/icons/IconMedium';
+import IconYouTube from '_components/icons/IconYouTube';
 
 const myPackages = [
   {

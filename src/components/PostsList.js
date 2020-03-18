@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import IconReact from '_components/IconReact';
+import IconReact from '_components/icons/IconReact';
 
 export function PostsPopular() {
   return (

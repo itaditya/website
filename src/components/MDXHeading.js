@@ -1,4 +1,4 @@
-import IconLink from '_components/IconLink';
+import IconLink from '_components/icons/IconLink';
 
 function convertToSlug(Text) {
   return Text.toLowerCase()

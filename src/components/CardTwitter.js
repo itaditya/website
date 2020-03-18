@@ -1,4 +1,4 @@
-import IconTwitter from '../components/IconTwitter';
+import IconTwitter from '_components/icons/IconTwitter';
 
 export default function CardTwitter() {
   return (
