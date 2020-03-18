@@ -5,27 +5,27 @@ export default function CardTwitter() {
     <article className="flex flex-col md:flex-row items-center justify-center text-center md:text-left bg-twitter-background text-white py-8 px-8 md:px-12 rounded-md shadow-2xl">
       <div className="md:w-4/6 md:mr-4">
         <p className="text-xl">
-          I solve real problems by building simple user experiences.
+          Follow me on Twitter to get updates on new articles.
         </p>
         <p className="mt-3 text-gray-400 w-4/6 mx-auto md:mx-0">
-          #function_over_design, #reactjs, #javascript, #node
+          #reactjs, #javascript, #node, #css, #design_systems
         </p>
-        <ul className="text-white mt-4 ml-3">
+        <ul className="text-white mt-6 md:flex items-center">
           <li className="flex items-center justify-center md:justify-start">
             <img
               src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/samsung/220/office-building_1f3e2.png"
               alt="Work"
               className="w-6 h-6"
             />
-            <span className="ml-3 text-lg">HackerRank</span>
+            <span className="ml-2 text-lg">HackerRank</span>
           </li>
-          <li className="flex items-center justify-center md:justify-start mt-2">
+          <li className="flex items-center justify-center md:justify-start ml-4">
             <img
-              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/round-pushpin_1f4cd.png"
+              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/236/round-pushpin_1f4cd.png"
               alt="Location"
               className="w-6 h-6"
             />
-            <span className="ml-3 text-lg">Bengaluru, India</span>
+            <span className="ml-1 text-lg">Bengaluru, India</span>
           </li>
         </ul>
       </div>
