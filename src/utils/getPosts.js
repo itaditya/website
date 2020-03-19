@@ -3,6 +3,16 @@ export default function getPosts() {
   const filePromise = [];
 
     filePromise.push(new Promise(resolve => {
+      import('_posts/10-mongo-things-i-wished-i-knew.mdx').then(data => {
+        const completeMeta = {
+          ...data.meta,
+          slug: '10-mongo-things-i-wished-i-knew',
+        }
+        resolve(completeMeta);
+      });
+    }))
+  
+    filePromise.push(new Promise(resolve => {
       import('_posts/async-await-hell.mdx').then(data => {
         const completeMeta = {
           ...data.meta,

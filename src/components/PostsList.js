@@ -23,7 +23,7 @@ export function PostsPopular() {
         </Link>
       </li>
       <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-        <Link href="/blog/better-components-with-tailwindcss">
+        <Link href="/blog/10-mongo-things-i-wished-i-knew">
           <a className="flex items-start">
             <span className="rounded-sm text-3xl mt-1">
               <IconMongoDB />

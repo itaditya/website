@@ -1,0 +1,259 @@
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Things I wish I knew before I started working with MongoDB',
+  date: '2017-09-17T18:30:00.000Z',
+  description: "When MEAN stack was very popular & I built a pet project to learn it. Here's something I wish people told me early on...",
+  readingTime: '5 mins',
+  previewPicUrl: null,
+  canonicalUrl: 'https://devadi.now.sh/blog/10-mongo-things-i-wished-i-knew'
+};
+
+MEAN Stack was all the rage and I was trying to wrap my head around it. I started a pet-project which had some CRUD operations related to CMS posts. This means that all it does is send and receive data via Rest Apis and saves the data in mongodb using mongoose driver.
+
+In the beginning you will find that mongo has a beautiful command called
+
+```js
+Collection.find(query)
+```
+<CodeDescription children="Beautiful .find" />
+
+It provides a list of all the documents present in that Collection which match the given query. `.find` is a really powerful tool and because of that beginners tend to use it for all sorts of operations. Eg- looping over each and executing some function, extracting a limited number of documents and many other things. That means all the heavy lifting happens on JavaScript side.
+
+What this does is —
+
+* Slow performance of the backend.
+* Never ending lines of code making everything a mess.
+* Embarrassment of your future self.
+
+As I kept digging up in mongo I found a great deal of functions which you can use to develop an efficient backend.
+
+**Note** — I’m only providing small snippets of the codes which will give you the idea of how they are used. All the commands are for Mongoose driver which let’s us use mongodb in Nodejs.
+
+Let’s look at the most awesome ones —
+
+## Query only one document
+
+Many a times you know that the query would give only one result so if you do this -
+
+```js
+User.find({email:"foo@bar.com"}) // => [user-1]
+```
+<CodeDescription children=".find will give array" />
+
+then it will return a single user document wrapped in an array and you'll have to extract the one item. Instead, you can use findOne method
+
+```js
+User.findOne({email:"foo@bar.com"}) // => user-1
+```
+<CodeDescription children=".findOne will give the first item" />
+
+## Query document by Id
+
+Mongo provides unique id for each document which is commonly used to find documents
+
+```js
+User.find({_id:"595873aaf6e9bcd415b44fc5"}) // => [user-1]
+```
+<CodeDescription children="You have to specify _id" />
+
+but I keep forgetting _ before the `_id`. It can also have issues like variable’s type error. You should use `findById` method instead like this -
+
+```js
+User.findById("595873aaf6e9bcd415b44fc5") // => user-1
+```
+<CodeDescription children="Directly pass the id to .findById" />
+
+
+## Looping over a list of documents and executing commands on each
+
+This has happened to everyone — “Loop over all the users which are unverified and send them an email to verify their account” . Many of us would do this
+
+```js {3}
+User.find({
+    verified: false
+}).exec(function (err, users) {
+    var n = users.length;
+    for (var i = 0; i < n; i++) {
+        var user = users[i];
+        sendMail(user.email);
+    }
+})
+```
+<CodeDescription children="Load all the results on query in users" />
+
+But using `cursors` is better because you are not loading lot of data into memory at once.
+
+```js
+const cursor = User.find({ verified: false }).cursor();
+
+cursor.on('data', function (user) {
+    sendMail(user.email);
+});
+
+cursor.on('close', function () {
+    console.log("sent mail to all users");
+});
+```
+<CodeDescription children="Each result of query is process one by one" />
+
+## Fetching only certain keys of documents -
+
+Let’s just say you have to get only the email and name of a user. As beginners we would simply do this
+
+```js
+User.findById(id).exec(function (err, user) {
+    var item = {
+        name: user.name,
+        email: user.email
+    }
+    addToList(item);
+})
+```
+<CodeDescription children="Fetching all user data" />
+
+what you may not realise is that behind the scenes mongo had to work so as to fetch the complete document. How about improving it -
+
+```js
+User.findById(id).select("name email").exec(function (err, user) {
+    var item = {
+        name: user.name,
+        email: user.email
+    }
+    addToList(item);
+})
+```
+<CodeDescription children="Fetching only name & email from DB" />
+
+The select property would tell mongo that it only needs to get the name and email from the document and thus makes for more efficient code.
+
+**Note** — if you want to get all the keys except some you can prefix it with a minus sign `-` . Eg-
+
+```js
+select("-password -token")
+```
+<CodeDescription children="Fetch all user data excepth password & token" />
+
+## Maintaining an array in a document.
+
+Many a times we have to store an array of items in a document key. Eg — Suppose you want to store the username of all the people who follow you. So you have a schema like —
+
+```js
+{
+    username: {
+        type: String,
+        default: "Anonymous"
+    },
+    email: {
+        type: String,
+        default: ""
+    },
+    followers: {
+        type: Array
+    }
+}
+```
+<CodeDescription children="followers is an array" />
+
+Now a naive approach to do this would be to query the document, manipulate the array with JS functions like `arr.push()` and `arr.splice()`.
+
+However deleting a particular item is little difficult in JS as first you have to find the index of the item, then use the splice method to remove that item and finally update the document in mongo.
+
+Mongo provides two wonderful methods to handle this -
+
+```js
+User.update({
+    _id: userId
+}, {
+    $push: {
+        followers: "foo_bar"
+    }
+}).exec(function(err, user){
+    console.log("foo_bar is added to the list of followers");
+})
+```
+<CodeDescription children="Add new follower to DB directly" />
+
+The update method is given two things. First the query which let’s it find the document that has to be updated and secondly an operation which should be performed on that document. Here we use `$push` to make mongo add the value “foo_bar” to the key followers of a user.
+
+Similarly, we can easily remove an element from the followers list -
+
+```js
+User.update({
+    _id: userId
+}, {
+    $pull: {
+        followers: "foo_bar"
+    }
+}).exec(function(err, user){
+    console.log("foo_bar is removed from the list");
+})
+```
+<CodeDescription children="Remove follower from DB directly" />
+
+## Linking documents from different collections.
+
+Consider the previous example. There we were just storing the username of all the followers. However if you need to access more data about the followers then what can you do ?
+
+The naive approach would be to store the id of all users who follow you in array, loop through each and then using `User.find()` method to fetch all the data of a user. However mongo has another trick up it’s sleeve and that’s the `populate()` method.
+
+You can read in detail here — http://mongoosejs.com/docs/populate.html.
+
+The main concept is that we use ref key to tell mongo from where should it fetch the data via the given id .
+
+Assume that we have two schemas Person and Story -
+
+```js
+var personSchema = Schema({
+    _id: Number,
+    name: String,
+    age: Number,
+    stories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Story'
+    }]
+});
+var storySchema = Schema({
+    _creator: {
+        type: Number,
+        ref: 'Person'
+    },
+    title: String,
+    fans: [{
+        type: Number,
+        ref: 'Person'
+    }]
+});
+
+var Person = mongoose.model('Person', personSchema);
+var Story = mongoose.model('Story', storySchema);
+```
+<CodeDescription children="Person & Story schema" />
+
+Now in Story schema you can see that `_creator` is an object and it is of type `Number`, this is done because the `_id` of Person schema is of `Number` type.
+
+By using that ref above and populate function shown below, you can get the creator’s data while querying the Story collection easily.
+
+```js
+Story.findOne({
+    title: 'Once upon a timex.'
+})
+.populate('_creator')
+.exec(function (err, story) {
+    if (err) return handleError(err);
+    console.log('The creator is %s', story._creator.name);
+    // prints "The creator is Aaron"
+});
+```
+<CodeDescription children="Get name of the creator of story" />
+
+You can see that we now don’t need to query the Person collection to get the creator’s details. Mongo does all this behind the scenes for you.
+
+But as you know most of the times we don’t specify the _id in the schema and that’s fine as you can see that same is done while defining Story schema. Due to this, the `_id` which mongo generates will be of `Schema.Types.ObjectId`. Hence to populate the story in the Person schema, we specify type of stories as Schema.Types.ObjectId.
+
+Lastly, I just wanted to give a little tip. After some digging of your own you will find about pagination and how we use `skip()` and `limit()` to do this. However this is a good method for small datasets. A faster way exists and you can read about it [here](https://scalegrid.io/blog/fast-paging-with-mongodb/).
+
+---
+
+Hope this article helped you learn something new. Please <TwitterShare meta={meta} />. If you have any questions then send me a [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).

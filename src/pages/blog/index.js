@@ -9,7 +9,8 @@ import getPosts from '_utils/getPosts';
 
 export async function getStaticProps() {
   const posts = await getPosts();
-  return { props: { posts } };
+  const sortedPosts = posts.sort((a, b) => b.date.localeCompare(a.date));
+  return { props: { posts: sortedPosts } };
 }
 
 const Blog = props => {

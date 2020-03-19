@@ -34,7 +34,7 @@ export default ({ metastring, className, children }) => {
   return (
     <Highlight {...defaultProps} code={children} language={language} theme={theme}>
       {({ className = '', style, tokens, getLineProps, getTokenProps }) => {
-        const fullClassName = `mb-2 pt-10 rounded-md match-braces overflow-scroll ${className}`;
+        const fullClassName = `mb-2 pt-6 rounded-md match-braces overflow-scroll ${className}`;
         return (
           <pre className={fullClassName} style={style}>
             {tokens.map((line, i) => {
