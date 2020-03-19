@@ -67,10 +67,11 @@ function LayoutBlog(props) {
         <meta name="twitter:url" content={postUrl} />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:image:src" content={imageUrl} />
-        <meta name="twitter:label1" value="Reading time"/>
-        <meta name="twitter:data1" value={`${meta.readingTime} read`}/>
-        <meta name="twitter:label2" value="Published on"/>
-        <meta name="twitter:data2" value={getShortDate(meta.date)}/>
+        <meta name="twitter:label1" value="Reading time" />
+        <meta name="twitter:data1" value={`${meta.readingTime} read`} />
+        <meta name="twitter:label2" value="Published on" />
+        <meta name="twitter:data2" value={getShortDate(meta.date)} />
+        <link rel="canonical" href={meta.canonicalUrl} />
       </Head>
       <SiteNavbar />
       <main className="col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto py-8 mt-10">

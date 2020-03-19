@@ -1,65 +1,103 @@
 import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Better Components with TailwindCSS',
-  date: '2019-05-22T00:12:00.000Z',
-  description: 'TailwindCSS is great but humans are not.',
+  date: '2020-01-12T18:30:00.000Z',
+  description: "TailwindCSS is great for building reusable components of our design systems. The component itself can be written in React, Vue, etc. and we'll get the same benefits.",
   readingTime: '5 mins',
+  previewPicUrl: null,
+  canonicalUrl: 'https://devadi.netlify.com/blog/better-components-with-tailwindcss'
 };
 
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+## But How?
 
-React is basically `ui = f(state)`.
+Today, I'll just talk about one reason and that is **Encapsulation**. When we write a component we want to allow some customizations but on the other hand, we also want to prevent full access to the internals of a component. That is to say we want to expose a public API and only allow customisation from that public API.
 
-## JavaScript & React Development from a designer's view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+First I'll shed some light on why traditional styling doesn't provide encapsulation.
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+## ClassNames is a public API.
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+In React, a components public API is made with props and in Vue we have props + slots. But we are forgetting one thing. If a component uses CSS classes for styling then we are unknowingly providing another public API. Because all CSS classes are global, any consumer of the component can override the internal styles of a component.
 
-## JavaScript & React Development from a designer's view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
+Take a look at this example-
 
-### Basic JavaScript & React Development from a DevOps engineer view
-React is an ecosystem of tools designed to make rich frontend experiences. When many people are collaborating on the same project having a clear defined way to do things goes a long way. It is also faster to build dynamic applications with React than with scratch HTML, CSS and JS.
-
-
-```jsx {1-4,9}
-import React from 'react'
-import Example from './place'
-
-function App() {
+```jsx {3-4}
+function Button({ icon, size='normal', children, ...props }) {
   return (
-    <div>
-      <h1>Hello</h1>
-      {
-        cond && (
-          <button></button>
-        )
-      }
-    </div>
-  )
+    <button {...props} className={`btn btn-${size}`}>
+      <span className="btn-icon">
+        <Icon icon={icon} />
+      </span>
+      {children}
+    </button>
+  );
 }
-
-export default () => <Example />
 ```
+<CodeDescription>Button which takes <strong>icon</strong>, <strong>size</strong> props</CodeDescription>
 
-<span className="block text-center text-gray-700">Code for src/App.js</span>
+It's a simple Button component which can render text and an icon. There is a `size` prop as well with which user can render a normal button or a large buttton. It makes sense because we don't want user to render a button of any size. We want the size to be constrained. Also this way we can scale the icon according to size of button. If we give user the full control then they might forget increasing the size of icon while making a large button.
+
+So we have two requirements-
+
+1. User should only render a normal or large size button.
+1. Everything inside button like font and icon should scale along with button size.
+
+But is the current implementation really following the two requirements?
+The answer is **No**.
+
+Because user knows about the two classNames `btn` & `btn-icon` they can customise both the elements in any way they want. Assume user writes this CSS-
+
 
 ```css
-.btn:first-child {
-  background-color: #444;
-  filter: darken(20);
+.btn {
+  font-size: 100px;
+  padding: 10px;
 }
 
-.btn:last-child {
-  color: pink;
+.btn-icon {
+  font-size: 20px;
 }
 ```
+<CodeDescription>User's App code (outside Button component)</CodeDescription>
+
+All of the hard work you did to keep the scale of icon and button in sync is now wasted. User has unregulated control, it's chaos.
+
+To put it in short there are two problems with using classNames like this for components of a design system-
+
+* User has full control of the styling and you can't add constraints.
+* If you change the internal structure, user's applications can break.
+
+I'm a lot more scared about the second problem. Because now the user relies on the internal structure of the component you can't modify the internals carefree. You cannot change the `btn-icon` class to something else. And that's just one thing. Imagine all the classes a component is made of. Once you publish the component you have tied yourself in a corner, you cannot modify anything you can just add new things. And when you just add new things your API surface becomes larger and more complex.
+
+This xkcd comic is exactly what I'm talking about
+
+![You're breaking someone else's workflow](https://res.cloudinary.com/practicaldev/image/fetch/s--qOge2rDh--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://imgs.xkcd.com/comics/workflow.png)
+
+## Tailwind to the rescue
+
+TailwindCSS provides a simple solution for this. Just don't use component classes. If you don't have a catch-all btn class then users won't be able to override it.
+
+A `Button` styled with TailwindCSS would look like this-
+
+```jsx {3,4}
+function Button({ icon, size='normal', children, ...props }) {
+  return (
+    <button {...props} className={`bg-green text-${size}`}>
+      <span className={`bg-gray-600 text-${size}`}>
+        <Icon icon={icon} />
+      </span>
+      {children}
+    </button>
+  );
+}
+```
+<CodeDescription>Only utility classes, no .btn or .media-player</CodeDescription>
+
+What is important to note is that the entire component is made of utility classes. These classes just do one small thing and each class might appear in multiple components. A user would not override `bg-gray-600` because that would break all those components which use `bg-gray-600` class. Earlier the user knew that `btn-icon` would just affect the icon inside Button component so they modified it carefree but now they can't.
+
+Now you have the control on what things you want the user to give control of. User can't even change the color of button if you don't provide a prop for it.
 
 ----
 
-I hope this article helped you see beyond some advantages of Tailwind. If you liked the article, please <TwitterShare meta={meta} /> and in your network. My [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) is open if you need to ask anything.
+Hope this article helped you understand one benefit of TailwindCSS. If yes then do <TwitterShare meta={meta} />. I'd be writing more about Tailwind and design systems in general so if you want to stay updated you can follow me on Twitter or hop in my [DMs](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).

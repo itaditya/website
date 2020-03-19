@@ -22,26 +22,6 @@ export default function getPosts() {
       });
     }))
   
-    filePromise.push(new Promise(resolve => {
-      import('_posts/first-post.mdx').then(data => {
-        const completeMeta = {
-          ...data.meta,
-          slug: 'first-post',
-        }
-        resolve(completeMeta);
-      });
-    }))
-  
-    filePromise.push(new Promise(resolve => {
-      import('_posts/input-args.mdx').then(data => {
-        const completeMeta = {
-          ...data.meta,
-          slug: 'input-args',
-        }
-        resolve(completeMeta);
-      });
-    }))
-  
 return Promise.all(filePromise);
 }
 
