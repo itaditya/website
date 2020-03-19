@@ -6,7 +6,9 @@
     "dev": "next dev -p 7991",
     "start": "next start -p 7991",
     "build": "next build",
-    "export": "next export"
+    "export": "next export",
+    "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
+    "gen:postFile": "node scripts/generatePostFile.js"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.7",
