@@ -21,7 +21,8 @@ function LayoutBlog(props) {
         <MDXHeading className="text-5xl leading-tight" showAnchorLink={false}>
           {meta.title}
         </MDXHeading>
-        <PublishAndReadTime post={{ date: '2018-04-06T00:12:00.000Z', readingTime: '10 mins' }} className="mt-3 mb-8" />
+        <PublishAndReadTime post={meta} className="mt-3 mb-8" />
+        <p className="text-2xl text-gray-700 mt-4">{meta.description}</p>
         {children}
         <span className="block mt-20"></span>
         <CardTwitter />

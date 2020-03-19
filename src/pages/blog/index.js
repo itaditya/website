@@ -5,10 +5,10 @@ import { PostsPopular } from '_components/PostsList';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
-import { getLatestPosts } from '_utils/posts';
+import getPosts from '_utils/getPosts';
 
 export async function getStaticProps() {
-  const posts = getLatestPosts();
+  const posts = await getPosts();
   return { props: { posts } };
 }
 
@@ -44,7 +44,7 @@ const Blog = props => {
                   </a>
                 </h3>
                 <PublishAndReadTime post={post} />
-                <p className="text-lg text-gray-800 mt-3">
+                <p className="text-lg text-gray-700 mt-3">
                   {post.description}
                 </p>
               </li>
