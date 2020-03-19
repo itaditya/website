@@ -5,7 +5,7 @@ export default function CardTwitter() {
     <article className="flex flex-col md:flex-row items-center justify-center text-center md:text-left bg-twitter-background text-white py-8 px-8 md:px-12 rounded-md shadow-2xl">
       <div className="md:w-4/6 md:mr-4">
         <p className="text-xl">
-          Follow me on Twitter to get updates on new articles.
+          Follow me on Twitter to get updates for new articles.
         </p>
         <p className="mt-3 text-gray-400 w-4/6 mx-auto md:mx-0">
           #reactjs, #javascript, #node, #css, #design_systems

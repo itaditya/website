@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 
-import MDXLayout from '_components/MDXLayout';
+import MDXWrapper from '_components/MDXWrapper';
 import MDXHeading from '_components/MDXHeading';
 import CodeBlock from '_components/CodeBlock';
 
@@ -29,9 +29,7 @@ const mdxComponents = {
   img: props => (
     <Fragment>
       <img className="rounded-md mt-16" src={props.src} />
-      <span className="block text-base text-center text-gray-700 mb-8 mt-4">
-        {props.alt}
-      </span>
+      <span className="block text-base text-center text-gray-700 mb-8 mt-4">{props.alt}</span>
     </Fragment>
   ),
   pre: props => <div className="mt-16 mb-4" {...props}></div>,
@@ -43,7 +41,7 @@ const mdxComponents = {
       {...props}
     ></code>
   ),
-  wrapper: MDXLayout,
+  wrapper: MDXWrapper,
 };
 
 export default function MyApp({ Component, pageProps }) {

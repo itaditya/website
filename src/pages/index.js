@@ -20,62 +20,7 @@ import IconTwitter from '_components/icons/IconTwitter';
 import IconMedium from '_components/icons/IconMedium';
 import IconYouTube from '_components/icons/IconYouTube';
 
-const myPackages = [
-  {
-    name: 'Birla',
-    description: 'Generate React component files in one command',
-    links: {
-      github: 'https://github.com/itaditya/birla',
-      website: 'https://github.com/itaditya/birla/blob/master/README.md',
-      npm: 'https://www.npmjs.com/package/birla',
-    },
-  },
-  {
-    name: 'Circlebars',
-    description: 'Circular progress bars made easy',
-    links: {
-      github: 'https://github.com/itaditya/circlebars',
-      website: 'http://circlebar.surge.sh/',
-      npm: 'https://www.npmjs.com/package/circlebars',
-    },
-  },
-  {
-    name: 'Optimisitc Toggle',
-    description: 'Respond to user actions without waiting on API',
-    links: {
-      github: 'https://github.com/interviewstreet/react-optimistic-toggle',
-      website: 'https://react-optimistic-toggle.netlify.com/',
-      npm: 'https://www.npmjs.com/package/react-optimistic-toggle',
-    },
-  },
-  {
-    name: 'Mentions Plugin',
-    description: 'Detects if a GitHub user is mentioned in a comment.',
-    links: {
-      github: 'https://github.com/itaditya/probot-on-mention',
-      website: 'https://github.com/itaditya/probot-on-mention/blob/master/README.md',
-      npm: 'https://www.npmjs.com/package/probot-on-mention',
-    },
-  },
-  {
-    name: 'Windows Hotspot',
-    description: 'Setup a Wi-Fi Hotspot with ease',
-    links: {
-      github: 'https://github.com/itaditya/hotspot',
-      website: 'https://github.com/itaditya/hotspot/blob/master/README.md',
-      npm: 'https://www.npmjs.com/package/whotspot',
-    },
-  },
-  {
-    name: 'Material React Icons',
-    description: 'Import Material Icons as React components',
-    links: {
-      github: 'https://github.com/itaditya/material-design-icons',
-      website: 'https://github.com/itaditya/material-design-icons/blob/master/README.md',
-      npm: 'https://www.npmjs.com/package/material-svg-react-icons',
-    },
-  },
-];
+import myPackages from '../staticData/myPackages.json';
 
 const Home = () => (
   <div

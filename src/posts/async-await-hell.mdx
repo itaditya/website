@@ -1,11 +1,9 @@
-import { PublishAndReadTime } from '_components/PostExtraInfo';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
-import CardTwitter from '_components/CardTwitter';
 
-# How to escape from the async/await hell
-
-<PublishAndReadTime post={{ date: '2018-04-06T00:12:00.000Z', readingTime: '10 mins' }} className="mt-3 mb-8" />
+export const meta = {
+  title: 'How to escape from the async/await hell',
+};
 
 async/await freed us from callback hell, but people have started abusing it — leading to the birth of async/await hell.
 
@@ -157,7 +155,7 @@ async function orderItems() {
   await Promise.all(promises)    // async call
 }
 
-// Although I prefer it this way 
+// Although I prefer it this way
 
 async function orderItems() {
   const items = await getCartItems()    // async call
@@ -171,7 +169,4 @@ async function orderItems() {
 
 I hope this article helped you see beyond the basics of async/await, and also helped you improve the performance of your application.
 
-If you liked the article, please <TwitterShare /> and in your network. My [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) is open if you need to ask anything.
-
-<span className="block mt-20"></span>
-<CardTwitter />
+If you liked the article, please <TwitterShare meta={meta} /> and in your network. My [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) is open if you need to ask anything.
