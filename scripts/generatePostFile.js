@@ -10,6 +10,8 @@ if(!slug) {
 const string = `import LayoutBlog from '_components/LayoutBlog';
 import PostContent, { meta } from '_posts/${slug}.mdx';
 
+meta.slug = '${slug}';
+
 const Post = () => {
   return (
     <LayoutBlog meta={meta}>

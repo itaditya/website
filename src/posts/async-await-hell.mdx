@@ -1,3 +1,4 @@
+import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
 
@@ -6,9 +7,11 @@ export const meta = {
   date: '2018-04-06T00:12:00.000Z',
   description: 'async/await freed us from callback hell, but people have started abusing it — leading to the birth of async/await hell.',
   readingTime: '10 mins',
+  previewPicUrl: null,
+  coverPicUrl: 'https://cdn-media-1.freecodecamp.org/images/1*_3nDjjPTWn4ohLt96IcwCA.png',
 };
 
-![Nesting awaits one after other](https://cdn-media-1.freecodecamp.org/images/1*_3nDjjPTWn4ohLt96IcwCA.png)
+<MDXImage alt="Nesting awaits one after other" src={meta.coverPicUrl} />
 
 ## What is async/await hell
 
