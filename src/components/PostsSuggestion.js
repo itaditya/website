@@ -77,10 +77,9 @@ const popularPosts = [
 ];
 
 function getNextArticle(currentPostSlug) {
-  const n = popularPosts.length;
+  const n = popularPosts.length - 1; // because the current slug post shouldn't be counted
   const index = Math.floor(Math.random() * n);
   const posts = popularPosts.filter(post => post.slug !== currentPostSlug);
-
   return posts[index];
 }
 
