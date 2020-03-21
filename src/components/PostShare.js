@@ -23,9 +23,8 @@ export function TwitterShare(props) {
       style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"
+      children="share it on Twitter"
       {...props}
-    >
-      share it on Twitter
-    </a>
+    />
   );
 }

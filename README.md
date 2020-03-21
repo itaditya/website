@@ -15,3 +15,6 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [ ] Projects section
 * [ ] Contact section
 * [ ] Labs section
+* [ ] Google Analytics or similar
+* [ ] Hide Social sidebar at open
+* [ ] Next post

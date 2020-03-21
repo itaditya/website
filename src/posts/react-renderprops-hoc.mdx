@@ -1,0 +1,374 @@
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import { WarningAlert } from '_components/PostAlerts';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Understanding React Render Props and HOC',
+  date: '2018-10-22T18:30:00.000Z',
+  description: 'A detailed introduction to Render Props and Higher-Order Components in React.',
+  readingTime: '7 mins',
+  previewPicUrl: null,
+  canonicalUrl: 'https://blog.bitsrc.io/understanding-react-render-props-and-hoc-b37a9576e196',
+};
+
+
+If you have been doing some React development recently, you must have come across terms like HOCs and Render Props. In this article, we’ll go deep into both these pattern to understand why we need them and how we can correctly use them to build better React applications.
+
+<WarningAlert className="mt-10" children="Note: This article was published way before React hooks" />
+
+## Why do we need these patterns?
+
+React offers a simple method for code reuse and that is **Components**. A component encapsulates many things ranging from content, styles and business logic. So ideally in a single component we can have a combination of html, css and js all of which have a single purpose, a [single responsibility](https://blog.bitsrc.io/solid-principles-every-developer-should-know-b3bfa96bb688).
+
+## Example
+
+Let’s suppose we are working on an E-commerce application. Like any E-commerce application, a user is shown all the products available, and the user can add any product to cart. We will fetch the products data from an API and show the product catalog as a list of cards.
+
+In this case, the React component can be implemented like this:
+
+```jsx {9}
+import React, { Component } from "react";
+
+class ProductList extends Component {
+  state = {
+    products: []
+  };
+
+  componentDidMount() {
+    getProducts().then(products => {
+      this.setState({
+        products
+      });
+    });
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.state.products.map(product => (
+          <li>
+            <span>{product.name}</span>
+            <a href="#">Add to Cart</a>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+export { ProductList };
+```
+
+<CodeDescription children="Fetch products to show in a list to users" />
+
+For our admins, there is a management portal where they can add or remove products. In this portal we fetch the products data from the same API and show the product catalog in tabular form.
+
+This React component can be implemented like this:
+
+```jsx {9}
+import React, { Component } from "react";
+
+class ProductTable extends Component {
+  state = {
+    products: []
+  };
+
+  componentDidMount() {
+    getProducts().then(products => {
+      this.setState({
+        products
+      });
+    });
+  }
+
+  handleDelete = currentProduct => {
+    const remainingProducts = this.state.products.filter(
+      product => product.id !== currentProduct.id
+    );
+    deleteProducts(currentProduct.id).then(() => {
+      this.setState({
+        products: remainingProducts
+      });
+    });
+  };
+
+  render() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.products.map(product => (
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>
+                <button
+                  onClick={() => this.handleDelete(product)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+}
+
+export { ProductTable };
+```
+
+<CodeDescription children="Fetch products to show in a table to admins" />
+
+One thing that immediately sticks out is that both the components implement the product’s data fetching logic.
+
+### Going forward these situations might arise too.
+
+* We have to use the products data and show it in a different manner.
+* Fetch products data from different API (useful in User’s Cart page) but show it just like we do in ProductList .
+* Instead of fetching data from API, we have to access it from localStorage.
+* In the tabular product catalog, instead of a delete button, have a button with a different action.
+
+
+If we make a different component for each of these then we’ll be duplicating a lot of code.
+
+Fetching data and showing data are two separate concerns. As said earlier, It is much better if one component has one responsibility.
+
+Let’s refactor the first component. It will take products data as prop and render the product catalog as a list of cards just like before. Since we don’t need [component state and lifecycle methods](https://blog.bitsrc.io/understanding-react-v16-4-new-component-lifecycle-methods-fa7b224efd7d) we’ll convert it to a functional component.
+
+It will look like this now:
+
+```jsx {3}
+import React from "react";
+
+const ProductList = ({ products }) => {
+  return (
+    <ul>
+      {products.map(product => (
+        <li key={product.id}>
+          <span>{product.name}</span>
+          <a href="#">Add to Cart</a>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export { ProductList };
+```
+
+<CodeDescription children="ProductList as a function component" />
+
+Just like ProductList , `ProductTable` will be a function component that take product data as prop and render the data as rows of table.
+
+Now let’s make a component named `ProductsData`. It fetches the products data from API. The data fetching and state updating will be just like in the original ProductList component. But what should we put in the render method of this component?
+
+```jsx {9,17}
+import React, { Component } from "react";
+
+class ProductData extends Component {
+  state = {
+    products: []
+  };
+
+  componentDidMount() {
+    getProducts().then(products => {
+      this.setState({
+        products
+      });
+    });
+  }
+
+  render() {
+    return 'what should we return here?';
+  }
+}
+
+export { ProductData };
+```
+
+<CodeDescription children="Moved the data fetching to ProductData component" />
+
+If we simply put the ProductList component then we can’t reuse this component for ProductTable. Somehow, if this component can ask for what to render then the issue will be solved. At one place we will tell it to render the ProductList component and in the management portal we will tell it to render ProductTable component.
+
+This is where render props and HOCs come into play. They are nothing but ways for a component to ask what it should render. This drives code reuse even further.
+
+Now that we know why we need them, let’s see how to use them.
+
+
+## Render Props
+
+Understanding Render Props at a conceptual level is very easy. Let’s forget about React for a minute and look at things in context of vanilla JavaScript.
+
+We have a function that calculates the sum of two numbers. At first we just want to log the result to console. So, we designed the function like this:
+
+```js
+const sum = (a, b) => {
+  const result = a + b;
+  console.log('result');
+}
+```
+
+<CodeDescription children="A sum function in JS" />
+
+However, we soon find out that the sum function is very useful and we need it in other places also. So, instead of logging it to console we want the sum function to provide the result only, and let the caller decide how it wants to use the result.
+
+It can be done in the manner given below. (I'm intentionally not using `return`).
+
+```js {3}
+const sum = (a, b, fn) => {
+  const result = a + b;
+  fn(result);
+}
+
+// Usage 1
+sum(1, 2, (result) => {
+  console.log(result);
+})
+
+// Usage 2
+const alertFn = (result) => {
+  alert(result);
+}
+
+sum(3, 6, alertFn)
+```
+
+<CodeDescription children="sum function which passes result to callback" />
+
+We pass `sum` function a callback function as argument `fn`. The `sum` function then calculates the result and calls `fn` with the result as an argument. This way the callback function gets the result and it is free to do anything with the result.
+
+This forms the essence of render props. We will gain more clarity by using the pattern so let’s apply it to the problem we are facing right now.
+
+Instead of a function that calculates the sum of two numbers, there is a component `ProductsData` that fetches products data. Now ProductsData component can be passed a function via props. The ProductsData component will then fetch products data and provide that data to the function that was passed as prop. The passed function can now do whatever it want with the products data.
+
+In React, it can be implemented like this:
+
+```jsx {17-19}
+import React, { Component } from "react";
+
+class ProductData extends Component {
+  state = {
+    products: []
+  };
+
+  componentDidMount() {
+    getProducts().then(products => {
+      this.setState({
+        products
+      });
+    });
+  }
+
+  render() {
+    return this.props.render({
+      products: this.state.products
+    });
+  }
+}
+
+export { ProductData };
+```
+
+<CodeDescription children="ProductsData calls the render function of props" />
+
+Just like the `fn` argument, we have a prop called `render` which will be assigned a function. Then the ProductData component calls this function with products data as argument.
+
+We can thus use the ProductData component in this manner.
+
+```jsx {2}
+<ProductData
+  render={data => <ProductList products={data.products} />}
+/>
+
+<ProductData
+  render={({ products }) => <ProductTable products={products} />}
+/>
+
+<ProductData
+  render={({ products }) => (
+    <h1>
+      Number of Products:
+      <strong>{products.length}</strong>
+    </h1>
+  )}
+/>
+
+```
+
+<CodeDescription children="ProductsData calls the render function of props" />
+
+As we can see render props is quite a versatile pattern. Most things can be accomplished in a very straight-forward manner. And this is exactly why we can shoot ourselves in the foot. As your component tree becomes deeper, it'll become harded to debug and might cause performance issues too. This is called Wrapper Hell. In the future Hooks will solve this problem.
+
+Next we’ll look at another popular pattern called HOC.
+
+## Higher Order Components (HOC)
+
+In this pattern we define a function which takes a component as an argument and then returns the same component but with some added functionality.
+
+If that sounds familiar, that’s because it is similar to decorator pattern used extensively in Mobx. Many languages like Python have decorators in-built and JavaScript is going to support decorators soon. HOCs are very much like decorators.
+
+Understanding HOCs with code is much easier than to explain with words. So we’ll look at the code first.
+
+```jsx {3,4,18}
+import React, { Component } from "react";
+
+const withProductData = WrappedComponent => {
+  return class ProductData extends Component {
+    state = {
+      products: []
+    };
+
+    componentDidMount() {
+      getProducts().then(products => {
+        this.setState({
+          products
+        });
+      });
+    }
+
+    render() {
+      return <WrappedComponent products={this.state.products} />;
+    }
+  };
+}
+
+export { withProductData };
+```
+
+<CodeDescription children="withProductData is a function which returns a component" />
+
+As we can see the data fetching and state updating logic is just like what we did in render props. The only change is that the component class is inside a function. The function takes a component as argument and then inside the render method of the class we render the passed component but with additional props. Pretty simple implementation for a pattern with such a complicated name, right?
+
+```jsx
+// Enhanced component = HOC(Component)
+const ProductListWithData = withProductData(ProductList);
+const ProductTableWithData = withProductData(ProductTable);
+
+
+// Use the Enhanced components just like normal components.
+<div>
+  <ProductListWithData />
+  <ProductTableWithData />
+</div>
+```
+
+<CodeDescription>Usage of <strong>withProductData</strong> HOC</CodeDescription>
+
+So now we have looked at why we need render props, HOCs and how we can implement both of them.
+
+One question remains: how do we choose between Render Props and HOCs? There have been quite a lot of articles on this topic so I won’t talk about that now.
+
+[When to NOT use Render Props](https://blog.kentcdodds.com/when-to-not-use-render-props-5397bbeff746) — Kent C. Dodds
+
+[HOCs vs Render Props](https://www.richardkotze.com/coding/hoc-vs-render-props-react) — Richard Kotze
+
+----
+
+In this article we looked at why we need these patterns, the essence of each pattern and how we can leverage these patterns to build highly reusable components. That’s all for now, hope you liked it. It'll be great if you <TwitterShare meta={meta} children="share this article on Twitter" />. If you need to ask anything slide into my [DMs](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).

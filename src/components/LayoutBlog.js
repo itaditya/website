@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { MDXProvider } from '@mdx-js/react';
 
 import SiteNavbar from '_components/SiteNavbar';
@@ -25,8 +26,8 @@ const mdxComponents = {
       {...props}
     ></a>
   ),
-  ul: props => <ul className="mt-4 ml-4 list-disc list-inside text-xl text-gray-700" {...props}></ul>,
-  ol: props => <ol className="mt-4 ml-4 list-decimal list-inside text-xl text-gray-700" {...props}></ol>,
+  ul: props => <ul className="mt-4 ml-8 list-disc text-xl text-gray-700" {...props}></ul>,
+  ol: props => <ol className="mt-4 ml-8 list-decimal text-xl text-gray-700" {...props}></ol>,
   li: props => <li className="mt-2" {...props}></li>,
   hr: props => <hr className="my-16 border-gray-400" {...props}></hr>,
   img: MDXImage,
@@ -40,6 +41,11 @@ const mdxComponents = {
     ></code>
   ),
   wrapper: MDXWrapper,
+};
+
+const nextArticle = {
+  title: 'How to escape from the async/await hell',
+  slug: 'async-await-hell',
 };
 
 function LayoutBlog(props) {
@@ -75,14 +81,26 @@ function LayoutBlog(props) {
       </Head>
       <SiteNavbar />
       <main className="col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto py-8 mt-10">
-        <MDXHeading className="text-5xl leading-tight" showAnchorLink={false}>
-          {meta.title}
-        </MDXHeading>
-        <PublishAndReadTime post={meta} className="mt-3 mb-8" />
-        <p className="text-2xl text-gray-700 mt-4">{meta.description}</p>
-        <MDXProvider components={mdxComponents}>{children}</MDXProvider>
+        <article>
+          <MDXHeading className="text-5xl leading-tight" showAnchorLink={false}>
+            {meta.title}
+          </MDXHeading>
+          <PublishAndReadTime post={meta} className="mt-3 mb-8" />
+          <p className="text-xl text-gray-600 mt-4 mb-8">{meta.description}</p>
+          <MDXProvider components={mdxComponents}>{children}</MDXProvider>
+        </article>
         <span className="block mt-20"></span>
         <CardTwitter />
+        <div className="flex justify-center text-center mt-20 py-10">
+          <Link href={'/blog/' + nextArticle.slug}>
+            <a>
+              <span>Next Icon</span>
+              <h3 className="text-2xl hover:underline">
+                {nextArticle.title}
+              </h3>
+            </a>
+          </Link>
+        </div>
       </main>
       <SiteFooter />
     </div>

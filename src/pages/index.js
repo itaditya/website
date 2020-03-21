@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { PostsPopular } from '_components/PostsList';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
+import SocialBar from '_components/SocialBar';
 
 import IconWebpack from '_components/icons/IconWebpack';
 import IconBabel from '_components/icons/IconBabel';
@@ -16,9 +17,6 @@ import IconNpm from '_components/icons/IconNpm';
 import IconGitHub from '_components/icons/IconGitHub';
 import IconGlobe from '_components/icons/IconGlobe';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
-import IconTwitter from '_components/icons/IconTwitter';
-import IconMedium from '_components/icons/IconMedium';
-import IconYouTube from '_components/icons/IconYouTube';
 
 import myPackages from '../staticData/myPackages.json';
 
@@ -40,18 +38,17 @@ const Home = () => (
 
     <main className="col-start-2 col-span-10 row-auto mt-24">
       <div className="flex items-center" style={{ height: '50vh' }}>
-        <div className="w-7/12">
+        <div className="w-1/2">
           <h1 className="text-6xl font-sans font-heading font-bold tracking-tighter text-gray-700">
             Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
           </h1>
           <p className="mt-2 text-xl">
-            Currently working at <span className="font-bold text-primary-700">HackerRank</span> as a frontend web
-            developer.
-            <br />I love open-sourcing my knowledge, be it through building projects on GitHub, giving talks or writing
+            Frontend developer at <span className="font-bold text-primary-700">HackerRank.</span>
+            <br />I love open-sourcing my knowledge through building projects, giving talks or writing
             blogs.
           </p>
-          <button className="bg-primary hover:bg-primary-600 mt-6 py-3 px-5 rounded-md font-bold text-primary-800 border border-primary-600 text-lg shadow-lg hover:shadow-xl transition ease-in duration-200">
-            Go to Portfolio
+          <button className="text-primary-700 hover:text-primary-800 hover:bg-primary mt-6 py-3 px-5 rounded-md font-bold border border-primary-600 text-lg shadow-md hover:shadow-lg transition ease-in duration-200">
+            Visit Portfolio
           </button>
         </div>
       </div>
@@ -102,10 +99,8 @@ const Home = () => (
       </section>
       <section className="mt-8 text-xl flex">
         <h1 className="font-bold text-primary-600">Hot off the press:</h1>
-        <Link href="/blog">
-          <a className="ml-2 hover:underline">
-            How to do Visual Testing in React
-          </a>
+        <Link href="/blog/better-components-with-tailwindcss">
+          <a className="ml-2 hover:underline">Better Components with TailwindCSS</a>
         </Link>
       </section>
       <section className="mt-56 flex flex-col items-center">
@@ -178,70 +173,7 @@ const Home = () => (
         ></iframe>
       </section>
     </main>
-
-    <aside className="fixed left-0 h-screen px-4 flex flex-col justify-center items-center" style={{ top: '0' }}>
-      <ul>
-        <li>
-          <a
-            href="https://twitter.com/dev__adi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-2 text-white text-3xl"
-          >
-            <span
-              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
-              style={{ backgroundColor: 'hsl(202.8, 89.1%, 53.1%)' }}
-            >
-              <IconTwitter />
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://medium.com/@adityaa803"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-2 text-gray-700 text-3xl"
-          >
-            <span
-              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
-              style={{ backgroundColor: '#12100E' }}
-            >
-              <IconMedium />
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.youtube.com/channel/UCk5cWNVIgtW_rpR7J_VSiWw?view_as=subscriber"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-2 text-gray-700 text-3xl"
-          >
-            <span
-              className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
-              style={{ backgroundColor: 'hsl(0, 75.4%, 50.6%)' }}
-            >
-              <IconYouTube />
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/itaditya"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-2 text-white text-4xl"
-          >
-            <span
-              className="rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
-            >
-              <IconGitHub />
-            </span>
-          </a>
-        </li>
-      </ul>
-    </aside>
+    <SocialBar />
     <SiteFooter />
   </div>
 );

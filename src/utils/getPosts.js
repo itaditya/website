@@ -32,6 +32,16 @@ export default function getPosts() {
       });
     }))
   
+    filePromise.push(new Promise(resolve => {
+      import('_posts/react-renderprops-hoc.mdx').then(data => {
+        const completeMeta = {
+          ...data.meta,
+          slug: 'react-renderprops-hoc',
+        }
+        resolve(completeMeta);
+      });
+    }))
+  
 return Promise.all(filePromise);
 }
 

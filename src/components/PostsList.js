@@ -32,22 +32,22 @@ export function PostsPopular() {
               Things I wish I knew before using MongoDB
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-              14 mins read
+              5 mins read
             </span>
           </a>
         </Link>
       </li>
       <li className="py-2 pl-3 pr-6 rounded-md mt-4">
-        <Link href="/blog/first-post">
+        <Link href="/blog/react-renderprops-hoc">
           <a className="flex items-start">
             <span className="rounded-full text-2xl mt-2" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
             <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
-              Building a game with React Hooks
+              Understanding React Render Props and HOC
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
-              9 mins read
+              7 mins read
             </span>
           </a>
         </Link>
