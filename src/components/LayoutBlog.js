@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { MDXProvider } from '@mdx-js/react';
 
 import SiteNavbar from '_components/SiteNavbar';
@@ -9,6 +8,7 @@ import MDXImage from '_components/MDXImage';
 import MDXWrapper from '_components/MDXWrapper';
 import CodeBlock from '_components/CodeBlock';
 import CardTwitter from '_components/CardTwitter';
+import { PostNextRead } from '_components/PostsSuggestion';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
 import { getShortDate } from '_utils/dateConvert';
 
@@ -41,11 +41,6 @@ const mdxComponents = {
     ></code>
   ),
   wrapper: MDXWrapper,
-};
-
-const nextArticle = {
-  title: 'How to escape from the async/await hell',
-  slug: 'async-await-hell',
 };
 
 function LayoutBlog(props) {
@@ -91,16 +86,7 @@ function LayoutBlog(props) {
         </article>
         <span className="block mt-20"></span>
         <CardTwitter />
-        <div className="flex justify-center text-center mt-20 py-10">
-          <Link href={'/blog/' + nextArticle.slug}>
-            <a>
-              <span>Next Icon</span>
-              <h3 className="text-2xl hover:underline">
-                {nextArticle.title}
-              </h3>
-            </a>
-          </Link>
-        </div>
+        <PostNextRead currentPostSlug={meta.slug} />
       </main>
       <SiteFooter />
     </div>

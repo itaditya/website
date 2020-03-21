@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { PostsPopular } from '_components/PostsList';
+import { PostsPopularList } from '_components/PostsSuggestion';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
@@ -33,7 +33,7 @@ const Blog = props => {
 
       <main className="col-start-2 col-span-10 row-auto mt-24">
         <h2 className="text-4xl mb-8 font-bold text-gray-800">Popular Posts</h2>
-        <PostsPopular />
+        <PostsPopularList />
         <h2 className="text-4xl mt-16 mb-1 font-bold text-gray-800">Latest Posts</h2>
         <ul className="xl:w-1/2">
           {posts.map((post) => (

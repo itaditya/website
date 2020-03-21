@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { PostsPopular } from '_components/PostsList';
+import { PostsPopularList } from '_components/PostsSuggestion';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
@@ -82,7 +82,7 @@ const Home = () => (
       <section className="mt-32 flex justify-between">
         <div>
           <h2 className="text-4xl font-bold mb-8">Popular Articles</h2>
-          <PostsPopular />
+          <PostsPopularList />
         </div>
         <Link href="/blog">
           <a className="bg-blue-300 hover:bg-blue-400 w-56 mt-auto py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in">
