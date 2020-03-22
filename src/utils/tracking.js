@@ -1,6 +1,7 @@
 import nanoid from 'nanoid';
 
 let metrics = [];
+let intervalId;
 
 function sendMetrics(sessionId) {
   if (metrics.length === 0) {
@@ -8,6 +9,9 @@ function sendMetrics(sessionId) {
   }
   fetch(`/api/metrics`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       sessionId,
       metrics,
@@ -22,12 +26,13 @@ function sendMetrics(sessionId) {
     })
     .catch(() => {
       console.log('metrics failed');
+      clearInterval(intervalId);
     });
 }
 
 export function setupMetrics() {
   const sessionId = nanoid(10);
-  setInterval(() => {
+  intervalId = setInterval(() => {
     sendMetrics(sessionId);
   }, 10000);
 }
