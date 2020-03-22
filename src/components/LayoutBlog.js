@@ -47,6 +47,7 @@ function LayoutBlog(props) {
   const { meta, children } = props;
   const postUrl = 'https://devadi.now.sh/blog/' + meta.slug;
   const imageUrl = meta.previewPicUrl || meta.coverPicUrl;
+
   return (
     <div
       className="relative min-h-screen bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4 font-body"

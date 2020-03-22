@@ -7,6 +7,7 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 
 #### To-Do
 
+* [x] Next post
 * [ ] Add PurgeCSS
 * [ ] Use forms instead of iframe for NewsLetter
 * [ ] Port all blogposts to this with correct canonical urls
@@ -17,4 +18,3 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [ ] Labs section
 * [ ] Google Analytics or similar
 * [ ] Hide Social sidebar at open
-* [ ] Next post
