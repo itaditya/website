@@ -1,6 +1,6 @@
 {
   "version": 2,
   "env": {
-    "GITHUB_TOKEN": "@github-token"
+    "FAUNADB_SECRET": "@faundadb-secret"
   }
 }
