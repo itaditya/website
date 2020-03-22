@@ -1,6 +1,3 @@
 {
-  "version": 2,
-  "env": {
-    "FAUNADB_SECRET": "@faundadb-secret"
-  }
+  "version": 2
 }
