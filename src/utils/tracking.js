@@ -38,5 +38,7 @@ export function setupMetrics() {
 }
 
 export function collectMetrics(metric) {
+  const d = new Date();
+  metric.createdAt = d.toISOString();
   metrics.push(metric);
 }
