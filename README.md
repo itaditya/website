@@ -8,13 +8,13 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 #### To-Do
 
 * [x] Next post
+* [x] Google Analytics or similar
+* [x] Work section
 * [ ] Add PurgeCSS
-* [ ] Use forms instead of iframe for NewsLetter
 * [ ] Port all blogposts to this with correct canonical urls
 * [ ] Design Preview Images
-* [ ] Work section
 * [ ] Projects section
 * [ ] Contact section
 * [ ] Labs section
-* [ ] Google Analytics or similar
 * [ ] Hide Social sidebar at open
+* [ ] (Maybe) Use forms instead of iframe for NewsLetter

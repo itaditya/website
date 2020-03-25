@@ -161,8 +161,8 @@ const Home = () => (
           </article>
         </div>
       </section>
-      <section className="mt-56 flex items-center justify-between">
-        <div className="max-w-md">
+      <section className="mt-56 md:flex items-center justify-between">
+        <div className="mb-8 md:mb-0 max-w-md">
           <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
           <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
         </div>
