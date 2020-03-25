@@ -24,7 +24,7 @@ const About = () => (
     <SiteNavbar />
 
     <main className="col-start-2 col-span-10 lg:col-start-2 lg:col-span-5 row-auto mt-16">
-      <h2 className="font-heading font-bold text-5xl mb-8">About Me</h2>
+      <h2 className="font-heading font-bold text-gray-800 text-5xl mb-8">About Me</h2>
       <p className="text-2xl text-gray-700 leading-relaxed">
         I am a <span className="text-gray-800">Web Developer</span> working as an SDE 1 at{' '}
         <a

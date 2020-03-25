@@ -5,7 +5,7 @@ import { PostsPopularList } from '_components/PostsSuggestion';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
-
+import SectionPackages from '_components/SectionPackages';
 import IconWebpack from '_components/icons/IconWebpack';
 import IconBabel from '_components/icons/IconBabel';
 import IconVue from '_components/icons/IconVue';
@@ -13,12 +13,7 @@ import IconJS from '_components/icons/IconJS';
 import IconHTML from '_components/icons/IconHTML';
 import IconCSS from '_components/icons/IconCSS';
 import IconReact from '_components/icons/IconReact';
-import IconNpm from '_components/icons/IconNpm';
-import IconGitHub from '_components/icons/IconGitHub';
-import IconGlobe from '_components/icons/IconGlobe';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
-
-import myPackages from '../staticData/myPackages.json';
 
 const Home = () => (
   <div
@@ -45,8 +40,7 @@ const Home = () => (
           </h1>
           <p className="mt-2 text-xl">
             Frontend developer at <span className="font-bold text-primary-700">HackerRank.</span>
-            <br />I love open-sourcing my knowledge through building projects, giving talks or writing
-            blogs.
+            <br />I love open-sourcing my knowledge through building projects, giving talks or writing blogs.
           </p>
           <button className="text-primary-700 hover:text-primary-800 hover:bg-primary mt-6 py-3 px-5 rounded-md font-bold border border-primary-600 text-lg shadow-md hover:shadow-lg transition ease-in duration-200">
             Visit Portfolio
@@ -104,63 +98,23 @@ const Home = () => (
           <a className="ml-2 hover:underline">Better Components with TailwindCSS</a>
         </Link>
       </section>
-      <section className="mt-56 flex flex-col items-center">
-        <h2 className="text-4xl font-bold">Open Source Tools</h2>
-        <div className="grid grid-cols-4 col-gap-8 row-gap-12 w-full mt-16">
-          {myPackages.map(pkg => (
-            <article className="p-4 bg-white shadow-xl rounded-lg text-center" key={pkg.name}>
-              <h3 className="w-full text-2xl">{pkg.name}</h3>
-              <p className="text-gray-700 mt-3">{pkg.description}</p>
-              <ul className="flex justify-evenly items-center px-8 mt-6">
-                <li>
-                  <a
-                    href={pkg.links.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block p-2 text-white text-2xl"
-                  >
-                    <span className="block p-1 bg-blue-500 rounded-full hover:shadow-lg transition duration-200 ease-in">
-                      <IconGlobe />
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href={pkg.links.npm} target="_blank" rel="noopener noreferrer" className="block p-2 text-2xl">
-                    <span
-                      className="block p-1 rounded-full hover:shadow-lg transition duration-200 ease-in"
-                      style={{ backgroundColor: 'hsl(3.2, 52.4%, 48.6%)' }}
-                    >
-                      <IconNpm />
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href={pkg.links.github} target="_blank" rel="noopener noreferrer" className="block p-2 text-3xl">
-                    <span className="rounded-full hover:shadow-lg transition duration-200 ease-in">
-                      <IconGitHub />
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </article>
-          ))}
-          <article
-            className="py-4 px-8 col-span-2 bg-blue-700 shadow-xl rounded-lg"
-            style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
+      <SectionPackages>
+        <article
+          className="py-4 px-8 col-span-2 bg-blue-700 shadow-xl rounded-lg"
+          style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
+        >
+          <h3 className="w-full text-2xl text-white font-bold">Other Projects</h3>
+          <p className="text-gray-100 text-lg mt-1">
+            I make lots of side projects whenever I'm <br /> learning new things.
+          </p>
+          <a
+            href="/projects"
+            className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
           >
-            <h3 className="w-full text-2xl text-white font-bold">Other Projects</h3>
-            <p className="text-gray-100 text-lg mt-1">
-              I make lots of side projects whenever I'm <br /> learning new things.
-            </p>
-            <a
-              href="/projects"
-              className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
-            >
-              See All Projects
-            </a>
-          </article>
-        </div>
-      </section>
+            See All Projects
+          </a>
+        </article>
+      </SectionPackages>
       <section className="mt-56 md:flex items-center justify-between">
         <div className="mb-8 md:mb-0 max-w-md">
           <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>

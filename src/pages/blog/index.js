@@ -32,20 +32,20 @@ const Blog = props => {
       <SiteNavbar activeLink="blog" />
 
       <main className="col-start-2 col-span-10 row-auto mt-24">
-        <h2 className="text-4xl mb-8 font-bold text-gray-800">Popular Posts</h2>
+        <h2 className="text-2xl md:text-4xl mb-8 font-bold text-gray-800">Popular Posts</h2>
         <PostsPopularList />
-        <h2 className="text-4xl mt-16 mb-1 font-bold text-gray-800">Latest Posts</h2>
+        <h2 className="text-2xl md:text-4xl mt-16 mb-1 font-bold text-gray-800">Latest Posts</h2>
         <ul className="xl:w-1/2">
           {posts.map((post) => (
             <Link key={post.slug} href={'/blog/' + post.slug}>
               <li className="group mt-8 pl-3 cursor-pointer">
-                <h3 className="text-2xl font-medium text-gray-800 group-hover:underline">
+                <h3 className="text-xl md:text-2xl font-medium text-gray-800 group-hover:underline">
                   <a>
                     {post.title}
                   </a>
                 </h3>
                 <PublishAndReadTime post={post} />
-                <p className="text-lg text-gray-700 mt-3">
+                <p className="text-base md:text-lg text-gray-700 mt-3">
                   {post.description}
                 </p>
               </li>

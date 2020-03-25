@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Trick or Treat",
+    "description": "Grab the candies using your keyboard. Less movement will give you higher rank.",
+    "label": "Side Project",
+    "anchorText": "Play Game",
+    "anchorLink": "https://trick-or-treat.netlify.com/",
+    "pictureUrl": "/trick-or-treat.png"
+  },
+  {
+    "name": "PR Train",
+    "description": "Distribute GitHub PRs among your teammates efficiently",
+    "label": "Internal Project",
+    "pictureUrl": "/prtrain.png"
+  },
+  {
+    "name": "Code Runner",
+    "description": "Quickly run your code online in any browser. Supports C, C++, Java, Python, JavaScript",
+    "label": "Side Project",
+    "anchorText": "Try it out",
+    "anchorLink": "https://codingrunner.herokuapp.com",
+    "pictureUrl": "/coderunner.png"
+  },
+  {
+    "name": "Game of Thrones Quiz",
+    "description": "GOT is famous for killing characters. Take this quiz if you know who died when.",
+    "label": "Side Project",
+    "anchorText": "Play Game",
+    "anchorLink": "https://got-death-quiz.netlify.com/",
+    "pictureUrl": "/got-death-quiz.png"
+  }
+]

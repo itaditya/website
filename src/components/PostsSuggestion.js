@@ -18,7 +18,7 @@ export function PostsPopularList() {
             >
               <IconJS />
             </span>
-            <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
               Escaping from Async/Await Hell
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
@@ -33,7 +33,7 @@ export function PostsPopularList() {
             <span className="rounded-sm text-3xl mt-1">
               <IconMongoDB />
             </span>
-            <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
               Things I wish I knew before using MongoDB
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
@@ -48,7 +48,7 @@ export function PostsPopularList() {
             <span className="rounded-full text-2xl mt-2" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
-            <span className="hover:underline text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
               Understanding React Render Props and HOC
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">

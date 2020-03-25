@@ -37,6 +37,9 @@ module.exports = {
         body: ['Roboto'],
       }
     },
+    minWidth: {
+      '1/3': '33%',
+    }
   },
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'visited', 'group-hover'],
