@@ -33,45 +33,42 @@ const Home = () => (
     <SiteNavbar />
 
     <main className="col-start-2 col-span-10 row-auto mt-24">
-      <div className="flex items-center" style={{ height: '50vh' }}>
+      <div className="flex justify-between items-center" style={{ minHeight: '50vh' }}>
         <div className="w-1/2">
           <h1 className="text-6xl font-sans font-heading font-bold tracking-tighter text-gray-700">
             Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
           </h1>
-          <p className="mt-2 text-xl">
-            Frontend developer at <span className="font-bold text-primary-700">HackerRank.</span>
+          <p className="mt-2 text-xl text-gray-700">
+            Frontend developer at HackerRank.
             <br />I love open-sourcing my knowledge through building projects, giving talks or writing blogs.
           </p>
-          <button className="text-primary-700 hover:text-primary-800 hover:bg-primary mt-6 py-3 px-5 rounded-md font-bold border border-primary-600 text-lg shadow-md hover:shadow-lg transition ease-in duration-200">
-            Visit Portfolio
-          </button>
         </div>
-      </div>
-      <div className="absolute pr-10 text-gray-400 text-6xl animation-fade-in" style={{ top: '50vh', right: '100px' }}>
-        <div className="mt-10 overflow-x-hidden" style={{ width: '440px' }}>
-          <ul className="flex animation-sliding">
-            <li>
-              <IconHTML width="2em" height="2em" />
-            </li>
-            <li>
-              <IconCSS width="2em" height="2em" />
-            </li>
-            <li className="ml-5">
-              <IconVue width="2em" height="2em" />
-            </li>
-            <li className="ml-5">
-              <IconWebpack width="2em" height="2em" />
-            </li>
-            <li className="ml-5">
-              <IconBabel width="2em" height="2em" />
-            </li>
-            <li className="ml-8">
-              <IconJS width="2em" height="2em" />
-            </li>
-            <li className="ml-8">
-              <IconReact width="2em" height="2em" />
-            </li>
-          </ul>
+        <div className="mt-4 text-gray-400 text-6xl animation-fade-in">
+          <div className="overflow-x-hidden" style={{ width: '440px' }}>
+            <ul className="flex animation-sliding">
+              <li>
+                <IconHTML width="2em" height="2em" />
+              </li>
+              <li>
+                <IconCSS width="2em" height="2em" />
+              </li>
+              <li className="ml-5">
+                <IconVue width="2em" height="2em" />
+              </li>
+              <li className="ml-5">
+                <IconWebpack width="2em" height="2em" />
+              </li>
+              <li className="ml-5">
+                <IconBabel width="2em" height="2em" />
+              </li>
+              <li className="ml-8">
+                <IconJS width="2em" height="2em" />
+              </li>
+              <li className="ml-8">
+                <IconReact width="2em" height="2em" />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <section className="mt-32 flex justify-between">
