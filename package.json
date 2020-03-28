@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev -p 7991",
     "start": "next start -p 7991",
-    "build": "next build",
+    "build": "npm run clean && next build",
     "export": "next export",
+    "clean": "rimraf .out/ && rimraf .next/",
     "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
     "gen:postFile": "node scripts/generatePostFile.js"
   },
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^4.0.0",
+    "rimraf": "^3.0.2",
     "tailwindcss": "^1.2.0"
   }
 }
