@@ -45,7 +45,7 @@ const mdxComponents = {
 
 function LayoutBlog(props) {
   const { meta, children } = props;
-  const postUrl = 'https://devadi.now.sh/blog/' + meta.slug;
+  const postUrl = 'https://devadi.netlify.com/blog/' + meta.slug;
   const imageUrl = meta.previewPicUrl || meta.coverPicUrl;
 
   return (
