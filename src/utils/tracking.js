@@ -7,7 +7,7 @@ function sendMetrics(sessionId) {
   if (metrics.length === 0) {
     return;
   }
-  fetch(`/api/metrics`, {
+  fetch(`/.netlify/functions/metrics`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export function setupMetrics() {
   const sessionId = nanoid(10);
   intervalId = setInterval(() => {
     sendMetrics(sessionId);
-  }, 10000);
+  }, 1000);
 }
 
 export function collectMetrics(metric) {
