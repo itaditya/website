@@ -34,7 +34,7 @@ export function setupMetrics() {
   const sessionId = nanoid(10);
   intervalId = setInterval(() => {
     sendMetrics(sessionId);
-  }, 1000);
+  }, 10000);
 }
 
 export function collectMetrics(metric) {
