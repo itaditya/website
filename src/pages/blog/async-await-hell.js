@@ -1,13 +1,13 @@
-import LayoutBlog from '_components/LayoutBlog';
+import BlogLayout from '_components/BlogLayout';
 import PostContent, { meta } from '_posts/async-await-hell.mdx';
 
 meta.slug = 'async-await-hell';
 
 const Post = () => {
   return (
-    <LayoutBlog meta={meta}>
+    <BlogLayout meta={meta}>
       <PostContent />
-    </LayoutBlog>
+    </BlogLayout>
   );
 };
 

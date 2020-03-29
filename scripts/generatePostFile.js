@@ -7,16 +7,16 @@ if(!slug) {
   process.exit(1);
 }
 
-const string = `import LayoutBlog from '_components/LayoutBlog';
+const string = `import BlogLayout from '_components/BlogLayout';
 import PostContent, { meta } from '_posts/${slug}.mdx';
 
 meta.slug = '${slug}';
 
 const Post = () => {
   return (
-    <LayoutBlog meta={meta}>
+    <BlogLayout meta={meta}>
       <PostContent />
-    </LayoutBlog>
+    </BlogLayout>
   );
 };
 

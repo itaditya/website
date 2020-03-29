@@ -1,5 +1,4 @@
-import Head from 'next/head';
-
+import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
@@ -9,17 +8,8 @@ const Work = () => (
     className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
     style={{ gridTemplateRows: 'auto 1fr auto' }}
   >
-    <Head>
-      <title>Work | Aditya Agarwal</title>
-      <link rel="icon" href="/favicon.ico" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-    </Head>
-
+    <SiteHead pageName="Work" />
     <SiteNavbar />
-
     <main className="col-start-2 col-span-10 xl:col-start-3 lg:col-span-5 mt-16 flex flex-col justify-center">
       <h2 className="text-gray-700 text-2xl mb-4">Currently employed at</h2>
       <img src="/hackerrank_logo.png" alt="HackerRank" width="400" />

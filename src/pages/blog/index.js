@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import Link from 'next/link';
 
 import { PostsPopularList } from '_components/PostsSuggestion';
+import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
@@ -20,14 +20,7 @@ const Blog = props => {
       className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
-      <Head>
-        <title>Blog | Aditya Agarwal</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <SiteHead pageName="Blog" />
 
       <SiteNavbar activeLink="blog" />
 

@@ -1,13 +1,13 @@
-import LayoutBlog from '_components/LayoutBlog';
+import BlogLayout from '_components/BlogLayout';
 import PostContent, { meta } from '_posts/react-renderprops-hoc.mdx';
 
 meta.slug = 'react-renderprops-hoc';
 
 const Post = () => {
   return (
-    <LayoutBlog meta={meta}>
+    <BlogLayout meta={meta}>
       <PostContent />
-    </LayoutBlog>
+    </BlogLayout>
   );
 };
 

@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/react';
 
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
+import BlogHead from '_components/BlogHead';
 import MDXHeading from '_components/MDXHeading';
 import MDXImage from '_components/MDXImage';
 import MDXWrapper from '_components/MDXWrapper';
@@ -10,7 +10,6 @@ import CodeBlock from '_components/CodeBlock';
 import CardTwitter from '_components/CardTwitter';
 import { PostNextRead } from '_components/PostsSuggestion';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
-import { getShortDate } from '_utils/dateConvert';
 
 const mdxComponents = {
   h1: props => <MDXHeading level={1} className="text-5xl leading-tight" showAnchorLink={false} {...props} />,
@@ -43,38 +42,15 @@ const mdxComponents = {
   wrapper: MDXWrapper,
 };
 
-function LayoutBlog(props) {
+function BlogLayout(props) {
   const { meta, children } = props;
-  const postUrl = 'https://devadi.netlify.com/blog/' + meta.slug;
-  const imageUrl = meta.previewPicUrl || meta.coverPicUrl;
 
   return (
     <div
       className="relative min-h-screen bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4 font-body"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
-      <Head>
-        <title>{meta.title} | Aditya Agarwal</title>
-        <meta property="article:author" content="https://twitter.com/dev__adi"></meta>
-        <meta name="description" content={meta.description} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Aditya Agarwal" />
-        <meta property="og:url" content={postUrl} />
-        <meta property="og:image" content={imageUrl} />
-        <meta property="fb:app_id" content="1790148541282728" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@dev__adi" />
-        <meta name="twitter:creator" content="@dev__adi" />
-        <meta name="twitter:url" content={postUrl} />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:image:src" content={imageUrl} />
-        <meta name="twitter:label1" value="Reading time" />
-        <meta name="twitter:data1" value={`${meta.readingTime} read`} />
-        <meta name="twitter:label2" value="Published on" />
-        <meta name="twitter:data2" value={getShortDate(meta.date)} />
-        <link rel="canonical" href={meta.canonicalUrl} />
-      </Head>
+      <BlogHead postInfo={meta} />
       <SiteNavbar />
       <main className="col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto py-8 mt-10">
         <article>
@@ -94,4 +70,4 @@ function LayoutBlog(props) {
   );
 }
 
-export default LayoutBlog;
+export default BlogLayout;
