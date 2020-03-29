@@ -31,7 +31,7 @@ export default function SiteNavbar(props) {
       </h4>
       <ul className="flex items-center text-center">
         {links.map(link => (
-          <li key={link.href} className="ml-12">
+          <li key={link.href} className="md:ml-12">
             <Link href={`/${link.href}`}>
               <a
                 className={cn(
@@ -39,6 +39,7 @@ export default function SiteNavbar(props) {
                   {
                     'border-b-2 border-primary-400 text-primary-700': activeLink === link.href,
                     'rounded-md hover:text-primary-800 hover:bg-primary-300': activeLink !== link.href,
+                    'hidden md:block': link.href !== 'blog',
                   },
                 )}
               >

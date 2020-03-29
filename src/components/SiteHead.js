@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 export default function SiteHead(props) {
-  const { pageName = 'Home' } = props;
+  const { pageName = 'Home', children } = props;
   return (
     <Head>
       <title>{pageName} | Aditya Agarwal</title>
@@ -11,6 +11,7 @@ export default function SiteHead(props) {
         href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
+      {children}
     </Head>
   );
 }

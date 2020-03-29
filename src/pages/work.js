@@ -16,7 +16,7 @@ const Work = () => (
     </main>
     <aside className="col-start-2 col-span-10 lg:col-start-8 lg:col-span-4 mt-16 flex flex-col justify-center">
       <h2 className="font-bold text-3xl mb-4">Past Experience</h2>
-      <ul className="grid grid-cols-1 row-gap-4 text-gray-700">
+      <ul className="grid grid-cols-1 row-gap-4 text-gray-700 pl-2">
         <li className="text-xl">GSoC student at Probot(GitHub).</li>
         <li className="text-xl">Fullstack Intern at Equifin United Pvt. Ltd.</li>
         <li className="text-xl">Frontend Intern at Elvento Labs.</li>
