@@ -198,7 +198,7 @@ Consider the previous example. There we were just storing the username of all th
 
 The naive approach would be to store the id of all users who follow you in array, loop through each and then using `User.find()` method to fetch all the data of a user. However mongo has another trick up it’s sleeve and that’s the `populate()` method.
 
-You can read in detail here — http://mongoosejs.com/docs/populate.html.
+You can read in detail [here](http://mongoosejs.com/docs/populate.html).
 
 The main concept is that we use ref key to tell mongo from where should it fetch the data via the given id .
 

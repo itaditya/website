@@ -17,7 +17,7 @@ const Blog = props => {
   const { posts } = props;
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen font-body bg-gray-200 py-8 px-4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Blog" />
