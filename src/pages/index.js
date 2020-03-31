@@ -94,12 +94,13 @@ const Home = () => (
           <p className="text-gray-100 text-lg mt-1">
             I make lots of side projects whenever I'm <br /> learning new things.
           </p>
-          <a
-            href="/projects"
-            className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
-          >
-            See All Projects
-          </a>
+          <Link href="/projects">
+            <a
+              className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
+            >
+              See All Projects
+            </a>
+          </Link>
         </article>
       </SectionPackages>
       <section className="mt-20 md:mt-56 md:flex items-center justify-between">
