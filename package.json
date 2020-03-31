@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "start": "next start -p 7991",
+    "start": "next dev",
     "build": "next build",
     "export": "next export",
     "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
