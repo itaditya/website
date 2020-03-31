@@ -13,4 +13,5 @@ jobs:
           wait-on: 'http://localhost:3000'
           command-prefix: 'percy exec -- npx'
         env:
+          PURGE_CSS: true
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
