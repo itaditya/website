@@ -5,7 +5,7 @@ export default function SiteFooter() {
     <footer className="col-span-12 py-3 px-4 mt-24 flex justify-center md:justify-between items-center">
       <span className="flex items-center">
         <img
-          src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/htc/37/envelope_2709.png"
+          src="/envelope.png"
           alt="Email Address"
           className="w-6 h-6"
         />

@@ -6,14 +6,15 @@ import IconGlobe from '_components/icons/IconGlobe';
 import myPackages from '../staticData/myPackages.json';
 
 export default function SectionPackages(props) {
-  const { children, size = 'small', className } = props;
+  const { children, size = 'md', className } = props;
   return (
-    <section className={cn('mt-56 flex flex-col items-center', className)}>
-      <h2 className="text-4xl font-bold">Open Source Tools</h2>
+    <section className={cn('mt-56 flex md:flex flex-col items-center', className)}>
+      <h2 className="text-4xl text-center font-bold">Open Source Tools</h2>
       <div
         className={cn('grid col-gap-8 row-gap-12 w-full mt-16', {
-          'grid-cols-3': size === 'big',
-          'grid-cols-4': size === 'small',
+          'grid-cols-3': size === 'lg',
+          'grid-cols-4': size === 'md',
+          'grid-cols-1': size === 'sm',
         })}
       >
         {myPackages.map(pkg => (
