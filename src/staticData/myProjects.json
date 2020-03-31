@@ -5,7 +5,7 @@
     "label": "Side Project",
     "anchorText": "Play Game",
     "anchorLink": "https://trick-or-treat.netlify.com/",
-    "pictureUrl": "/trick-or-treat.png"
+    "pictureUrl": "/trick-or-treat.jpg"
   },
   {
     "name": "PR Train",
@@ -27,6 +27,6 @@
     "label": "Side Project",
     "anchorText": "Play Game",
     "anchorLink": "https://got-death-quiz.netlify.com/",
-    "pictureUrl": "/got-death-quiz.png"
+    "pictureUrl": "/got-death-quiz.jpg"
   }
 ]
