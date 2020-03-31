@@ -91,14 +91,14 @@ const Labs = () => {
   }, []);
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Labs">
         <script key="codepen-script" async src="https://static.codepen.io/assets/embed/ei.js"></script>
       </SiteHead>
       <SiteNavbar />
-      <main className="col-span-12 row-auto">
+      <main className="col-span-12 row-auto px-4">
         <section className="md:flex justify-between mt-16">
           <div className="mt-16">
             <CodePenEmbed className="codepen-xs" id="VwLMeYV" title="Squeeze Animation in Sidebar" />

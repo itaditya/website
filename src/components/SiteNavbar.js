@@ -1,8 +1,24 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 
+import IconMenu from '_components/icons/IconMenu';
+import IconCross from '_components/icons/IconCross';
+
+import { useDeviceWidth } from '_utils/deviceDetails';
+
 export default function SiteNavbar(props) {
   const { activeLink } = props;
+  const deviceWidth = useDeviceWidth();
+  const [stateIsExpanded, setStateIsExpanded] = useState(false);
+
+  function handleOpenMenu() {
+    setStateIsExpanded(true);
+  }
+
+  function handleCloseMenu() {
+    setStateIsExpanded(false);
+  }
 
   const links = [
     {
@@ -16,6 +32,29 @@ export default function SiteNavbar(props) {
     {
       href: 'about',
       name: 'About',
+    },
+  ];
+
+  const linksExpanded = [
+    {
+      href: 'projects',
+      name: 'Projects',
+    },
+    {
+      href: 'about',
+      name: 'About',
+    },
+    {
+      href: 'labs',
+      name: 'Experiments',
+    },
+    {
+      href: 'social',
+      name: 'Connect with me',
+    },
+    {
+      href: 'work',
+      name: 'Work',
     },
   ];
 
@@ -48,6 +87,29 @@ export default function SiteNavbar(props) {
             </Link>
           </li>
         ))}
+        {['xs', 'sm'].includes(deviceWidth) && (
+          <li className="md:hidden ml-6 pr-1 flex items-center">
+            <button className="text-xl text-gray-700" onClick={handleOpenMenu} aria-label="More"><IconMenu /></button>
+            {stateIsExpanded && (
+              <nav
+                className="fixed flex flex-col justify-center bg-gray-100"
+                style={{ top: 0, height: '100vh', width: '100%', left: 0 }}
+              >
+                <button className="absolute text-lg flex items-center" style={{ top: '20px', right: '20px' }} onClick={handleCloseMenu}>
+                  <IconCross className="text-2xl text-gray-700" />
+                  <span className="ml-1 text-gray-900">Close</span>
+                </button>
+                {linksExpanded.map(link => (
+                  <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
+                    <Link href={`/${link.href}`}>
+                      <a className="block text-md md:text-xl text-gray-700 py-1 px-2">{link.name}</a>
+                    </Link>
+                  </li>
+                ))}
+              </nav>
+            )}
+          </li>
+        )}
       </ul>
     </nav>
   );
