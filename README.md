@@ -11,7 +11,7 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [x] Google Analytics or similar
 * [x] Work section
 * [x] Visual Testing
-* [ ] Add PurgeCSS
+* [x] Add PurgeCSS
 * [ ] Port all blogposts to this with correct canonical urls
 * [ ] Design Preview Images
 * [x] Projects section
