@@ -5,7 +5,7 @@ import IconGitHub from '_components/icons/IconGitHub';
 
 export default function SocialBar() {
   return (
-    <aside className="fixed left-0 h-screen px-4 hidden md:flex flex-col justify-center items-center" style={{ top: '0' }}>
+    <aside className="fixed left-0 h-screen px-4 hidden md:flex flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
       <ul>
         <li>
           <a

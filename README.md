@@ -16,7 +16,8 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [x] Contact section
 * [x] Labs section
 * [x] Update favicon.ico
-* [ ] Hide Social sidebar at open
+* [x] Hide Social sidebar at open
+* [ ] Mobile Navigation
 * [ ] Port all blogposts to this with correct canonical urls
 * [ ] Design Preview Images
 * [ ] (Maybe) Use forms instead of iframe for NewsLetter
