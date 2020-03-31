@@ -8,7 +8,10 @@
     "build": "next build",
     "export": "next export",
     "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
-    "gen:postFile": "node scripts/generatePostFile.js"
+    "gen:postFile": "node scripts/generatePostFile.js",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:visual": "percy exec -- cypress run"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.5.7",
@@ -23,7 +26,9 @@
     "react-dom": "16.13.0"
   },
   "devDependencies": {
+    "@percy/cypress": "^2.3.1",
     "babel-plugin-module-resolver": "^4.0.0",
+    "cypress": "^4.3.0",
     "tailwindcss": "^1.2.0"
   }
 }

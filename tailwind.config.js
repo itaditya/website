@@ -1,5 +1,11 @@
+const { fontFamily } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   theme: {
+    fontFamily: {
+      heading: ['Lora', fontFamily.serif],
+      body: ['Roboto', fontFamily.sans],
+    },
     extend: {
       colors: {
         primary: {
@@ -32,10 +38,6 @@ module.exports = {
       width: {
         'max-content': 'max-content',
       },
-      fontFamily: {
-        heading: ['Lora'],
-        body: ['Roboto'],
-      }
     },
     minWidth: {
       '1/3': '33%',

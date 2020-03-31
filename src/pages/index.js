@@ -25,16 +25,16 @@ const Home = () => (
     <main className="col-start-2 col-span-10 row-auto mt-8 md:mt-24">
       <div className="flex justify-between items-center" style={{ minHeight: '50vh' }}>
         <div className="md:w-1/2">
-          <h1 className="text-3xl md:text-6xl font-sans font-heading font-bold tracking-tighter text-gray-700">
+          <h1 className="text-3xl md:text-5xl xl:text-6xl font-heading font-bold tracking-tighter text-gray-700">
             Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
           </h1>
-          <p className="mt-2 text-lg md:text-xl text-gray-700">
+          <p className="mt-2 text-base xl:text-xl text-gray-700">
             Frontend developer at HackerRank.
             <br />I love open-sourcing my knowledge through building projects, giving talks or writing blogs.
           </p>
         </div>
-        <div className="hidden md:block mt-4 text-gray-400 text-6xl animation-fade-in">
-          <div className="overflow-x-hidden" style={{ width: '440px' }}>
+        <div className="hidden md:block mt-4 text-gray-400 text-5xl animation-fade-in">
+          <div className="overflow-x-hidden" style={{ width: '340px' }}>
             <ul className="flex animation-sliding">
               <li>
                 <IconHTML width="2em" height="2em" />

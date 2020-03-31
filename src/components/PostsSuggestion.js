@@ -18,7 +18,7 @@ export function PostsPopularList() {
             >
               <IconJS />
             </span>
-            <span className="hover:underline text-base sm:text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
               Escaping from Async/Await Hell
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
@@ -33,7 +33,7 @@ export function PostsPopularList() {
             <span className="rounded-sm text-3xl mt-1">
               <IconMongoDB />
             </span>
-            <span className="hover:underline text-base sm:text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
               Things I wish I knew before using MongoDB
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
@@ -48,7 +48,7 @@ export function PostsPopularList() {
             <span className="rounded-full text-2xl mt-2" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
-            <span className="hover:underline text-base sm:text-lg md:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
               Understanding React Render Props and HOC
             </span>
             <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
@@ -97,7 +97,7 @@ export function PostNextRead(props) {
       {
         stateNextArticle && (
           <Link href={'/blog/' + stateNextArticle.slug}>
-            <a className="group flex flex-col items-center text-center">
+            <a className="group flex flex-col items-center text-center" data-percy-hidden>
               <span className="text-3xl md:text-5xl text-center text-gray-600 group-hover:text-blue-700"><IconChevronRight /></span>
               <h3 className="font-medium mt-4 text-2xl text-gray-700 group-hover:text-blue-700 transition-colors duration-200">Next Up: {stateNextArticle.title}</h3>
             </a>

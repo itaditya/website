@@ -18,6 +18,6 @@
 
 @keyframes sliding {
   to {
-    transform: translateX(-580px);
+    transform: translateX(-330px);
   }
 }

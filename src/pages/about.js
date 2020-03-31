@@ -35,7 +35,7 @@ const About = () => (
       <p className="text-xl text-gray-700 leading-relaxed mt-6">
         Apart from coding, I love reading fandom about my favorite series like Harry Potter, Naruto and the MCU.
       </p>
-      <div className="md:flex justify-between items-center">
+      <div className="xl:flex justify-between items-center">
         <a
           className="flex items-center text-lg text-primary-600 leading-relaxed mt-8"
           target="_blank"
