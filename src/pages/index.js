@@ -80,7 +80,7 @@ const Home = () => {
             </h1>
             <p className="mt-2 text-base xl:text-xl text-gray-700">
               Frontend developer at HackerRank.
-              <br />I love open-sourcing my knowledge through building projects, giving talks or writing blogs.
+              <br />I love open-sourcing my knowledge through building projects, giving talks and writing blogs.
             </p>
           </div>
           <div className="hidden md:block mt-4 text-gray-400 text-5xl animation-fade-in">

@@ -13,13 +13,6 @@ export default function SiteFooter() {
       </span>
       <ul className="hidden md:flex">
         <li>
-          <Link href="/work">
-            <a className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">
-              Work
-            </a>
-          </Link>
-        </li>
-        <li className="ml-10">
           <Link href="/labs">
             <a className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">
               Experiments
@@ -31,6 +24,11 @@ export default function SiteFooter() {
             <a className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">
               Connect with me
             </a>
+          </Link>
+        </li>
+        <li className="ml-10">
+          <Link href="/work">
+            <a className="text-lg text-gray-600 hover:text-gray-900 transition-colors duration-200 ease-in">Work</a>
           </Link>
         </li>
       </ul>
