@@ -13,8 +13,8 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [ ] Add PurgeCSS
 * [ ] Port all blogposts to this with correct canonical urls
 * [ ] Design Preview Images
-* [ ] Projects section
-* [ ] Contact section
-* [ ] Labs section
+* [x] Projects section
+* [x] Contact section
+* [x] Labs section
 * [ ] Hide Social sidebar at open
 * [ ] (Maybe) Use forms instead of iframe for NewsLetter

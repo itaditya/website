@@ -16,7 +16,7 @@
     "classnames": "^2.2.6",
     "faunadb": "^2.13.0",
     "nanoid": "^2.1.11",
-    "next": "9.3.0",
+    "next": "9.3.2",
     "object.fromentries": "^2.0.2",
     "prism-react-renderer": "^1.0.2",
     "react": "16.13.0",
