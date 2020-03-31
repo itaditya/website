@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 import { PostsPopularList } from '_components/PostsSuggestion';
@@ -14,6 +15,44 @@ import IconHTML from '_components/icons/IconHTML';
 import IconCSS from '_components/icons/IconCSS';
 import IconReact from '_components/icons/IconReact';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
+
+function Newsletter() {
+  const [stateSeenNl, setStateSeenNl] = useState('unseen');
+  const newsletterRef = useRef();
+
+  useEffect(() => {
+    function callBack(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setStateSeenNl('seen');
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver(callBack);
+    observer.observe(newsletterRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div className="w-full md:w-3/4 lg:w-1/2 h-56 bg-gray-300" ref={newsletterRef}>
+      {
+        stateSeenNl === 'seen' && (
+          <iframe
+            title="Subscribe to Aditya's newsletter"
+            loading="lazy"
+            scrolling="no"
+            src="https://buttondown.email/itaditya?as_embed=true"
+            className="w-full h-full"
+          ></iframe>
+        )
+      }
+    </div>
+  );
+}
 
 const Home = () => (
   <div
@@ -95,9 +134,7 @@ const Home = () => (
             I make lots of side projects whenever I'm <br /> learning new things.
           </p>
           <Link href="/projects">
-            <a
-              className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200"
-            >
+            <a className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200">
               See All Projects
             </a>
           </Link>
@@ -108,12 +145,7 @@ const Home = () => (
           <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
           <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
         </div>
-        <iframe
-          title="Subscribe to Aditya's newsletter"
-          scrolling="no"
-          src="https://buttondown.email/itaditya?as_embed=true"
-          className="w-full md:w-3/4 lg:w-1/2 h-56 bg-gray-300"
-        ></iframe>
+        <Newsletter />
       </section>
     </main>
     <SocialBar />
