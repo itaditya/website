@@ -13,7 +13,7 @@ export default function CardTwitter() {
         <ul className="text-white mt-6 md:flex items-center">
           <li className="flex items-center justify-center md:justify-start">
             <img
-              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/samsung/220/office-building_1f3e2.png"
+              src="/office-building.png"
               alt="Work"
               className="w-6 h-6"
             />
@@ -21,7 +21,7 @@ export default function CardTwitter() {
           </li>
           <li className="flex items-center justify-center md:justify-start ml-4">
             <img
-              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/236/round-pushpin_1f4cd.png"
+              src="/pushpin.png"
               alt="Location"
               className="w-6 h-6"
             />
