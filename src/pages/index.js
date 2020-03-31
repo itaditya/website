@@ -84,7 +84,7 @@ const Home = () => {
             </p>
           </div>
           <div className="hidden md:block mt-4 text-gray-400 text-5xl animation-fade-in">
-            <div className="overflow-x-hidden" style={{ width: '340px' }}>
+            <div className="overflow-x-hidden" style={{ width: '360px' }}>
               <ul className="flex animation-sliding">
                 <li>
                   <IconHTML width="2em" height="2em" />
