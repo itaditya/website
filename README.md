@@ -12,10 +12,11 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [x] Work section
 * [x] Visual Testing
 * [x] Add PurgeCSS
-* [ ] Port all blogposts to this with correct canonical urls
-* [ ] Design Preview Images
 * [x] Projects section
 * [x] Contact section
 * [x] Labs section
+* [x] Update favicon.ico
 * [ ] Hide Social sidebar at open
+* [ ] Port all blogposts to this with correct canonical urls
+* [ ] Design Preview Images
 * [ ] (Maybe) Use forms instead of iframe for NewsLetter
