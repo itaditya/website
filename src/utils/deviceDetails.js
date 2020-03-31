@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { screens } from 'tailwindcss/defaultTheme';
 
 function matchMedia(breakpoint) {
@@ -18,4 +19,15 @@ export function getDeviceWidth() {
   });
 
   return width;
+}
+
+export function useDeviceWidth() {
+  const [stateDeviceWidth, setStateDeviceWidth] = useState('server');
+
+  useEffect(() => {
+    const deviceWidth = getDeviceWidth();
+    setStateDeviceWidth(deviceWidth);
+  }, []);
+
+  return stateDeviceWidth;
 }

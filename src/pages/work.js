@@ -5,13 +5,13 @@ import SocialBar from '_components/SocialBar';
 
 const Work = () => (
   <div
-    className="relative min-h-screen font-body bg-gray-200 px-10 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+    className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
     style={{ gridTemplateRows: 'auto 1fr auto' }}
   >
     <SiteHead pageName="Work" />
     <SiteNavbar />
     <main className="col-start-2 col-span-10 xl:col-start-3 lg:col-span-5 mt-16 flex flex-col justify-center">
-      <h2 className="text-gray-700 text-2xl mb-4">Currently employed at</h2>
+      <h2 className="text-gray-700 text-lg md:text-2xl mb-4">Currently employed at</h2>
       <img src="/hackerrank_logo.png" alt="HackerRank" width="400" />
     </main>
     <aside className="col-start-2 col-span-10 lg:col-start-8 lg:col-span-4 mt-16 flex flex-col justify-center">

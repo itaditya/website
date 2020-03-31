@@ -15,7 +15,7 @@ import IconHTML from '_components/icons/IconHTML';
 import IconCSS from '_components/icons/IconCSS';
 import IconReact from '_components/icons/IconReact';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
-import { getDeviceWidth } from '_utils/deviceDetails';
+import { useDeviceWidth } from '_utils/deviceDetails';
 
 function Newsletter() {
   return (
@@ -30,16 +30,11 @@ function Newsletter() {
 }
 
 const Home = () => {
-  const [stateDeviceWidth, setStateDeviceWidth] = useState('server');
+  const deviceWidth = useDeviceWidth();
   const [stateSeenNl, setStateSeenNl] = useState('unseen');
   const [stateSeenLatestArticle, setStateSeenLatestArticle] = useState('unseen');
   const latestArticleRef = useRef();
   const newsletterRef = useRef();
-
-  useEffect(() => {
-    const deviceWidth = getDeviceWidth();
-    setStateDeviceWidth(deviceWidth);
-  }, []);
 
   useEffect(() => {
     function callBack(entries) {
@@ -161,7 +156,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-      {!['server', 'xs', 'sm'].includes(stateDeviceWidth) && stateSeenLatestArticle === 'seen' && <SocialBar />}
+      {!['server', 'xs', 'sm'].includes(deviceWidth) && stateSeenLatestArticle === 'seen' && <SocialBar />}
       <SiteFooter />
     </div>
   );

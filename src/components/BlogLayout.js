@@ -47,7 +47,7 @@ function BlogLayout(props) {
 
   return (
     <div
-      className="relative min-h-screen bg-gray-200 px-4 py-8 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4 font-body"
+      className="relative min-h-screen bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4 font-body"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <BlogHead postInfo={meta} />
