@@ -45,15 +45,17 @@ const Blog = props => {
               {shownPosts.map(slug => {
                 const post = postsMap[slug];
                 return (
-                  <Link key={post.slug} href={'/blog/' + post.slug}>
-                    <li className="group mt-8 pl-3 cursor-pointer">
-                      <h3 className="text-xl md:text-2xl font-medium text-gray-800 group-hover:underline">
+                  <li key={post.slug} className="mt-8 pl-3">
+                    <h3 className="text-xl md:text-2xl font-medium text-gray-800 hover:underline">
+                      <Link href={'/blog/' + post.slug}>
                         <a>{post.title}</a>
-                      </h3>
-                      <PublishAndReadTime post={post} />
-                      <p className="text-base md:text-lg text-gray-700 mt-3">{post.description}</p>
-                    </li>
-                  </Link>
+                      </Link>
+                    </h3>
+                    <PublishAndReadTime post={post} />
+                    {['lg', 'xl'].includes(deviceWidth) && (
+                      <p className="hidden lg:block text-base md:text-lg text-gray-700 mt-3">{post.description}</p>
+                    )}
+                  </li>
                 );
               })}
             </ul>
