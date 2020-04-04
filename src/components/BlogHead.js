@@ -28,8 +28,8 @@ export default function BlogHead(props) {
       <meta name="twitter:image:src" content={imageUrl} />
       <meta name="twitter:label1" value="Reading time" />
       <meta name="twitter:data1" value={`${postInfo.readingTime} read`} />
-      <meta name="twitter:label2" value="Published on" />
-      <meta name="twitter:data2" value={shortDate} />
+      <meta name="twitter:label2" value="Authored By" />
+      <meta name="twitter:data2" value="@dev__adi" />
       <link rel="canonical" href={postInfo.canonicalUrl} />
     </Head>
   );

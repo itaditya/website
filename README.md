@@ -20,6 +20,6 @@ Suppose you are writing an article on 'what is css' so the slug is `what-is-css`
 * [x] Wrap images in link so people can see enlarged image in new tab for blog
 * [x] Mobile Navigation
 * [x] Filter blogs by Category
+* [x] Design Preview Images
 * [ ] Port all blogposts to this with correct canonical urls
-* [ ] Design Preview Images
 * [ ] (Maybe) Use forms instead of iframe for NewsLetter
