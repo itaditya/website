@@ -22,10 +22,8 @@ function sendMetrics(sessionId) {
       if (!res.ok) {
         throw new Error('Api Error');
       }
-      console.log('metrics sent');
     })
     .catch(() => {
-      console.log('metrics failed');
       clearInterval(intervalId);
     });
 }
