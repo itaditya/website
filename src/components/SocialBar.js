@@ -2,10 +2,16 @@ import IconTwitter from '_components/icons/IconTwitter';
 import IconMedium from '_components/icons/IconMedium';
 import IconYouTube from '_components/icons/IconYouTube';
 import IconGitHub from '_components/icons/IconGitHub';
+import { useDeviceWidth } from '_utils/deviceDetails';
 
 export default function SocialBar() {
+  const deviceWidth = useDeviceWidth();
+  if(['server', 'xs', 'sm'].includes(deviceWidth)) {
+    return null;
+  }
+
   return (
-    <aside className="md:fixed left-0 md:h-screen px-4 hidden md:flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
+    <aside className="md:fixed left-0 md:h-screen px-4 flex md:flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
       <ul className="flex md:block">
         <li>
           <a
