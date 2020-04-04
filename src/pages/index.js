@@ -154,7 +154,7 @@ const Home = () => {
             <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
           </div>
           <div className="w-full md:w-3/4 lg:w-1/2 h-56 bg-gray-300" ref={newsletterRef}>
-            {stateSeenNl === 'seen' && <Newsletter />}
+            {(stateSeenNl === 'seen' || stateSeenLatestArticle === 'seen') && <Newsletter />}
           </div>
         </section>
       </main>
