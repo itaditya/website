@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import IconMenu from '_components/icons/IconMenu';
 import IconCross from '_components/icons/IconCross';
-
+import SocialBar from '_components/SocialBar';
 import { useDeviceWidth } from '_utils/deviceDetails';
 
 export default function SiteNavbar(props) {
@@ -99,13 +99,18 @@ export default function SiteNavbar(props) {
                   <IconCross className="text-2xl text-gray-700" />
                   <span className="ml-1 text-gray-900">Close</span>
                 </button>
-                {linksExpanded.map(link => (
-                  <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
-                    <Link href={`/${link.href}`}>
-                      <a className="block text-md md:text-xl text-gray-700 py-1 px-2">{link.name}</a>
-                    </Link>
-                  </li>
-                ))}
+                <ul>
+                  {linksExpanded.map(link => (
+                    <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
+                      <Link href={`/${link.href}`}>
+                        <a className="block text-md md:text-xl text-gray-700 py-1 px-2">{link.name}</a>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4">
+                  <SocialBar />
+                </div>
               </nav>
             )}
           </li>

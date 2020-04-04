@@ -5,8 +5,8 @@ import IconGitHub from '_components/icons/IconGitHub';
 
 export default function SocialBar() {
   return (
-    <aside className="fixed left-0 h-screen px-4 hidden md:flex flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
-      <ul>
+    <aside className="md:fixed left-0 md:h-screen px-4 flex md:flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
+      <ul className="flex md:block">
         <li>
           <a
             href="https://twitter.com/dev__adi"
