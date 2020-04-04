@@ -30,13 +30,13 @@ export default function CardTwitter() {
         </ul>
       </div>
       <div className="flex flex-col items-center mt-6 md:mt-0">
-        <img src="/dp_twitter.jpg" className="w-32 h-32 rounded-full object-cover object-center shadow-xl" />
+        <img src="/dp_twitter.png" className="w-32 h-32 rounded-full object-cover object-center shadow-xl" />
         <div className="inline-block">
           <a
             href="https://twitter.com/dev__adi"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
+            className="mt-4 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
           >
             <IconTwitter className="text-2xl" />
             <strong className="ml-1 font-bold">Follow</strong>
