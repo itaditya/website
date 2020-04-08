@@ -1,11 +1,10 @@
-import cn from 'classnames';
-
 import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
 import IconExternalLink from '_components/icons/IconExternalLink';
 import SectionPackages from '_components/SectionPackages';
+import cn from '_utils/classnames';
 import { useDeviceWidth } from '_utils/deviceDetails';
 import myProjects from '../staticData/myProjects.json';
 
@@ -25,13 +24,15 @@ const Projects = () => {
           {myProjects.map((project, index) => (
             <li
               key={project.name}
-              className={cn('flex flex-col-reverse items-center', {
+              className={cn({
+                'flex flex-col-reverse items-center': true,
                 'md:flex-row': index % 2 === 0,
                 'md:flex-row-reverse': index % 2 !== 0,
               })}
             >
               <div
-                className={cn('pl-2 mt-3 md:mt-0 min-w-1/3', {
+                className={cn({
+                  'pl-2 mt-3 md:mt-0 min-w-1/3': true,
                   'md:mr-8': index % 2 === 0,
                   'md:ml-8': index % 2 !== 0,
                 })}

@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
-import cn from 'classnames';
 
 import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
+import cn from '_utils/classnames';
 
 function CodePenEmbed(props) {
   const { id, title, className } = props;
   return (
-    <div className={cn('embed-codepen shadow-lg rounded-md overflow-hidden', className)}>
+    <div className={cn({ 'embed-codepen shadow-lg rounded-md overflow-hidden': true, [className]: true })}>
       <p
         className="codepen"
         data-height="640"

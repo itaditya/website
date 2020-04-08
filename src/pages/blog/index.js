@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import cn from 'classnames';
 
 import { PostsPopularList } from '_components/PostsSuggestion';
 import SiteHead from '_components/SiteHead';
@@ -9,6 +8,7 @@ import SiteFooter from '_components/SiteFooter';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
 import IconCross from '_components/icons/IconCross';
 import { useDeviceWidth } from '_utils/deviceDetails';
+import cn from '_utils/classnames';
 import getPosts from '_utils/getPosts';
 import postsByCategory, { tagNameMapping } from '_utils/postsByCategory';
 
@@ -85,7 +85,8 @@ const Blog = props => {
                   .map(category => (
                     <li
                       key={category}
-                      className={cn('mt-1 ml-2', {
+                      className={cn({
+                        'mt-1 ml-2': true,
                         'text-primary-600': stateActiveCategory === category,
                         'hover:text-gray-900': stateActiveCategory !== category,
                       })}

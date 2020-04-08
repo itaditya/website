@@ -1,5 +1,4 @@
-import cn from 'classnames';
-
+import cn from '_utils/classnames';
 import IconNpm from '_components/icons/IconNpm';
 import IconGitHub from '_components/icons/IconGitHub';
 import IconGlobe from '_components/icons/IconGlobe';
@@ -8,10 +7,11 @@ import myPackages from '../staticData/myPackages.json';
 export default function SectionPackages(props) {
   const { children, size = 'md', className } = props;
   return (
-    <section className={cn('mt-56 flex md:flex flex-col items-center', className)}>
+    <section className={cn({ 'mt-56 flex md:flex flex-col items-center': true, [className]: true })}>
       <h2 className="text-4xl text-center font-bold">Open Source Tools</h2>
       <div
-        className={cn('grid col-gap-8 row-gap-12 w-full mt-16', {
+        className={cn({
+          'grid col-gap-8 row-gap-12 w-full mt-16': true,
           'grid-cols-3': size === 'lg',
           'grid-cols-4': size === 'md',
           'grid-cols-1': size === 'sm',
