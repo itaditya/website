@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function SiteFooter() {
   return (
-    <footer className="col-span-12 py-3 px-4 mt-24 flex justify-center md:justify-between items-center">
+    <footer className="flex items-center justify-center px-4 py-3 mt-24 col-span-12 md:justify-between">
       <span className="flex items-center">
         <img
           src="/envelope.png"

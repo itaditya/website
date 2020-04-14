@@ -9,49 +9,49 @@ import IconChevronRight from '_components/icons/IconChevronRight';
 export function PostsPopularList() {
   return (
     <ul className="">
-      <li className="md:py-2 pl-3 pr-6 rounded-md">
+      <li className="pl-3 pr-6 md:py-2 rounded-md">
         <Link href="/blog/async-await-hell">
           <a className="flex items-start">
             <span
-              className="rounded-full text-2xl mt-1"
+              className="mt-1 text-2xl rounded-full"
               style={{ color: 'hsl(52.2, 84.3%, 62.5%)', backgroundColor: 'hsl(80, 3%, 19.4%)' }}
             >
               <IconJS />
             </span>
-            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Escaping from Async/Await Hell
             </span>
-            <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               10 mins read
             </span>
           </a>
         </Link>
       </li>
-      <li className="md:py-2 pl-3 pr-6 rounded-md mt-4">
+      <li className="pl-3 pr-6 mt-4 md:py-2 rounded-md">
         <Link href="/blog/10-mongo-things-i-wished-i-knew">
           <a className="flex items-start">
-            <span className="rounded-sm text-3xl mt-1">
+            <span className="mt-1 text-3xl rounded-sm">
               <IconMongoDB />
             </span>
-            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Things I wish I knew before using MongoDB
             </span>
-            <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               5 mins read
             </span>
           </a>
         </Link>
       </li>
-      <li className="md:py-2 pl-3 pr-6 rounded-md mt-4">
+      <li className="pl-3 pr-6 mt-4 md:py-2 rounded-md">
         <Link href="/blog/react-renderprops-hoc">
           <a className="flex items-start">
-            <span className="rounded-full text-2xl mt-2" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
+            <span className="mt-2 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
-            <span className="hover:underline text-base sm:text-lg xl:text-2xl text-gray-800 ml-4 max-w-2xl">
+            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Understanding React Render Props and HOC
             </span>
-            <span className="hidden sm:block ml-4 mt-1 text-sm bg-blue-200 rounded-md px-2 text-blue-800 border border-blue-300">
+            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               7 mins read
             </span>
           </a>
@@ -93,13 +93,13 @@ export function PostNextRead(props) {
   }, [currentPostSlug]);
 
   return (
-    <div className="mt-20 py-10">
+    <div className="py-10 mt-20">
       {
         stateNextArticle && (
           <Link href={'/blog/' + stateNextArticle.slug}>
-            <a className="group flex flex-col items-center text-center" data-percy-hidden>
-              <span className="text-3xl md:text-5xl text-center text-gray-600 group-hover:text-blue-700"><IconChevronRight /></span>
-              <h3 className="font-medium mt-4 text-2xl text-gray-700 group-hover:text-blue-700 transition-colors duration-200">Next Up: {stateNextArticle.title}</h3>
+            <a className="flex flex-col items-center text-center group" data-percy-hidden>
+              <span className="text-3xl text-center text-gray-600 md:text-5xl group-hover:text-blue-700"><IconChevronRight /></span>
+              <h3 className="mt-4 text-2xl font-medium text-gray-700 group-hover:text-blue-700 transition-colors duration-200">Next Up: {stateNextArticle.title}</h3>
             </a>
           </Link>
         )

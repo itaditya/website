@@ -59,7 +59,7 @@ export default function SiteNavbar(props) {
   ];
 
   return (
-    <nav className="col-span-12 py-4 px-6 flex items-center justify-between">
+    <nav className="flex items-center justify-between px-6 py-4 col-span-12">
       <h4 className="text-2xl font-bold" aria-label="@dev__adi">
         <Link href="/">
           <a>
@@ -86,7 +86,7 @@ export default function SiteNavbar(props) {
           </li>
         ))}
         {['xs', 'sm'].includes(deviceWidth) && (
-          <li className="md:hidden ml-6 pr-1 flex items-center">
+          <li className="flex items-center pr-1 ml-6 md:hidden">
             <button className="text-xl text-gray-700" onClick={handleOpenMenu} aria-label="More">
               <IconMenu />
             </button>
@@ -96,7 +96,7 @@ export default function SiteNavbar(props) {
                 style={{ top: 0, height: '100vh', width: '100%', left: 0 }}
               >
                 <button
-                  className="absolute text-lg flex items-center"
+                  className="absolute flex items-center text-lg"
                   style={{ top: '20px', right: '20px' }}
                   onClick={handleCloseMenu}
                 >
@@ -107,7 +107,7 @@ export default function SiteNavbar(props) {
                   {linksExpanded.map((link) => (
                     <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
                       <Link href={`/${link.href}`}>
-                        <a className="block text-md md:text-xl text-gray-700 py-1 px-2">{link.name}</a>
+                        <a className="block px-2 py-1 text-gray-700 text-md md:text-xl">{link.name}</a>
                       </Link>
                     </li>
                   ))}

@@ -62,23 +62,23 @@ const Home = () => {
 
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead />
       <SiteNavbar />
-      <main className="col-start-2 col-span-10 row-auto mt-8 md:mt-24">
-        <div className="flex justify-between items-center" style={{ minHeight: '50vh' }}>
+      <main className="mt-8 col-start-2 col-span-10 row-auto md:mt-24">
+        <div className="flex items-center justify-between" style={{ minHeight: '50vh' }}>
           <div className="md:w-1/2">
-            <h1 className="text-3xl md:text-5xl xl:text-6xl font-heading font-bold tracking-tighter text-gray-700">
+            <h1 className="text-3xl font-bold tracking-tighter text-gray-700 md:text-5xl xl:text-6xl font-heading">
               Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
             </h1>
-            <p className="mt-2 text-base xl:text-xl text-gray-700">
+            <p className="mt-2 text-base text-gray-700 xl:text-xl">
               Frontend developer at HackerRank.
               <br />I love open-sourcing my knowledge through building projects, giving talks and writing blogs.
             </p>
           </div>
-          <div className="hidden md:block mt-4 text-gray-400 text-5xl animation-fade-in">
+          <div className="hidden mt-4 text-5xl text-gray-400 md:block animation-fade-in">
             <div className="overflow-x-hidden" style={{ width: '360px' }}>
               <ul className="flex animation-sliding">
                 <li>
@@ -106,13 +106,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <section className="mt-10 md:mt-32 md:flex justify-between">
+        <section className="justify-between mt-10 md:mt-32 md:flex">
           <div>
-            <h2 className="text-2xl md:text-4xl font-bold mb-8">Popular Articles</h2>
+            <h2 className="mb-8 text-2xl font-bold md:text-4xl">Popular Articles</h2>
             <PostsPopularList />
           </div>
           <Link href="/blog">
-            <a className="bg-blue-300 hover:bg-blue-400 w-full md:w-56 mt-8 md:mt-auto py-8 md:py-16 rounded-lg flex flex-col opacity-1 text-center items-center justify-center text-3xl shadow-xl hover:shadow-2xl transition duration-200 ease-in">
+            <a className="flex flex-col items-center justify-center w-full py-8 mt-8 text-3xl text-center bg-blue-300 rounded-lg shadow-xl hover:bg-blue-400 md:w-56 md:mt-auto md:py-16 opacity-1 hover:shadow-2xl transition duration-200 ease-in">
               <span className="text-4xl text-blue-700">
                 <IconCircleArrow />
               </span>
@@ -133,27 +133,27 @@ const Home = () => {
         {!['server', 'xs', 'sm'].includes(deviceWidth) && (
           <SectionPackages className="hidden">
             <article
-              className="py-4 px-8 col-span-2 bg-blue-700 shadow-xl rounded-lg"
+              className="px-8 py-4 bg-blue-700 rounded-lg shadow-xl col-span-2"
               style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
             >
-              <h3 className="w-full text-2xl text-white font-bold">Other Projects</h3>
-              <p className="text-gray-100 text-lg mt-1">
+              <h3 className="w-full text-2xl font-bold text-white">Other Projects</h3>
+              <p className="mt-1 text-lg text-gray-100">
                 I make lots of side projects whenever I'm <br /> learning new things.
               </p>
               <Link href="/projects">
-                <a className="inline-block bg-white shadow-md hover:shadow-xl text-gray-700 mt-3 py-3 px-5 rounded-md font-bold text-lg transition-shadow ease-in duration-200">
+                <a className="inline-block px-5 py-3 mt-3 text-lg font-bold text-gray-700 bg-white shadow-md hover:shadow-xl rounded-md transition-shadow ease-in duration-200">
                   See All Projects
                 </a>
               </Link>
             </article>
           </SectionPackages>
         )}
-        <section className="mt-20 md:mt-56 md:flex items-center justify-between">
-          <div className="mb-8 md:mb-0 max-w-md">
+        <section className="items-center justify-between mt-20 md:mt-56 md:flex">
+          <div className="max-w-md mb-8 md:mb-0">
             <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
             <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
           </div>
-          <div className="w-full md:w-3/4 lg:w-1/2 h-56 bg-gray-300" ref={newsletterRef}>
+          <div className="w-full h-56 bg-gray-300 md:w-3/4 lg:w-1/2" ref={newsletterRef}>
             {(stateSeenNl === 'seen' || stateSeenLatestArticle === 'seen') && <Newsletter />}
           </div>
         </section>

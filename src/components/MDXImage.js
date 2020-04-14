@@ -2,8 +2,8 @@ export default function MDXImage(props) {
   return (
     <a href={props.src} target="_blank">
       <figure>
-        <img className="rounded-md mt-10 mx-auto" src={props.src} />
-        <figcaption className="block text-base text-center text-gray-700 mb-8 mt-4">{props.alt}</figcaption>
+        <img className="mx-auto mt-10 rounded-md" src={props.src} />
+        <figcaption className="block mt-4 mb-8 text-base text-center text-gray-700">{props.alt}</figcaption>
       </figure>
     </a>
   );

@@ -37,26 +37,26 @@ const links = [
 
 const Social = () => (
   <div
-    className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
+    className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
     style={{ gridTemplateRows: 'auto 1fr auto' }}
   >
     <SiteHead pageName="Social" />
     <SiteNavbar />
-    <main className="col-start-2 col-span-10 row-auto mt-24">
-      <h2 className="text-2xl md:text-4xl mb-8 font-bold text-gray-800">Social Links</h2>
+    <main className="mt-24 col-start-2 col-span-10 row-auto">
+      <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Social Links</h2>
       <div className="md:grid row-gap-3" style={{ gridTemplateColumns: 'auto 1fr' }}>
         {
           links.map(link => (
             <>
-              <span className="mr-4 md:text-xl text-gray-800 font-medium">{link.title}:</span>
+              <span className="mr-4 font-medium text-gray-800 md:text-xl">{link.title}:</span>
               <a
-              className="flex items-center text-gray-800 leading-relaxed hover:text-gray-900 hover:underline"
+              className="flex items-center leading-relaxed text-gray-800 hover:text-gray-900 hover:underline"
               target="_blank"
               rel="noreferrer noopener"
               href={link.href}
             >
-              <span className="text-lg md:text-xl mr-2 truncate">{link.href}</span>
-              <IconExternalLink className="text-gray-700 hidden md:block" />
+              <span className="mr-2 text-lg truncate md:text-xl">{link.href}</span>
+              <IconExternalLink className="hidden text-gray-700 md:block" />
             </a>
             </>
           ))
