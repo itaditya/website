@@ -2,15 +2,15 @@ import IconTwitter from '_components/icons/IconTwitter';
 
 export default function CardTwitter() {
   return (
-    <article className="flex flex-col md:flex-row items-center justify-center text-center md:text-left bg-twitter-background text-white py-8 px-8 md:px-12 rounded-md shadow-2xl">
+    <article className="flex flex-col items-center justify-center px-8 py-8 text-center text-white shadow-2xl md:flex-row md:text-left bg-twitter-background md:px-12 rounded-md">
       <div className="md:w-4/6 md:mr-4">
         <p className="text-xl">
           Follow me on Twitter to get updates for new articles.
         </p>
-        <p className="mt-3 text-gray-400 w-4/6 mx-auto md:mx-0">
+        <p className="w-4/6 mx-auto mt-3 text-gray-400 md:mx-0">
           #reactjs, #javascript, #node, #css, #design_systems
         </p>
-        <ul className="text-white mt-6 md:flex items-center">
+        <ul className="items-center mt-6 text-white md:flex">
           <li className="flex items-center justify-center md:justify-start">
             <img
               src="/office-building.png"
@@ -19,7 +19,7 @@ export default function CardTwitter() {
             />
             <span className="ml-2 text-lg">HackerRank</span>
           </li>
-          <li className="flex items-center justify-center md:justify-start ml-4">
+          <li className="flex items-center justify-center ml-4 md:justify-start">
             <img
               src="/pushpin.png"
               alt="Location"
@@ -30,13 +30,13 @@ export default function CardTwitter() {
         </ul>
       </div>
       <div className="flex flex-col items-center mt-6 md:mt-0">
-        <img src="/dp_twitter.png" className="w-32 h-32 rounded-full object-cover object-center shadow-xl" />
+        <img src="/dp_twitter.png" className="object-cover object-center w-32 h-32 rounded-full shadow-xl" />
         <div className="inline-block">
           <a
             href="https://twitter.com/dev__adi"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 py-1 px-4 flex items-center bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
+            className="flex items-center px-4 py-1 mt-4 bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
           >
             <IconTwitter className="text-2xl" />
             <strong className="ml-1 font-bold">Follow</strong>

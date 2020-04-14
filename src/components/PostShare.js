@@ -19,7 +19,7 @@ export function TwitterShare(props) {
   return (
     <a
       href={stateTwitterUrl}
-      className="underline text-blue-600 hover:text-blue-700 visited:text-indigo-800"
+      className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
       style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"

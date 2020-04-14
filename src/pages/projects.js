@@ -13,13 +13,13 @@ const Projects = () => {
 
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Projects" />
       <SiteNavbar activeLink="projects" />
-      <main className="col-span-12 md:col-start-3 md:col-span-8 px-8 mt-12">
-        <h2 className="font-heading font-bold text-gray-800 text-center text-5xl mb-40">Projects</h2>
+      <main className="px-8 mt-12 col-span-12 md:col-start-3 md:col-span-8">
+        <h2 className="mb-40 text-5xl font-bold text-center text-gray-800 font-heading">Projects</h2>
         <ul className="grid grid-cols-1 row-gap-8 md:row-gap-40">
           {myProjects.map((project, index) => (
             <li
@@ -37,20 +37,20 @@ const Projects = () => {
                   'md:ml-8': index % 2 !== 0,
                 })}
               >
-                <h3 className="text-xl md:text-3xl text-gray-700">{project.name}</h3>
-                <span className="inline-block mb-1 text-sm bg-blue-200 rounded-md px-2 text-blue-600 border border-blue-300">
+                <h3 className="text-xl text-gray-700 md:text-3xl">{project.name}</h3>
+                <span className="inline-block px-2 mb-1 text-sm text-blue-600 bg-blue-200 border border-blue-300 rounded-md">
                   {project.label}
                 </span>
-                <p className="text-gray-600 mt-2 text-lg">{project.description}</p>
+                <p className="mt-2 text-lg text-gray-600">{project.description}</p>
                 {project.anchorLink && (
                   <span className="inline-block mt-3">
                     <a
-                      className="group flex items-center text-base text-primary-600 leading-relaxed"
+                      className="flex items-center text-base leading-relaxed group text-primary-600"
                       target="_blank"
                       rel="noreferrer noopener"
                       href={project.anchorLink}
                     >
-                      <span className="text-xl mr-2 group-hover:text-primary-700 transition-colors duration-200">
+                      <span className="mr-2 text-xl group-hover:text-primary-700 transition-colors duration-200">
                         {project.anchorText}
                       </span>
                       <IconExternalLink
@@ -61,7 +61,7 @@ const Projects = () => {
                   </span>
                 )}
               </div>
-              <img src={project.pictureUrl} className="w-full rounded-md shadow-md" width={420} height={200} />
+              <img src={project.pictureUrl} className="w-full shadow-md rounded-md" width={420} height={200} />
             </li>
           ))}
         </ul>

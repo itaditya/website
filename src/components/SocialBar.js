@@ -11,14 +11,14 @@ export default function SocialBar() {
   }
 
   return (
-    <aside className="md:fixed left-0 md:h-screen px-4 flex md:flex-col justify-center items-center animation-fade-in" style={{ top: '0' }}>
+    <aside className="left-0 flex items-center justify-center px-4 md:fixed md:h-screen md:flex-col animation-fade-in" style={{ top: '0' }}>
       <ul className="flex md:block">
         <li>
           <a
             href="https://twitter.com/dev__adi"
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-2 text-white text-3xl"
+            className="block p-2 text-3xl text-white"
           >
             <span
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
@@ -33,7 +33,7 @@ export default function SocialBar() {
             href="https://medium.com/@adityaa803"
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-2 text-gray-700 text-3xl"
+            className="block p-2 text-3xl text-gray-700"
           >
             <span
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
@@ -48,7 +48,7 @@ export default function SocialBar() {
             href="https://www.youtube.com/channel/UCk5cWNVIgtW_rpR7J_VSiWw?view_as=subscriber"
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-2 text-gray-700 text-3xl"
+            className="block p-2 text-3xl text-gray-700"
           >
             <span
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in"
@@ -63,7 +63,7 @@ export default function SocialBar() {
             href="https://github.com/itaditya"
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-2 text-white text-4xl"
+            className="block p-2 text-4xl text-white"
           >
             <span className="rounded-full shadow-md hover:shadow-lg transition duration-200 ease-in">
               <IconGitHub />

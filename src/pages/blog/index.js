@@ -28,32 +28,32 @@ const Blog = props => {
 
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Blog" />
       <SiteNavbar activeLink="blog" />
-      <main className="col-start-2 col-span-10 row-auto mt-24">
+      <main className="mt-24 col-start-2 col-span-10 row-auto">
         <section>
-          <h2 className="text-2xl md:text-4xl mb-8 font-bold text-gray-800">Popular Posts</h2>
+          <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Popular Posts</h2>
           <PostsPopularList />
         </section>
-        <div className="mt-16 flex flex-col-reverse lg:flex-row justify-between">
+        <div className="flex flex-col-reverse justify-between mt-16 lg:flex-row">
           <section>
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-800">Latest Posts</h2>
+            <h2 className="text-2xl font-bold text-gray-800 md:text-4xl">Latest Posts</h2>
             <ul className="lg:w-3/4 xl:w-1/2">
               {shownPosts.map(slug => {
                 const post = postsMap[slug];
                 return (
-                  <li key={post.slug} className="mt-8 pl-3">
-                    <h3 className="text-xl md:text-2xl font-medium text-gray-800 hover:underline">
+                  <li key={post.slug} className="pl-3 mt-8">
+                    <h3 className="text-xl font-medium text-gray-800 md:text-2xl hover:underline">
                       <Link href={'/blog/' + post.slug}>
                         <a>{post.title}</a>
                       </Link>
                     </h3>
                     <PublishAndReadTime post={post} />
                     {['lg', 'xl'].includes(deviceWidth) && (
-                      <p className="hidden lg:block text-base md:text-lg text-gray-700 mt-3">{post.description}</p>
+                      <p className="hidden mt-3 text-base text-gray-700 lg:block md:text-lg">{post.description}</p>
                     )}
                   </li>
                 );
@@ -62,9 +62,9 @@ const Blog = props => {
           </section>
           {['xs', 'sm', 'md'].includes(deviceWidth) && (
             <section className="flex items-center mb-8 lg:hidden">
-              <h4 className="text-base text-gray-800 mr-4">Filter By Category</h4>
+              <h4 className="mr-4 text-base text-gray-800">Filter By Category</h4>
               <select
-                className="px-2 py-1 shadow-md bg-gray-200"
+                className="px-2 py-1 bg-gray-200 shadow-md"
                 value={stateActiveCategory}
                 onChange={event => setStateActiveCategory(event.target.value)}
               >
@@ -78,8 +78,8 @@ const Blog = props => {
           )}
           {['lg', 'xl'].includes(deviceWidth) && (
             <section className="hidden lg:block">
-              <h4 className="text-xl md:text-2xl mb-1 text-gray-800">Categories</h4>
-              <ul className="text-gray-700 text-lg mt-3 transition-colors duration-200">
+              <h4 className="mb-1 text-xl text-gray-800 md:text-2xl">Categories</h4>
+              <ul className="mt-3 text-lg text-gray-700 transition-colors duration-200">
                 {Object.keys(categoryMap)
                   .filter(category => category !== 'all')
                   .map(category => (
@@ -96,9 +96,9 @@ const Blog = props => {
                       </button>
                     </li>
                   ))}
-                <li className="text-base mt-3 text-blue-600">
+                <li className="mt-3 text-base text-blue-600">
                   <button className="flex items-center" onClick={() => setStateActiveCategory('all')}>
-                    <IconCross className="text-lg mr-1" />
+                    <IconCross className="mr-1 text-lg" />
                     Clear Filter
                   </button>
                 </li>

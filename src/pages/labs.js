@@ -91,15 +91,15 @@ const Labs = () => {
   }, []);
   return (
     <div
-      className="relative min-h-screen font-body bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 py-8 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Labs">
         <script key="codepen-script" async src="https://static.codepen.io/assets/embed/ei.js"></script>
       </SiteHead>
       <SiteNavbar />
-      <main className="col-span-12 row-auto px-4">
-        <section className="md:flex justify-between mt-16">
+      <main className="px-4 col-span-12 row-auto">
+        <section className="justify-between mt-16 md:flex">
           <div className="mt-16">
             <CodePenEmbed className="codepen-xs" id="VwLMeYV" title="Squeeze Animation in Sidebar" />
           </div>
@@ -107,7 +107,7 @@ const Labs = () => {
             <CodePenEmbed className="codepen-md" id="bvJRrb" title="Animation for a logo" />
           </div>
         </section>
-        <section className="md:flex justify-between">
+        <section className="justify-between md:flex">
           <div className="flex-1 mt-16 md:mr-20">
             <CodePenEmbed className="codepen-md" id="madMKg" title="CSS Grid is not just tables" />
           </div>
@@ -115,7 +115,7 @@ const Labs = () => {
             <CodePenEmbed className="codepen-xs" id="ajLMve" title="Music App Concept" />
           </div>
         </section>
-        <section className="md:flex justify-between">
+        <section className="justify-between md:flex">
           <div className="mt-16">
             <CodePenEmbed className="codepen-xs" id="MZWWmM" title="Juicy Link Animation" />
           </div>
@@ -123,7 +123,7 @@ const Labs = () => {
             <CodePenEmbed className="codepen-md" id="JjdLVmE" title="Responsive Timeline" />
           </div>
         </section>
-        <section className="md:flex justify-between">
+        <section className="justify-between md:flex">
           <div className="flex-1 mt-16 md:mr-20">
             <CodePenEmbed className="codepen-md" id="LBjmOJ" title="Parallax Card Scrolling" />
           </div>
@@ -131,7 +131,7 @@ const Labs = () => {
             <CodePenEmbed className="codepen-xs" id="vaeeGo" title="Open Door with CSS" />
           </div>
         </section>
-        <section className="md:flex justify-between">
+        <section className="justify-between md:flex">
           <div className="mt-16" ref={refObserverCodeSandbox1} data-csb-id="v8oz87lq03" style={{ height: '640px ' }}>
             {stateSeenCodeSandbox['v8oz87lq03'] === 'seen' && (
               <CodeSandboxEmbed className="codesandbox-xs" id="v8oz87lq03" title="Ball Resizer" />
