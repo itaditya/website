@@ -35,7 +35,7 @@ function Unpolished(props) {
       <aside className="top-0 lg:h-64 col-span-10 col-start-2 pt-8 mt-10 lg:sticky lg:col-start-9 lg:col-span-5 lg:row-start-2 xl:col-start-8 xl:col-span-4">
         <h2 className="mb-8 text-4xl font-bold text-gray-700 xl:text-5xl font-heading">Adi's unpolished thoughts...</h2>
         <p className="text-lg text-gray-700 lg:text-xl">
-          These posts are my unpolished thought. They lack nuance and are not well researched. If I'm wrong about
+          These posts are my unpolished thoughts. They lack nuance and are not well researched. If I'm wrong about
           anything please correct me on{' '}
           <a
             href="https://twitter.com/dev__adi"
