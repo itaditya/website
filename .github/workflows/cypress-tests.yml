@@ -15,3 +15,5 @@ jobs:
         env:
           PURGE_CSS: true
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          CONTENTFUL_TOKEN: ${{ secrets.CONTENTFUL_TOKEN }}
+          CONTENTFUL_PREVIEW_TOKEN: ${{ secrets.CONTENTFUL_PREVIEW_TOKEN }}
