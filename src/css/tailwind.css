@@ -3,4 +3,11 @@
 @tailwind components;
 /* purgecss end ignore */
 
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp, 7);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @tailwind utilities;
