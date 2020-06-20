@@ -67,8 +67,8 @@ const popularPosts = [
     title: <Fragment>How to escape from async/await<br /> hell</Fragment>,
   },
   {
-    slug: '10-mongo-things-i-wished-i-knew',
-    title: <Fragment>Things I wish I knew before using<br /> MongoDB</Fragment>,
+    slug: 'optimize-your-react-app-with-react-memo',
+    title: <Fragment>Optimize Your React App<br /> with React.memo</Fragment>,
   },
   {
     slug: 'react-renderprops-hoc',

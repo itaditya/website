@@ -1,6 +1,6 @@
 import IconLink from '_components/icons/IconLink';
 
-function convertToSlug(Text) {
+function convertToSlug(Text = '') {
   return Text.toLowerCase()
     .replace(/ /g, '-')
     .replace(/[^\w-]+/g, '');
@@ -22,13 +22,11 @@ export default function MDXHeading(props) {
 
   return (
     <Element id={slug} className={fullClassName} {...restProps}>
-      {
-        showAnchorLink && (
-          <a href={`#${slug}`} className={fullAnchorClassName}>
-            <IconLink />
-          </a>
-        )
-      }
+      {showAnchorLink && (
+        <a href={`#${slug}`} className={fullAnchorClassName}>
+          <IconLink />
+        </a>
+      )}
       <span>{children}</span>
     </Element>
   );

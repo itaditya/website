@@ -31,6 +31,6 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "contentful": "^7.14.3",
     "cypress": "^4.3.0",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.4.6"
   }
 }

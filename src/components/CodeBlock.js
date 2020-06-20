@@ -25,7 +25,7 @@ const calculateLinesToHighlight = meta => {
   }
 };
 
-export default ({ metastring, className, children }) => {
+export default ({ metastring, className = '', children }) => {
   const { shouldHighlightLine, lineNumbers } = calculateLinesToHighlight(metastring);
   const language = className.replace(/language-/, '');
 
@@ -34,7 +34,7 @@ export default ({ metastring, className, children }) => {
   return (
     <Highlight {...defaultProps} code={children} language={language} theme={theme}>
       {({ className = '', style, tokens, getLineProps, getTokenProps }) => {
-        const fullClassName = `mb-2 pt-6 rounded-md match-braces overflow-scroll ${className}`;
+        const fullClassName = `mb-2 pt-6 rounded-md match-braces overflow-auto highlight-diff ${className}`;
         return (
           <pre className={fullClassName} style={style}>
             {tokens.map((line, i) => {
