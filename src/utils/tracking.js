@@ -29,6 +29,10 @@ function sendMetrics(sessionId) {
 }
 
 export function setupMetrics() {
+  if (process.env.NODE_ENV !== 'production') {
+    return;
+  }
+
   const sessionId = nanoid(10);
   intervalId = setInterval(() => {
     sendMetrics(sessionId);
