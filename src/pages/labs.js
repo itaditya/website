@@ -40,7 +40,7 @@ function CodePenEmbed(props) {
 function CodeSandboxEmbed(props) {
   const { id, title, className } = props;
   return (
-    <div className={cn('embed-codesandbox shadow-lg rounded-md overflow-hidden h-full', className)}>
+    <div className={cn({ 'embed-codesandbox shadow-lg rounded-md overflow-hidden h-full': true, [className]: true })}>
       <iframe
         className="iframe-codesandbox"
         src={`https://codesandbox.io/embed/${id}?codemirror=1&fontsize=14&hidenavigation=1&theme=dark&view=preview&hidedevtools=1&runonclick=1&moduleview=0`}
@@ -50,7 +50,8 @@ function CodeSandboxEmbed(props) {
           height: '100%',
         }}
         title={title}
-        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+        allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+        sandbox="allow-autoplay allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       ></iframe>
     </div>
   );
@@ -70,10 +71,10 @@ const Labs = () => {
     }
 
     function callBack(entries) {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const { csbId } = entry.target.dataset;
-          setStateSeenCodeSandbox(oldState => ({
+          setStateSeenCodeSandbox((oldState) => ({
             ...oldState,
             [csbId]: 'seen',
           }));
@@ -113,6 +114,14 @@ const Labs = () => {
           </div>
           <div className="mt-16">
             <CodePenEmbed className="codepen-xs" id="ajLMve" title="Music App Concept" />
+          </div>
+        </section>
+        <section className="justify-between md:flex">
+          <div className="flex-1 mt-16 md:mr-20" style={{ height: '640px ' }}>
+            <CodeSandboxEmbed id="xstate-otp-animated-c4rey" title="Otp Verification with XState" />
+          </div>
+          <div className="mt-16" style={{ height: '640px ' }}>
+            <CodeSandboxEmbed className="codesandbox-xs" id="2p52nx3wnj" title="Shake or Tap for jokes" />
           </div>
         </section>
         <section className="justify-between md:flex">
