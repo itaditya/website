@@ -1,0 +1,428 @@
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import { EmbedCSB, EmbedGist } from '_components/PostEmbed';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Optimize Your React App with React.memo',
+  date: '2020-07-03T12:50:30.196Z',
+  description: 'Learn how to use React.memo and useMemo together to optimize your React app performance.',
+  readingTime: '11 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/optimize-your-react-app-with-react-memo.jpg',
+  coverPicUrl: '/covers/optimize-your-react-app-with-react-memo.jpg',
+  canonicalUrl: 'https://blog.bitsrc.io/optimize-your-react-app-with-react-memo-ec52447b09ba',
+  tags: ['javascript', 'react'],
+};
+
+<MDXImage alt="Photo by Steven Lelham on Unsplash" src={meta.coverPicUrl} />
+
+All the optimizations performed in this article will be available in this [GitHub Pull Request](https://github.com/itaditya/demo-filtered-list/pull/2). Now let’s check out our app —
+
+![Demo of the app to be optimized](/posts/demo-filtered-app.gif)
+
+* Our app shows details of characters in a table.
+* We can filter characters by their house.
+* We can switch the theme of the app from dark to light and vice-versa.
+* We have two states in the app — one for tracking the active house’s id and another for the active theme.
+* At any state change, the entire app re-renders.
+
+You can try the app in this CodeSandbox. Choose a house or switch the theme and you’ll notice that in the Console there’s a log for each component when that component re-renders. If you don’t know what render in React means don’t worry we’ll go over it in this post.
+
+<EmbedCSB id="github/itaditya/demo-filtered-list/tree/master" title="Unoptimized App" description="Try the app on CodeSandox" />
+
+## Problems with the App
+You would have noticed that Table component gets re-rendered anytime a state update happens in App component. It makes sense for Table component to re-render when the **houseId state** changes but it also re-renders when the **theme state** changes. We can optimize the Table component by re-rendering it only when houseId state changes.
+
+**Note—** If the app grew larger and the Table component started rendering lots of components only then optimizing it will be useful. This example is intentionally kept simple so you can easily grasp the main concepts.
+
+## Understanding the code
+Our app structure looks like this —
+
+```
+App
+ Header
+ Picker
+ Table
+```
+
+The App component renders the above three components. From the names you must have guessed Header component renders the title of the app, Picker component renders the list of houses from which you can choose a house and the Table component renders the details of characters based on the chosen house in a table.
+
+### Peek into the app code
+Let’s look at the App.js file which contains the main logic including all the components. The mountain of code might look overwhelming and that’s ok. We’ll focus on App component and then breakdown the other important stuff one by one.
+
+```jsx
+import React, { useState } from 'react';
+import cn from 'clsx';
+
+import { housesData, charactersData } from './staticData';
+import './styles.css';
+
+function Header(props) {
+  const { children } = props;
+  return (
+    <header className="app-header">
+      <h1 className="app-name">Potter World</h1>
+      {children}
+    </header>
+  );
+}
+
+function Picker(props) {
+  const { activeHouseId, onChange } = props;
+  return (
+    <div className="house-picker">
+      <h3>Filter by House</h3>
+      <ul className="house-list">
+        {housesData.map((house) => (
+          <li>
+            <button
+              className={cn('house', activeHouseId === house.id && 'active')}
+              onClick={(event) => onChange(house.id, event)}
+            >
+              <span>{house.name}</span>
+              <img src={house.imageUrl} alt={house.name} className="house-logo" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Table(props) {
+  const { charactersList } = props;
+  return (
+    <table className="table">
+      <thead className="table-head">
+        <tr className="table-row">
+          <th className="table-cell">Name</th>
+          <th className="table-cell">House</th>
+        </tr>
+      </thead>
+      <tbody>
+        {charactersList.map((character) => (
+          <tr>
+            <td className="table-cell">{character.name}</td>
+            <td className="table-cell">{character.house}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function filterByHouse(houseId) {
+  return charactersData.filter((character) => {
+    if (houseId === 'all') {
+      return true;
+    }
+    return character.houseId === houseId;
+  });
+}
+
+function App() {
+  const [stateTheme, setStateTheme] = useState('dark');
+  const [stateActiveHouseId, setStateActiveHouseId] = useState('all');
+
+  function handleChangeTheme() {
+    setStateTheme((oldTheme) => (oldTheme === 'dark' ? 'light' : 'dark'));
+  }
+
+  function handleFilter(houseId) {
+    setStateActiveHouseId(houseId);
+  }
+
+  const filteredCharacters = filterByHouse(stateActiveHouseId);
+
+  return (
+    <div className={cn('app', `theme-${stateTheme}`)}>
+      <Header>
+        <button className="theme-switch-btn" onClick={handleChangeTheme}>
+          {stateTheme === 'light' ? 'Nox' : 'Lumos'}
+        </button>
+      </Header>
+      <main className="main">
+        <Picker activeHouseId={stateActiveHouseId} onChange={handleFilter} />
+        <p>List starts with {filteredCharacters[0].name}</p>
+        <Table charactersList={filteredCharacters} />
+      </main>
+    </div>
+  );
+}
+
+export default App;
+```
+<CodeDescription children="App.js in full glory" />
+
+The **App component** is responsible for these things —
+
+* Render components like Header, Picker & Table and some other JSX.
+* Manage state for houseId and theme.
+* Use the state and other logic to pass the right props to various components.
+
+The **Header component** renders the title of the app. Header also renders the button JSX which App component passed to it via children prop.
+
+The **Picker component** renders the list of Hogwart’s houses. When user clicks on a house, Picker tells the App component which house is selected using the onChange prop. The App component then updates the **houseId state**. Then the Picker component’s **activeHouseId** prop changes and based on the prop an ‘active’ class gets added to the house which is currently selected.
+
+Then we have the **Table component**. Suppose user selects the house Ravenclaw. So Picker tells App about it and then App component updates the **houseId state** which now becomes the string ‘ravenclaw’. We’ll learn in the next section what exactly state update means. But in short when a state of App component updates, the App component function gets called again.
+
+Here's what happens next-
+
+* The stateActiveHouseId variable now has the value ‘ravenclaw’.
+* The filterByHouse function gets called again and it returns a new array with only Ravenclaw house characters. This filtered array is stored in filteredCharacters variable.
+* App renders the name of first character from the filteredCharacters array in a paragraph.
+* The filteredCharacters array is passed to the Table component via charactersList prop.
+* Table component loops through the charactersList prop and render each character’s details in a row.
+
+If you’re wondering why all the state is kept in the App component that’s because —
+
+* The theme state is needed by App component directly as it needs to apply the relevant classname at the top most ‘div’.
+* The active houseId state is needed by both Picker and Table component so we need to keep that state in App component.
+
+Ideally the state should be kept in the deepest component possible. In our case that’s the App component and because of that all child component re-renders when App’s state changes.
+
+Hope it’s clear to you what the code in App.js file is doing. Now let’s look at React’s update flow in more detail.
+
+## How React updates the App
+Before we go on optimizing our component we should have a basic understanding of how React handle updates. When we trigger a state change in App this how React re-renders.
+
+![How React updates on state change](/posts/react-update-flow.png)
+
+**Key Takeaways-**
+
+1. The component whose state has changed will re-render. Then all components inside it will re-render i.e the child function components will get called again. So if the top-most component i.e. App re-renders then all child components will re-render.
+1. We can also say that a child component will get called again if any of it’s parent’s state changes as only state updates can tell React to re-render. Even child components whose props haven’t changed will get called because React doesn’t compare props by default.
+1. In function components React only performs two optimizations by default. First, it avoid the re-render process if by **shallow comparison** the new state is equal to the old state. Second, it only updates the DOM nodes which have changed and not the whole DOM as updating DOM is costly.
+
+I mentioned shallow comparison above. It’s an important concept in React and I’ll be explaining it in detail later in this post.
+
+## Optimizing Table component
+Our objective is to make Table re-render only when necessary. So it should **re-render** when **houseId** state changes but should not **re-render** if the **theme state** (or any other state for that matter) changes. This can be done in two steps. In the first step we’ll make Table component re-render only when it’s props changes and in the second step we’ll make sure that props of Table component changes only when houseId state changes.
+
+## Step 1- Wrap Table with React.memo
+If some component is doing a lot of heavy lifting then React provides utilities which can help prevent wasteful re-renders of that component. One of those is React.memo.
+
+React.memo is an [HOC](/blog/react-renderprops-hoc#higher-order-components-hoc) which takes a component and returns an enhanced component. When React re-renders this enhanced component it will **shallow compare** the new props object passed to this component with the old one. If shallow compare says that props are same as last time then React skips re-rendering the enhanced component (and therefore all other component it re-renders).
+
+You might be wondering why React doesn’t shallow compare props by default. That’s because there’s a high chance the comparison will be false and in that case we’ll pay both the comparison cost and the re-render cost.
+
+Let’s apply React.memo on the Table component and you’ll see what I mean.
+
+```diff {9,20,21}
+--- a/src/App.js
++++ b/src/App.js
+
+function Table(props) {
+  console.log('render: Table');
+  // other old code
+}
+
++ const OptimizedTable = React.memo(Table);
+
+
+function App() {
+  console.log('render: App');
+
+  return (
+    <div className={cn('app', `theme-${stateTheme}`)}>
+      <main className="main">
+        <Picker activeHouseId={stateActiveHouseId} onChange={handleFilter} />
+        <p>List starts with {filteredCharacters[0].name}</p>
+-       <Table charactersList={filteredCharacters} />
++       <OptimizedTable charactersList={filteredCharacters} />
+      </main>
+    </div>
+  );
+}
+```
+<CodeDescription children="Using OptimizedTable component in App" />
+
+Take a look at the CodeSandbox below. Surprisingly everything behaves exactly like it did before. The reason there is no noticeable change is that we pass an **array** in the props. But why 🤔? Let’s take a closer look.
+
+<EmbedCSB id="github/itaditya/demo-filtered-list/tree/half-measure" title="React.memo is a half measure" description="Just wrapping Table with React.memo doesn’t help in our case" />
+
+### Shallow Comparison
+Two objects are equal by shallow comparison if —
+
+* Both objects have the same keys.
+* The values for each key in both objects are **[strictly equal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#Identity)**.
+
+So if we have three objects like
+
+```js
+const car1 = {
+  color: 'red',
+  model: 'S',
+};
+
+const car2 = {
+  color: 'red',
+  model: 'X',
+};
+
+const car3 = {
+  color: 'red',
+  model: 'S',
+};
+
+shallowCompare(car1, car2); // false
+shallowCompare(car1, car3); // true
+```
+<CodeDescription children="Shallow Comparison between objects" />
+
+Then shallow comparing car1 with car2 will happen like this —
+
+1. Both car1 & car2 have the same keys (color and model)?
+
+   Yes ✅
+2. The values for color key ( car1.color === car2.color) are strictly equal?
+
+   Yes ✅
+3. The values for model key (car1.model === car2.model) are strictly equal?
+
+   No ❌
+
+For that reason shallow comparing car1 with car2 will give us false. But when we **shallow compare car1 with car3 it will give us true**.
+
+This still doesn’t answer why passing an array in the props made the React.memo useless. For that we also need to understand strict equality.
+
+### Strict Equality
+
+Let’s see the result of strict equality (===) on some items.
+
+```js
+const num1 = 3;
+const num2 = 7;
+const num3 = 3;
+
+console.log(num1 === num2); // false
+console.log(num1 === num3); // true
+
+
+const arr1 = [1];
+const arr2 = [1];
+const arr3 = arr1;
+
+console.log(arr1 === arr2);     // false
+console.log(arr1 === arr3);     // true
+console.log([] === []);         // false
+console.log({a: 2} === {a: 2}); // false
+```
+<CodeDescription children="Strict Equality check between numbers and arrays" />
+
+You might be surprised by the behavior of strict equality with arrays (same with objects and functions too). If that’s the case definitely [read this article by Dmitri](https://dmitripavlutin.com/how-to-compare-objects-in-javascript/). It explains these things in more detail.
+
+In a nutshell strictly comparing two arrays means checking if they have the same memory location or reference. Try this [challenge on strict equality](https://gist.github.com/itaditya/6dfce9abecc8cbf54a763de3521e3559) if you wanna be sure that you got everything. Let me know in comments how you perform.
+
+I promise the time we have spent on **shallow comparison** will definitely come in handy to you as its used a lot in React. State updates, useEffect, useMemo, useCallback and React.memo all depend on it.
+
+### Shallow Comparison of Table props
+We can now understand the behavior of React.memo when we passed an array as a prop.
+
+When App re-renders, the **filterByHouse** function gets called which generates a **new array** of characters. This array is passed as **charactersList** prop. That means React will perform a shallow comparison like
+
+```js
+shallowCompare(oldProps, newProps)
+```
+
+Because of this each item in the props objects will be checked for strict equality. We only have charactersList array so this will happen —
+
+```js
+oldProps.charactersList === newProps.charactersList // false
+```
+
+As the filterByHouse function returns a new array the reference of the two charactersList arrays being compared are different. Because of that shallow comparing old props with new props will give us false and so React will conclude that props have changed and the Table component needs to re-render.
+
+Let’s look at the effect of passing different values in props on a component wrapped with React.memo.
+
+<EmbedCSB id="reactmemo-re-render-based-on-props-zgku3" title="React.memo re-render based on props" description="Component wrapped with React.memo can re-render based on props" />
+
+So we need a way to ensure that comparing the new props with the old one gives us **true**. That brings us to the last step.
+
+## Step 2- Babysitting React.memo
+We saw that just wrapping Table with React.memo doesn’t solve our problem and that’s because React.memo does shallow comparison by default. Now there are two ways to solve it.
+
+* **Deep comparison** — React.memo can take a comparison function as the second argument. This function can be used for deep comparing the old props with the new one. It’s done like `React.memo(MyComp, myCompareFunc)`. But as the comparison is deep, it has to go through all the nested properties of both objects. The higher the nesting the slower it will be. Instead of deep comparing 100 items just rendering them might be faster.
+
+* **Preserving reference** — The problem we faced with shallow compare was that reference to charactersList array was different on every render. But what if we cache the filtered array such that it only generates a new array when the houseId state changes? That way if the houseId is same as the last time it returns the same old array and so Table component won’t re-render. Let’s see how to do it in React.
+
+### Preserving reference with useMemo hook.
+The main idea of useMemo is to utilize the same last result when certain conditions are met. Let’s look at how it is used.
+
+1. We pass two arguments to useMemo. First is a function which performs some calculations and return the result. Second argument is an array called the dependency array.
+2. On the first render the result of calling the function (first argument) is stored and useMemo returns that result.
+3. On every subsequent render, the dependency array is shallow compared with it’s previous value. If shallow comparison gives false the function gets called again.
+4. The new result returned by the function is then stored by useMemo and useMemo then returns this result.
+
+```diff
+--- a/src/App.js
++++ b/src/App.js
+-import React, { useState } from 'react';
++import React, { useState, useMemo } from 'react';
+ import cn from 'clsx';
+
+
+function Table(props) {
+  console.log('render: Table');
+  // other old code
+}
+
++const OptimizedTable = React.memo(Table);
+
+
+function App() {
+  console.log('render: App');
+  const [stateActiveHouseId, setStateActiveHouseId] = useState('all');
+
+-  const filteredCharacters = filterByHouse(stateActiveHouseId);
++  const filteredCharacters = useMemo(() => {
++    return filterByHouse(stateActiveHouseId);
++  }, [stateActiveHouseId]);
+
+
+  return (
+    <div className={cn('app', `theme-${stateTheme}`)}>
+      <main className="main">
+        <Picker activeHouseId={stateActiveHouseId} onChange={handleFilter} />
+        <p>List starts with {filteredCharacters[0].name}</p>
+-       <Table charactersList={filteredCharacters} />
++       <OptimizedTable charactersList={filteredCharacters} />
+      </main>
+    </div>
+  );
+}
+```
+<CodeDescription children="Apply useMemo along with React.memo" />
+
+Let’s look at how useMemo is working in our app —
+
+1. On first render, **filterByHouse** function is called and it returns an array including all characters. useMemo store this array and then returns it so Table can then render it on screen.
+2. User selects a house so the **houseId state changes**, because it’s listed in the dependency array, useMemo calls filterByHouse again, a new array is generated and so Table component re-renders.
+3. User changes the theme so **theme state** changes. Since the items in dependency array is same as last time, useMemo just returns the same old filteredCharacters array (same reference) without calling filterByHouse function.
+4. Since the Table component (wrapped with React.memo) now gets the charactersList array with same reference as last time it doesn’t re-render.
+
+This becomes apparent in this recording
+![Table component re-renders only when houseId state changes](/posts/demo-optimized-filtered-app.gif)
+
+Here’s the [full App.js file](https://github.com/itaditya/demo-filtered-list/blob/optimized/src/App.js) with both React.memo and useMemo added.
+
+**Note —** useMemo only stores the last value and not all the previous values. So if you change from Ravenclaw to Slytherin and back to Ravenclaw then **filterByHouse** will get called 3 times. If filterByHouse is going to be an expensive operation then it’s better to memoize it outside of React using lodash’s memoize or your own custom implementation.
+
+You can see all the changes we did in this [GitHub PR](https://github.com/itaditya/demo-filtered-list/pull/2) and you can see the optimized app in this CodeSandbox —
+
+<EmbedCSB id="github/itaditya/demo-filtered-list/tree/optimized/" title="Optimized App" description="CodeSandbox for Optimized app" />
+
+### Negative Optimizations
+You must have realized now that optimizing the app is not like flipping a switch. You have to actually check how the changes affect the app. Here’s another case where React.memo by itself will just harm the performance.
+
+Let’s say you’re passing JSX as children prop to a component wrapped with React.memo. Now these things will happen.
+
+1. JSX passed to children prop gets transformed into React.createElement() i.e. a function call.
+2. React.createElement() returns an object representation of children JSX.
+3. Since the function returns an object, shallow compare between previous children prop and new children prop will **always be false** even if the children JSX looks same as before.
+
+You can try this on Header component as it accepts a children prop to render the theme switching button. Actually, that’s the only reason I included it in the app.
+
+Also I didn’t optimize the Picker component. It re-renders on theme state change too but as it’s a tiny component it’s re-render won’t cause any performance issues. For learning purposes you can try optimizing Picker component. It will also need something more then React.memo because we are passing a function as prop to it. Read about useCallback if you’re interested.
+
+**TL;DR** — don’t start wrapping all components with React.memo blindly. It can lead to negative optimizations as well as premature optimizations which are not good for maintainability.

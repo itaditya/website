@@ -33,6 +33,16 @@ export default function getPosts() {
     }))
   
     filePromise.push(new Promise(resolve => {
+      import('_posts/optimize-your-react-app-with-react-memo.mdx').then(data => {
+        const completeMeta = {
+          ...data.meta,
+          slug: 'optimize-your-react-app-with-react-memo',
+        }
+        resolve(completeMeta);
+      });
+    }))
+  
+    filePromise.push(new Promise(resolve => {
       import('_posts/react-renderprops-hoc.mdx').then(data => {
         const completeMeta = {
           ...data.meta,
