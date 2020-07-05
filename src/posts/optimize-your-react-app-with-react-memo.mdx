@@ -1,6 +1,7 @@
 import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import { EmbedCSB, EmbedGist } from '_components/PostEmbed';
+import { AlertOriginalPublish } from '_components/PostAlerts';
 import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
@@ -426,3 +427,5 @@ You can try this on Header component as it accepts a children prop to render the
 Also I didn’t optimize the Picker component. It re-renders on theme state change too but as it’s a tiny component it’s re-render won’t cause any performance issues. For learning purposes you can try optimizing Picker component. It will also need something more then React.memo because we are passing a function as prop to it. Read about useCallback if you’re interested.
 
 **TL;DR** — don’t start wrapping all components with React.memo blindly. It can lead to negative optimizations as well as premature optimizations which are not good for maintainability.
+
+<AlertOriginalPublish publisherName="Bits & Pieces" href={meta.canonicalUrl} />
