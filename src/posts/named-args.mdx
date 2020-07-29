@@ -1,0 +1,210 @@
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import { AlertOriginalPublish } from '_components/PostAlerts';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Why named arguments are better than positional arguments',
+  date: '2020-08-22T06:02:36.868Z',
+  description: 'By passing arguments as objects, we can make reusable functions with less bugs. This approach is called named arguments. Read on to understand why its better.',
+  readingTime: '5 mins',
+  previewPicUrl: 'https://devadi.netlify.com/previews/named-args.jpg',
+  coverPicUrl: '/covers/named-args.jpg',
+  canonicalUrl: 'https://blog.bitsrc.io/javascript-why-named-arguments-are-better-than-positional-arguments-9b15ab3155ef',
+  tags: ['javascript'],
+};
+
+<MDXImage alt="Photo by Greg Rosenke on Unsplash" src={meta.coverPicUrl} />
+
+Before talking about named arguments let's first clearly understand positional arguments and the problems they can cause.
+
+## What are positional arguments?
+
+You must be pretty familiar with positional arguments even if you heard the name for the first time.
+
+```js
+function greet(firstName, lastName) {
+  console.log(`Hello ${firstName} ${lastName}`);
+}
+
+// intended usage
+
+greet('Michael', 'Scott');
+
+const fName = 'Harry';
+const lName = 'Potter';
+greet(fName, lName);
+
+
+// wrong usage
+
+const firstName = 'Erlich';
+const lastName = 'Bachman';
+greet(lastName, firstName);
+```
+<CodeDescription>Normal functions using positional arguments</CodeDescription>
+
+The greet function takes two arguments- firstName & lastName. The caller has to make sure that the firstName is the first argument and the lastName is the second argument. The important takeaway here is that the **name of the argument doesn't have any significance**. The only thing that matters is **the order in which the arguments are passed**.
+
+This familiar approach is called positional arguments. It is usually fine for cases where you pass one or two arguments since its hard to mess up the order of arguments. But if you have to call a util which takes 6 arguments it would be hard to remember the order of arguments to pass. You don't want to pass the password in place of the username argument.
+
+## Problems with Positional Arguments
+Positional Arguments are pretty straight-forward to do but you will face some challenges with them.
+
+### 1. Can’t skip middle arguments
+Say you have changed the greet function from earlier such that it takes 3 arguments now — firstName, middleName, lastName. Since many people don’t have a middle name you want to make middleName an optional argument. The only way to call greet function with only firstName and lastName is this.
+
+```js
+greet('Aditya', null, 'Agarwal');
+// Correct ✅
+
+greet('Aditya', 'Agarwal');
+// Incorrect ❌
+```
+
+You can’t just provide firstName and lastName. This problem becomes more pronounced when the number of optional arguments increases to let’s say 5. Now you have to provide 5 nulls just to be able to provide arguments after those.
+
+### 2. Adding types to positional arguments is less cleaner
+Nowadays adding types to your utilities is becoming very common. With positional arguments you have no choice but to inline the types along with the function definition. This can obfuscate the code a little. It would be much better if we could declare type definitions of all arguments in one block.
+
+I don’t want to cover Types in this article. You can bug my friend [Gurjit](https://medium.com/@gurjitmehta) to cover this in his articles as he’s the one who pointed this out to me.
+
+### 3. Cause Subtle bugs
+
+Positional Arguments pack a lot of implicit behavior which can be the cause of subtle bugs. Let's see a common JS trick question.
+
+```js
+const numbers = ['1', '4', '8', '10'];
+console.log(numbers.map(parseInt));
+
+// You might think the result would be-
+[1, 4, 8, 10]
+
+// Here's the actual output-
+[ 1, NaN, NaN, 3 ]
+```
+<CodeDescription>Tricky JS question</CodeDescription>
+
+Surprised? The reason for this weird output is hidden behind the implicit nature of positional arguments. You see the map and parseInt functions are hiding some of their secrets in plain sight.
+
+Let's review the code `numbers.map(parseInt)` again.
+
+What exactly is happening here?
+
+* We run the map function on the numbers array.
+* map takes the first item of the array and pass it to parseInt.
+* Now for first item in array (i.e. 1) it would do `parseInt(1)`. Right...? **Wrong!!!**
+
+Actually map passes three arguments to its callback function. The first is the current item in array, the second is the index of the item. The third is the entire array. This in itself has no problem but the real issue is with the latter part.
+
+`numbers.map(parseInt)` its not the same as `numbers.map((item) => parseInt(item))`. You could make the assumption that since the callback function just takes the item argument and pass it to parseInt we can skip the additional step. But the two are different: in the former, we pass all the data from map to parseInt whereas in the latter we only pass the item.
+
+You might not know but there is a second argument of parseInt called the radix. By default the value of radix is 10 (base 10 because we humans follow the decimal system for counting). What went wrong with the code was that we passed the **index of the current item as the radix value to parseInt**. These are the actual function calls that happened-
+
+```js
+parseInt('1', 0, [...]);
+parseInt('4', 1, [...]);
+parseInt('8', 2, [...]);
+parseInt('10', 3, [...]);
+```
+<CodeDescription>Reference code for the behaviour</CodeDescription>
+
+Now that we know the issues, how can we do better?
+
+## Alternative to Positional Arguments
+
+What if a function could tell by name what arguments it expects? That way even if you pass extra data to it by mistake it will only use the things it needs.
+
+Let's make our own wrapper over parseInt. Here's a naive implementation.
+
+```js
+// Implementation
+function myCustomParseInt(objArgs) {
+  return parseInt(objArgs.item, objArgs.radix);
+}
+
+// Usage
+const num = myCustomParseInt({ item: '100', radix: 10 });
+```
+<CodeDescription>Code for myCustomParseInt</CodeDescription>
+
+myCustomParseInt accepts only one argument and that is an object. This object can have two keys– item & radix. Let's use our custom util with map. It will be necessary to have an intermediate step to send args received by callback to myCustomParseInt.
+
+```js
+const numbers = ['1', '4', '8', '10'];
+
+const result = numbers.map((item, index) => myCustomParseInt({ item, index }));
+console.log(result); // [ 1, 4, 8, 10 ]
+```
+<CodeDescription>Using myCustomParseInt with map</CodeDescription>
+
+Notice that even if we pass the index to myCustomParseInt it won't cause any problems. That's because myCustomParseInt will just ignore it. This pattern of passing objects to functions is called **named arguments**. It is lot more explicit than positional arguments.
+
+To change the radix we have to explicitly pass the radix key. That means if we want to parse a string with base 2 we have to go to the docs (or use autocomplete) and see the exact name of parameter (radix). If we blindly pass any other key it won't do anything. This is great for us because it avoids unintended behavior.
+
+### Named arguments with destructuring
+
+A while back JavaScript got a feature called destructuring. Let's use this in myCustomParseInt implementation.
+
+```js
+// positional args
+function myCustomParseInt(item, radix) {
+  return parseInt(item, radix);
+}
+
+// old implementation of named args
+function myCustomParseInt(objArgs) {
+  return parseInt(objArgs.item, objArgs.radix);
+}
+
+// named args with destructuring
+function myCustomParseInt({ item, radix }) {
+  return parseInt(item, radix);
+}
+```
+<CodeDescription>Named arguments with destructuring</CodeDescription>
+
+You'll notice that by adding just a pair of curly braces we get the benefits of named args but the ergonomics of positional args. You can think of destructuring as performing `const item = objArgs.item`;
+
+If myCustomParseInt is called with **undefined** then JS would throw an error. That's because `undefined.item` is not allowed. To avoid it we can add `= {}` in the end of destructuring. That way when we pass undefined it will now do `{}.item` which is valid JS. Here's the final implementation-
+
+```js
+function myCustomParseInt({ item, radix } = {}) {
+  return parseInt(item, radix);
+}
+```
+<CodeDescription>Final Implementation</CodeDescription>
+
+With named arguments pattern we can also skip the arguments we don’t want to provide since the function no longer depends on the order in which the arguments are passed.
+
+```js
+// With positional args we had to add a null in between
+function greetPos(firstName, middleName, lastName) {}
+greetPos('Aditya', null, 'Agarwal');
+
+
+// With named args you just provide firstName & lastName.
+function greetNamed({ firstName, middleName, lastName } = {}) {}
+greetNamed({ firstName: 'Aditya', lastName 'Agarwal' });
+```
+<CodeDescription>Named Args pattern make it easy to skip optional args</CodeDescription>
+
+In conclusion I'd say named arguments is a powerful pattern and it has become very commonplace nowadays but you don't always need to use them. Sometimes you could even combine the two. The fetch API in browser is used like this
+
+```js
+// request with url as positional arg and options as named args.
+fetch('https://google.com', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// basic GET requests with just positional args
+fetch('https://google.com');
+```
+<CodeDescription>Combine positional args with named args</CodeDescription>
+
+Here the mandatory argument (API path) is a positional argument and then the optional params are accepted through named arguments.
+
+<AlertOriginalPublish publisherName="Bits & Pieces" href={meta.canonicalUrl} />

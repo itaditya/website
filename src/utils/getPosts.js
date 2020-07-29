@@ -43,6 +43,16 @@ export default function getPosts() {
     }))
   
     filePromise.push(new Promise(resolve => {
+      import('_posts/named-args.mdx').then(data => {
+        const completeMeta = {
+          ...data.meta,
+          slug: 'named-args',
+        }
+        resolve(completeMeta);
+      });
+    }))
+  
+    filePromise.push(new Promise(resolve => {
       import('_posts/optimize-your-react-app-with-react-memo.mdx').then(data => {
         const completeMeta = {
           ...data.meta,
