@@ -1,0 +1,171 @@
+import MDXImage from '_components/MDXImage';
+import { EmbedCSB } from '_components/PostEmbed';
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'React Buttons with the Base + Variant Pattern',
+  date: '2020-08-08T10:05:15.929Z',
+  description: 'Composing React buttons for design systems with the Base and Variant pattern.',
+  readingTime: '6 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/design-systems-react-buttons-base-variant.jpg',
+  coverPicUrl: '/covers/design-systems-react-buttons-base-variant.jpg',
+  canonicalUrl: 'https://blog.bitsrc.io/design-systems-react-buttons-with-the-base-variant-pattern-c56a3b394aaf',
+  tags: ['React', 'Design Systems'],
+};
+
+<MDXImage alt="" src={meta.coverPicUrl} />
+
+Design Systems are made to make the designs consistent across products. But they shouldn’t become a bottleneck for creativity. Some room for experimentation should be present. Let’s see how we can tread this fine line between flexibility and consistency using the base + variant pattern.
+
+Suppose there’s a e-commerce platform with multiple products like the main shopping site, inventory management portal, email system. All of these are customer-facing software so they should reflect a common design language.
+
+For that **Sarah** will be working on the design system and **Ana** will be using it in the main shopping site where people buy various products. Sarah figures out that the first priority is to have buttons inside the design system.
+
+The buttons should be flexible enough to fit various product needs but not so much that we risk losing design consistency. When new product requirements come these buttons should be extendable too. If any of these elements are missing then the design systems adaption and impact will be negatively affected.
+
+To accommodate all these requirements Sarah uses the Base + Variant pattern to build the buttons.
+
+## Base + Variant Pattern
+
+In the base + variant pattern the core parts of a component that are not subject to change are isolated from the parts that are open to customization.
+
+Things like core behavior are implemented inside the Base component. The Base is private i.e. it’s not meant to be used directly in the application. For each use case, a separate component (Variant) can be built on top of this Base component.
+
+There is a great [talk on this by the AirBnB design system team](https://www.youtube.com/watch?v=fHQ1WSx41CA). Check it out once you’re done with this article.
+
+Sarah has categorized the buttons into 3 types —
+
+* **Solid buttons** can have 3 variants (primary, danger & plain) & 3 sizes (base, large, small) and icons before and after the button text.
+* **Ghost buttons** can have 2 variants (primary & danger) & 3 sizes (base, large, small) and icons before and after the button text.
+* **Icon buttons** don’t have variants for now. Only size customization is supported. A single icon in the center is shown along with a tooltip.
+
+Since Solid button & Ghost buttons have similar structure and core behavior Sarah will make a ButtonBase component first. Then the ButtonSolid & ButtonGhost component can use ButtonBase internally.
+
+Here’s some skeleton code to make these components. The example is in React here but the same concepts can be applied across libraries.
+
+```jsx
+function ButtonBase(props) {
+  const {
+    className,
+    size = 'base',
+    as = 'button', // let Ana render it as a button or an anchor.
+    children,
+    IconStart, // use to render an icon before children
+    IconEnd, // use to render an icon after children
+    ...restProps
+  } = props;
+
+  const Element = as;
+
+  return (
+    <Element
+      {...restProps}
+      // use size, className prop to generate className for this element
+      className="generated-base-classnames"
+    >
+      <span>{IconStart}</span>
+      {children}
+      <span>{IconEnd}</span>
+    </Element>
+  );
+}
+
+function ButtonSolid(props) {
+  const { variant = 'primary', ...restProps } = props;
+  return (
+    <ButtonBase
+      // all the other props like IconStart will be passed to ButtonBase
+      {...restProps}
+      // use variant to generate className and pass it to ButtonBase
+      className="generated-solid-classnames"
+    />
+  );
+}
+
+function ButtonGhost(props) {
+  const { variant = 'primary', ...restProps } = props;
+  return (
+    <ButtonBase
+      // all the other props like IconStart will be passed to ButtonBase
+      {...restProps}
+      // use variant to generate className and pass it to ButtonBase
+      className="generated-ghost-classnames"
+    />
+  );
+}
+
+export function IconButton(props) {
+  const {
+    className,
+    size = 'base',
+    as = 'button', // let Ana render it as a button or an anchor.
+    Icon,
+    tooltip, // button text in tooltip (code not shown)
+    ...restProps
+  } = props;
+
+  const Element = as;
+
+  return (
+    <Element
+      {...restProps}
+      // use size, className prop to generate className for this element
+      className={`generated-icon-classnames ${className}`}
+    >
+      {Icon}
+    </Element>
+  );
+}
+```
+<CodeDescription children="API for various Button" />
+
+As you can see IconButton is not using ButtonBase since there is almost nothing common between them. We could make a IconButtonBase and use it in IconButton but it would be an overkill at this point. If need does arise in future then the common parts can be moved from IconButton to IconButtonBase. IconButton will use IconButtonBase and no changes in the product side would be needed.
+
+![Possible buttons with our implementation](/posts/tailwind-button-variants.png)
+
+You can clearly see how many usecases we can address with our implementation. Let’s check how Ana can use them in her product.
+
+### Practical Usage
+
+The different type, variant, size of buttons are used to communicate different things to the users. Let’s take the following use cases for buttons as an exercise.
+
+1. Add to Cart button — Since most users buy multiple items together their main action is to add an item to cart. To make this button the most prominent on the product detail page Ana chooses a **Solid button** with **primary variant**.
+
+1. Buy Now button — This is the second most useful interaction for users. As this is also present on product detail page Sarah recommends to not use the Solid button of primary variant. So instead Ana chooses a **Ghost button** with **primary variant**. It’s primary because it’s also a positive action.
+
+1. Add to Wishlist button. — This can be useful for customers who just want to bookmark an item to buy later. Ana uses a **large IconButton** here.
+
+1. Empty Cart button — User can empty the entire cart by clicking on this button. User needs to be slightly aware of buttons which destroy something or delete things. Ana chooses a **Ghost button** with **danger variant** for this.
+
+1. Cancel Order button — User can cancel their entire order by clicking this button. This action will cost money to the company too. So the user should take extra precaution when using this button. To stress this Ana makes this a **Solid button** with **danger variant**.
+
+1. Cancel Confirmation dialog — After user clicks on the Cancel Order button a confirmation dialog is shown. There will be two buttons side by side. As the Confirm button will cancel the order it’s a **Solid button** with **danger variant**. The Cancel button is neutral as it’s neither a positive action like buying an item nor a negative action like deleting stuff so it’s a **Solid button** with **plain variant**.
+
+## Composing Custom Buttons
+
+Suppose Ana has to make a banner for a new super special feature. The banner has a colorful CTA which is meant to gain user attention immediately. None of the existing button variants satisfy the needs of this special CTA.
+
+One approach is that Ana could ask Sarah to make changes in design system components to support this variant. This can lead to many problems. Sarah will need to take care of one more variant which means testing it across products on every release. It also increases the API surface of existing components which can complicate the implementation of the component.
+
+### Recommended Approach
+
+The biggest advantage of Base + Variant pattern is that it makes your design system super extendable. In this scenario Ana can make a component let’s say ButtonCustom for her product on top of ButtonBase. This has a couple of advantages —
+
+1. Since ButtonCustom is part of the product code instead of design system there is no extra maintenance cost on design system team.
+
+1. ButtonCustom will be built on top of ButtonBase so it is ensured that there is some consistency and best practices baked in.
+
+1. There will be a lot of room for customization in ButtonCustom. This gives Ana an opportunity to go all out with the new variant’s designs without complicating the design system.
+
+1. If ButtonCustom breaks it will not affect other buttons in any way. So the issue will be isolated to only one component of only one product.
+
+So we can see that the Base Variant pattern provides us with a lot of design consistency meanwhile being flexible enough to support new variants for future cases.
+
+I’ve built some buttons on this pattern using ReactJS and TailwindCSS. Check it out in this [CodeSandbox](https://codesandbox.io/s/tailwind-buttons-for-design-systems-xdyg1?file=/src/pages/index.js).
+
+<EmbedCSB id="tailwind-buttons-for-design-systems-xdyg1" title="Buttons for Design System with Tailwind & React" description="Buttons for Design System with Tailwind & React" />
+
+The full source code is available on [GitHub](https://github.com/itaditya/tailwind-buttons-for-design-system).
+
+If you like this article do consider <TwitterShare meta={meta} children="sharing it on Twitter" />. Your appreciation matters a lot. Also [DM me](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) if you're interested in a post about a certain topic, I'll add it to my list!
