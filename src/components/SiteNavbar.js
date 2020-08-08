@@ -113,7 +113,7 @@ export default function SiteNavbar(props) {
                   ))}
                 </ul>
                 <div className="mt-4">
-                  <SocialBar />
+                  <SocialBar isInsideMenu={true} />
                 </div>
               </nav>
             )}
