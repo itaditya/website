@@ -7,8 +7,8 @@
     "start": "next dev",
     "build": "next build",
     "export": "next export",
-    "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
     "gen:postFile": "node scripts/generatePostFile.js",
+    "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:visual": "percy exec -- cypress run"

@@ -128,8 +128,8 @@ const Home = () => {
         </section>
         <section className="mt-8 text-lg md:text-xl md:flex" ref={latestArticleRef}>
           <h1 className="font-bold text-primary-600">Hot off the press:</h1>
-          <Link href="/blog/optimize-your-react-app-with-react-memo">
-            <a className="md:ml-2 hover:underline">Optimize Your React App with React.memo</a>
+          <Link href="/blog/design-systems-react-buttons-base-variant">
+            <a className="md:ml-2 hover:underline">React Buttons with the Base + Variant Pattern</a>
           </Link>
         </section>
         <SectionPackages>

@@ -43,16 +43,16 @@ export function PostsPopularList() {
         </Link>
       </li>
       <li className="pl-3 pr-6 mt-4 md:py-2 rounded-md">
-        <Link href="/blog/react-renderprops-hoc">
+        <Link href="/blog/optimize-your-react-app-with-react-memo">
           <a className="flex items-start">
             <span className="mt-2 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
             <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
-              Understanding React Render Props and HOC
+              Optimize Your React App with React.memo
             </span>
             <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
-              7 mins read
+              11 mins read
             </span>
           </a>
         </Link>

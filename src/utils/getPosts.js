@@ -33,6 +33,16 @@ export default function getPosts() {
     }))
   
     filePromise.push(new Promise(resolve => {
+      import('_posts/design-systems-react-buttons-base-variant.mdx').then(data => {
+        const completeMeta = {
+          ...data.meta,
+          slug: 'design-systems-react-buttons-base-variant',
+        }
+        resolve(completeMeta);
+      });
+    }))
+  
+    filePromise.push(new Promise(resolve => {
       import('_posts/optimize-your-react-app-with-react-memo.mdx').then(data => {
         const completeMeta = {
           ...data.meta,
