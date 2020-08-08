@@ -15,9 +15,9 @@ const Projects = () => {
     >
       <SiteHead pageName="Projects" />
       <SiteNavbar activeLink="projects" />
-      <main className="px-8 mt-12 col-span-12 md:col-start-3 md:col-span-8">
+      <main className="px-8 mt-12 col-span-12 md:col-start-2 md:col-span-10">
         <h2 className="mb-40 text-5xl font-bold text-center text-gray-800 font-heading">Projects</h2>
-        <ul className="grid grid-cols-1 row-gap-8 md:row-gap-40">
+        <ul className="grid grid-cols-1 row-gap-8 md:row-gap-40 max-w-screen-sm mx-auto">
           {myProjects.map((project, index) => (
             <li
               key={project.name}

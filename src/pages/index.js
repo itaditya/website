@@ -16,7 +16,6 @@ import IconCSS from '_components/icons/IconCSS';
 import IconReact from '_components/icons/IconReact';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
 import { useDeviceWidth } from '_utils/deviceDetails';
-import cn from '_utils/classnames';
 
 function Newsletter() {
   return (
