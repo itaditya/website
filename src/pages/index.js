@@ -16,6 +16,7 @@ import IconCSS from '_components/icons/IconCSS';
 import IconReact from '_components/icons/IconReact';
 import IconCircleArrow from '_components/icons/IconCircleArrow';
 import { useDeviceWidth } from '_utils/deviceDetails';
+import cn from '_utils/classnames';
 
 function Newsletter() {
   return (
@@ -75,7 +76,8 @@ const Home = () => {
             </h1>
             <p className="mt-2 text-base text-gray-700 xl:text-xl">
               Frontend developer at HackerRank.
-              <br />I love open-sourcing my knowledge through building projects, giving talks and writing blogs.
+              <br />I love open-sourcing my knowledge through building projects, giving talks and
+              writing blogs.
             </p>
           </div>
           <div className="hidden mt-4 text-5xl text-gray-400 md:block animation-fade-in">
@@ -130,35 +132,37 @@ const Home = () => {
             <a className="md:ml-2 hover:underline">Optimize Your React App with React.memo</a>
           </Link>
         </section>
-        {!['server', 'xs', 'sm'].includes(deviceWidth) && (
-          <SectionPackages className="hidden">
-            <article
-              className="px-8 py-4 bg-blue-700 rounded-lg shadow-xl col-span-2"
-              style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
-            >
-              <h3 className="w-full text-2xl font-bold text-white">Other Projects</h3>
-              <p className="mt-1 text-lg text-gray-100">
-                I make lots of side projects whenever I'm <br /> learning new things.
-              </p>
-              <Link href="/projects">
-                <a className="inline-block px-5 py-3 mt-3 text-lg font-bold text-gray-700 bg-white shadow-md hover:shadow-xl rounded-md transition-shadow ease-in duration-200">
-                  See All Projects
-                </a>
-              </Link>
-            </article>
-          </SectionPackages>
-        )}
+        <SectionPackages>
+          <article
+            className="px-8 py-4 bg-blue-700 rounded-lg shadow-xl col-span-1 md:col-span-2"
+            style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
+          >
+            <h3 className="w-full text-2xl font-bold text-white">Other Projects</h3>
+            <p className="mt-1 text-lg text-gray-100">
+              I make lots of side projects whenever I'm <br /> learning new things.
+            </p>
+            <Link href="/projects">
+              <a className="inline-block px-5 py-3 mt-3 text-lg font-bold text-gray-700 bg-white shadow-md hover:shadow-xl rounded-md transition-shadow ease-in duration-200">
+                See All Projects
+              </a>
+            </Link>
+          </article>
+        </SectionPackages>
         <section className="items-center justify-between mt-20 md:mt-56 md:flex">
           <div className="max-w-md mb-8 md:mb-0">
             <h3 className="text-3xl font-bold text-gray-700">I'm running a newsletter</h3>
-            <p className="mt-3">Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems</p>
+            <p className="mt-3">
+              Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems
+            </p>
           </div>
           <div className="w-full h-56 bg-gray-300 md:w-3/4 lg:w-1/2" ref={newsletterRef}>
             {(stateSeenNl === 'seen' || stateSeenLatestArticle === 'seen') && <Newsletter />}
           </div>
         </section>
       </main>
-      {!['server', 'xs', 'sm'].includes(deviceWidth) && stateSeenLatestArticle === 'seen' && <SocialBar />}
+      {!['server', 'xs', 'sm'].includes(deviceWidth) && stateSeenLatestArticle === 'seen' && (
+        <SocialBar />
+      )}
       <SiteFooter />
     </div>
   );

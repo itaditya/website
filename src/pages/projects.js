@@ -5,12 +5,9 @@ import SocialBar from '_components/SocialBar';
 import IconExternalLink from '_components/icons/IconExternalLink';
 import SectionPackages from '_components/SectionPackages';
 import cn from '_utils/classnames';
-import { useDeviceWidth } from '_utils/deviceDetails';
 import myProjects from '../staticData/myProjects.json';
 
 const Projects = () => {
-  const deviceWidth = useDeviceWidth();
-
   return (
     <div
       className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
@@ -65,7 +62,7 @@ const Projects = () => {
             </li>
           ))}
         </ul>
-        <SectionPackages size={['xs', 'sm'].includes(deviceWidth) ? 'sm' : 'lg'} />
+        <SectionPackages />
       </main>
       <SocialBar />
       <SiteFooter />

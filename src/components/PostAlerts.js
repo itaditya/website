@@ -12,7 +12,7 @@ export function AlertWarning(props) {
 
 export function AlertOriginalPublish(props) {
   const { publisherName, href, className = '', ...restProps } = props;
-  const fullClassName = cn({ 'text-gray-700 text-lg text-center flex justify-center space-x-1 mt-8': true, [className]: true });
+  const fullClassName = cn({ 'text-gray-700 text-lg text-center md:flex justify-center space-x-1 mt-8': true, [className]: true });
   return (
     <div role="alert" {...restProps} className={fullClassName}>
       <span>This post was originally published at </span>
