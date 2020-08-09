@@ -1,13 +1,10 @@
 import Head from 'next/head';
 
-import { getShortDate } from '_utils/dateConvert';
-
 export default function BlogHead(props) {
   const { postInfo } = props;
 
   const postUrl = 'https://devadi.netlify.com/blog/' + postInfo.slug;
   const imageUrl = postInfo.previewPicUrl || postInfo.coverPicUrl;
-  const shortDate = getShortDate(postInfo.date);
 
   return (
     <Head>
@@ -31,6 +28,7 @@ export default function BlogHead(props) {
       <meta name="twitter:label2" value="Authored By" />
       <meta name="twitter:data2" value="@dev__adi" />
       <link rel="canonical" href={postInfo.canonicalUrl} />
+      <script async src="https://unpkg.com/thesemetrics@latest"></script>
     </Head>
   );
 }
