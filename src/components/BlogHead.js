@@ -28,7 +28,7 @@ export default function BlogHead(props) {
       <meta name="twitter:label2" value="Authored By" />
       <meta name="twitter:data2" value="@dev__adi" />
       <link rel="canonical" href={postInfo.canonicalUrl} />
-      <script async src="https://unpkg.com/thesemetrics@latest"></script>
+      {/* <script async src="https://unpkg.com/thesemetrics@latest"></script> */}
     </Head>
   );
 }
