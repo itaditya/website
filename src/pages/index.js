@@ -70,7 +70,7 @@ const Home = () => {
       <main className="mt-8 col-start-2 col-span-10 row-auto md:mt-24">
         <div className="flex items-center justify-between" style={{ minHeight: '50vh' }}>
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold tracking-tighter text-gray-700 md:text-5xl xl:text-6xl font-heading">
+            <h1 className="text-3xl tracking-tighter text-gray-700 md:text-5xl xl:text-6xl font-heading">
               Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
             </h1>
             <p className="mt-2 text-base text-gray-700 xl:text-xl">
