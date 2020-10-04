@@ -12,7 +12,7 @@ export default function SiteHead(props) {
         rel="stylesheet"
       />
       {children}
-      {/* <script async src="https://unpkg.com/thesemetrics@latest"></script> */}
+      <script async src="https://unpkg.com/thesemetrics@latest"></script>
     </Head>
   );
 }
