@@ -44,23 +44,21 @@ const Social = () => (
     <SiteNavbar />
     <main className="mt-24 col-start-2 col-span-10 row-auto">
       <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Social Links</h2>
-      <div className="md:grid gap-y-3" style={{ gridTemplateColumns: 'auto 1fr' }}>
-        {
-          links.map(link => (
-            <>
-              <span className="mr-4 font-medium text-gray-800 md:text-xl">{link.title}:</span>
-              <a
-              className="flex items-center leading-relaxed text-gray-800 hover:text-gray-900 hover:underline"
+      <div className="space-y-5">
+        {links.map((link) => (
+          <div>
+            <span className="mr-4 font-medium text-gray-800 md:text-xl">{link.title}:</span>
+            <a
+              className="flex items-center leading-relaxed text-gray-700 hover:text-gray-900 hover:underline"
               target="_blank"
               rel="noreferrer noopener"
               href={link.href}
             >
               <span className="mr-2 text-lg truncate md:text-xl">{link.href}</span>
-              <IconExternalLink className="hidden text-gray-700 md:block" />
+              <IconExternalLink className="hidden text-gray-600 md:block" />
             </a>
-            </>
-          ))
-        }
+          </div>
+        ))}
       </div>
     </main>
     <SiteFooter />
