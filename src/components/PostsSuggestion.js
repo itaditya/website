@@ -8,12 +8,12 @@ import IconChevronRight from '_components/icons/IconChevronRight';
 
 export function PostsPopularList() {
   return (
-    <ul className="">
+    <ul className="space-y-4">
       <li className="pl-3 pr-6 md:py-2 rounded-md">
         <Link href="/blog/async-await-hell">
-          <a className="flex items-start">
+          <a className="flex items-start lg:items-center">
             <span
-              className="mt-1 text-2xl rounded-full"
+              className="mt-1 lg:mt-0 text-2xl rounded-full"
               style={{ color: 'hsl(52.2, 84.3%, 62.5%)', backgroundColor: 'hsl(80, 3%, 19.4%)' }}
             >
               <IconJS />
@@ -21,37 +21,37 @@ export function PostsPopularList() {
             <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Escaping from Async/Await Hell
             </span>
-            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
+            <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               10 mins read
             </span>
           </a>
         </Link>
       </li>
-      <li className="pl-3 pr-6 mt-4 md:py-2 rounded-md">
+      <li className="pl-3 pr-6 md:py-2 rounded-md">
         <Link href="/blog/10-mongo-things-i-wished-i-knew">
-          <a className="flex items-start">
-            <span className="mt-1 text-3xl rounded-sm">
+          <a className="flex items-start lg:items-center">
+            <span className="mt-1 lg:mt-0 text-3xl rounded-sm">
               <IconMongoDB />
             </span>
             <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Things I wish I knew before using MongoDB
             </span>
-            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
+            <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               5 mins read
             </span>
           </a>
         </Link>
       </li>
-      <li className="pl-3 pr-6 mt-4 md:py-2 rounded-md">
+      <li className="pl-3 pr-6 md:py-2 rounded-md">
         <Link href="/blog/optimize-your-react-app-with-react-memo">
-          <a className="flex items-start">
-            <span className="mt-2 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
+          <a className="flex items-start lg:items-center">
+            <span className="mt-2 lg:mt-0 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
             <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Optimize Your React App with React.memo
             </span>
-            <span className="hidden px-2 mt-1 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
+            <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               11 mins read
             </span>
           </a>
