@@ -10,12 +10,14 @@ if(!slug) {
 const date = new Date();
 const strDate = date.toISOString();
 
-const strMdx = `import MDXImage from '_components/MDXImage';
+const strMdx = `import BlogLayout from '_components/BlogLayout';
+import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: '',
+  slug: '${slug}',
   date: '${strDate}',
   description: '',
   readingTime: '6 mins',
@@ -32,31 +34,12 @@ export const meta = {
 <CodeDescription children="Fetch products to show in a list to users" />
 
 <TwitterShare meta={meta} children="share this article on Twitter" />.
-`;
 
-const strComp = `import BlogLayout from '_components/BlogLayout';
-import PostContent, { meta } from '_posts/${slug}.mdx';
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}`;
 
-meta.slug = '${slug}';
-
-const Post = () => {
-  return (
-    <BlogLayout meta={meta}>
-      <PostContent />
-    </BlogLayout>
-  );
-};
-
-export default Post;
-`;
-
-fs.writeFile(`src/posts/${slug}.mdx`, strMdx, (error) => {
-  if(error) {
-    console.error('File creation failed');
-  }
-});
-
-fs.writeFile(`src/pages/blog/${slug}.js`, strComp, (error) => {
+fs.writeFile(`src/pages/blog/${slug}.mdx`, strMdx, (error) => {
   if(error) {
     console.error('File creation failed');
   }

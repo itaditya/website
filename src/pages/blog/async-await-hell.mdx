@@ -1,9 +1,11 @@
+import BlogLayout from '_components/BlogLayout';
 import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'How to escape from the async/await hell',
+  slug: 'async-await-hell',
   date: '2018-04-06T00:12:00.000Z',
   description: 'async/await freed us from callback hell, but people have started abusing it — leading to the birth of async/await hell.',
   readingTime: '10 mins',
@@ -174,3 +176,7 @@ async function orderItems() {
 I hope this article helped you see beyond the basics of async/await, and also helped you improve the performance of your application.
 
 If you liked the article, please <TwitterShare meta={meta} /> and in your network. My [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) is open if you need to ask anything.
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

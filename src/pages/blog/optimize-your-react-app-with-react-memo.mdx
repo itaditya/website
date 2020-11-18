@@ -1,3 +1,4 @@
+import BlogLayout from '_components/BlogLayout';
 import MDXImage from '_components/MDXImage';
 import { EmbedCSB } from '_components/PostEmbed';
 import { AlertOriginalPublish } from '_components/PostAlerts';
@@ -5,6 +6,7 @@ import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Optimize Your React App with React.memo',
+  slug: 'optimize-your-react-app-with-react-memo',
   date: '2020-07-03T12:50:30.196Z',
   description: 'Learn how to use React.memo and useMemo together to optimize your React app performance.',
   readingTime: '11 mins',
@@ -428,3 +430,7 @@ Also I didn’t optimize the Picker component. It re-renders on theme state chan
 **TL;DR** — don’t start wrapping all components with React.memo blindly. It can lead to negative optimizations as well as premature optimizations which are not good for maintainability.
 
 <AlertOriginalPublish publisherName="Bits & Pieces" href={meta.canonicalUrl} />
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

@@ -9,7 +9,7 @@
         "alias": {
           "_components": "./src/components",
           "_utils": "./src/utils",
-          "_posts": "./src/posts"
+          "_posts": "./src/pages/blog"
         }
       }
     ]
