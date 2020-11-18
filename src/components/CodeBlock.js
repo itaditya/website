@@ -4,7 +4,7 @@ import theme from 'prism-react-renderer/themes/oceanicNext';
 
 const RE = /{([\d,-]+)}/;
 
-const calculateLinesToHighlight = meta => {
+function calculateLinesToHighlight(meta) {
   if (!RE.test(meta)) {
     return {
       shouldHighlightLine: () => false,
@@ -12,9 +12,9 @@ const calculateLinesToHighlight = meta => {
   } else {
     const lineNumbers = RE.exec(meta)[1]
       .split(',')
-      .map(v => v.split('-').map(v => parseInt(v, 10)));
+      .map((v) => v.split('-').map((v) => parseInt(v, 10)));
 
-    const shouldHighlightLine = index => {
+    const shouldHighlightLine = (index) => {
       const lineNumber = index + 1;
       const inRange = lineNumbers.some(([start, end]) =>
         end ? lineNumber >= start && lineNumber <= end : lineNumber === start,
@@ -23,9 +23,9 @@ const calculateLinesToHighlight = meta => {
     };
     return { shouldHighlightLine, lineNumbers };
   }
-};
+}
 
-export default ({ metastring, className = '', children }) => {
+function CodeBlock({ metastring, className = '', children }) {
   const { shouldHighlightLine, lineNumbers } = calculateLinesToHighlight(metastring);
   const language = className.replace(/language-/, '');
 
@@ -44,7 +44,7 @@ export default ({ metastring, className = '', children }) => {
                 newClassNames += ' bg-overlay-200 py-1';
                 highlightIndex += 1;
               }
-              lineProps.className =  newClassNames;
+              lineProps.className = newClassNames;
               return (
                 <div key={i} {...lineProps}>
                   {line.map((token, key) => (
@@ -58,4 +58,6 @@ export default ({ metastring, className = '', children }) => {
       }}
     </Highlight>
   );
-};
+}
+
+export default CodeBlock;

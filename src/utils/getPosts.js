@@ -1,4 +1,4 @@
-
+// This file is auto-generated. Please don't edit it manually.
 export default function getPosts() {
   const filePromise = [];
 

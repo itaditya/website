@@ -1,10 +1,15 @@
-export default function (obj) {
-	var k, cls='';
-	for (k in obj) {
-		if (obj[k]) {
-			cls && (cls += ' ');
-			cls += k;
-		}
+function classNames(obj) {
+	let k;
+	let cls = '';
+
+  for (k in obj) {
+    if (obj[k]) {
+      cls && (cls += ' ');
+      cls += k;
+    }
 	}
-	return cls;
+
+  return cls;
 }
+
+export default classNames;

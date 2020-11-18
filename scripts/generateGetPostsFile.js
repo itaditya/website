@@ -9,7 +9,7 @@ const readdir = util.promisify(fs.readdir);
   const files = await readdir(postsDirectory);
   const fileMdx = files.filter((file) => file.endsWith('.mdx'));
 
-  let string = `
+  let string = `// This file is auto-generated. Please don't edit it manually.
 export default function getPosts() {
   const filePromise = [];
 `;
