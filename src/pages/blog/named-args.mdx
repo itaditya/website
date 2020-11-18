@@ -1,3 +1,4 @@
+import BlogLayout from '_components/BlogLayout';
 import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import { AlertOriginalPublish } from '_components/PostAlerts';
@@ -5,6 +6,7 @@ import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Why named arguments are better than positional arguments',
+  slug: 'named-args',
   date: '2020-08-22T06:02:36.868Z',
   description: 'By passing arguments as objects, we can make reusable functions with less bugs. This approach is called named arguments. Read on to understand why its better.',
   readingTime: '5 mins',
@@ -208,3 +210,7 @@ fetch('https://google.com');
 Here the mandatory argument (API path) is a positional argument and then the optional params are accepted through named arguments.
 
 <AlertOriginalPublish publisherName="Bits & Pieces" href={meta.canonicalUrl} />
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

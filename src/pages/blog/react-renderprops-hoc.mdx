@@ -1,3 +1,4 @@
+import BlogLayout from '_components/BlogLayout';
 import MDXImage from '_components/MDXImage';
 import { TwitterShare } from '_components/PostShare';
 import { AlertWarning } from '_components/PostAlerts';
@@ -5,6 +6,7 @@ import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Understanding React Render Props and HOC',
+  slug: 'react-renderprops-hoc',
   date: '2018-10-22T18:30:00.000Z',
   description: 'A detailed introduction to Render Props and Higher-Order Components in React.',
   readingTime: '7 mins',
@@ -373,3 +375,7 @@ One question remains: how do we choose between Render Props and HOCs? There have
 ----
 
 In this article we looked at why we need these patterns, the essence of each pattern and how we can leverage these patterns to build highly reusable components. That’s all for now, hope you liked it. It'll be great if you <TwitterShare meta={meta} children="share this article on Twitter" />. If you need to ask anything slide into my [DMs](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

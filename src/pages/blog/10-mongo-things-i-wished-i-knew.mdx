@@ -1,8 +1,10 @@
+import BlogLayout from '_components/BlogLayout';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Things I wish I knew before I started working with MongoDB',
+  slug: '10-mongo-things-i-wished-i-knew',
   date: '2017-09-17T18:30:00.000Z',
   description: "When MEAN stack was very popular I built a pet project to learn it. Here's something I wish people told me early on...",
   readingTime: '5 mins',
@@ -258,3 +260,7 @@ Lastly, I just wanted to give a little tip. After some digging of your own you w
 ---
 
 Hope this article helped you learn something new. Please <TwitterShare meta={meta} />. If you have any questions then send me a [DM](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

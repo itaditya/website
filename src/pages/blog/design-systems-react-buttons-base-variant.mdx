@@ -1,3 +1,4 @@
+import BlogLayout from '_components/BlogLayout';
 import MDXImage from '_components/MDXImage';
 import { EmbedCSB } from '_components/PostEmbed';
 import { TwitterShare } from '_components/PostShare';
@@ -5,6 +6,7 @@ import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'React Buttons with the Base + Variant Pattern',
+  slug: 'design-systems-react-buttons-base-variant',
   date: '2020-08-08T10:05:15.929Z',
   description: 'Composing React buttons for design systems with the Base and Variant pattern.',
   readingTime: '6 mins',
@@ -169,3 +171,7 @@ I’ve built some buttons on this pattern using ReactJS and TailwindCSS. Check i
 The full source code is available on [GitHub](https://github.com/itaditya/tailwind-buttons-for-design-system).
 
 If you like this article do consider <TwitterShare meta={meta} children="sharing it on Twitter" />. Your appreciation matters a lot. Also [DM me](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!) if you're interested in a post about a certain topic, I'll add it to my list!
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

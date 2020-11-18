@@ -1,8 +1,10 @@
+import BlogLayout from '_components/BlogLayout';
 import { TwitterShare } from '_components/PostShare';
 import CodeDescription from '_components/CodeDescription';
 
 export const meta = {
   title: 'Better Components with TailwindCSS',
+  slug: 'better-components-with-tailwindcss',
   date: '2020-01-12T18:30:00.000Z',
   description: "TailwindCSS is great for building reusable components of our design systems. The component itself can be written in React, Vue, etc. and we'll get the same benefits.",
   readingTime: '5 mins',
@@ -102,3 +104,7 @@ Now you have the control on what things you want the user to give control of. Us
 ----
 
 Hope this article helped you understand one benefit of TailwindCSS. If yes then do <TwitterShare meta={meta} />. I'd be writing more about Tailwind and design systems in general so if you want to stay updated you can follow me on Twitter or hop in my [DMs](https://twitter.com/messages/1650129775-1650129775?recipient_id=1650129775&text=Hey!).
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}

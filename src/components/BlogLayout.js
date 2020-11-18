@@ -5,7 +5,6 @@ import SiteFooter from '_components/SiteFooter';
 import BlogHead from '_components/BlogHead';
 import MDXHeading from '_components/MDXHeading';
 import MDXImage from '_components/MDXImage';
-import MDXWrapper from '_components/MDXWrapper';
 import CodeBlock from '_components/CodeBlock';
 import CardTwitter from '_components/CardTwitter';
 import { PostNextRead } from '_components/PostsSuggestion';
@@ -39,7 +38,6 @@ const mdxComponents = {
       {...props}
     ></code>
   ),
-  wrapper: MDXWrapper,
 };
 
 function BlogLayout(props) {
