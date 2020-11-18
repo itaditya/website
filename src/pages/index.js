@@ -62,7 +62,7 @@ const Home = () => {
 
   return (
     <div
-      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
+      className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead />
@@ -70,16 +70,16 @@ const Home = () => {
       <main className="mt-8 col-start-2 col-span-10 row-auto md:mt-24">
         <div className="flex items-center justify-between" style={{ minHeight: '50vh' }}>
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold tracking-tighter text-gray-700 md:text-5xl xl:text-6xl font-heading">
-              Hey, I'm <span className="text-gray-900 underline">Aditya.</span>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-500 md:text-5xl xl:text-6xl font-heading">
+              Hey, I'm <span className="text-gray-700 underline">Aditya.</span>
             </h1>
-            <p className="mt-2 text-base text-gray-700 xl:text-xl">
+            <p className="mt-4 lg:mt-6 text-gray-600 text-base lg:text-lg xl:text-xl">
               Frontend developer at HackerRank.
               <br />I love open-sourcing my knowledge through building projects, giving talks and
               writing blogs.
             </p>
           </div>
-          <div className="hidden mt-4 text-5xl text-gray-400 md:block animation-fade-in">
+          <div className="hidden mt-4 text-5xl text-gray-300 md:block animation-fade-in">
             <div className="overflow-x-hidden" style={{ width: '360px' }}>
               <ul className="flex animation-sliding">
                 <li>
@@ -109,15 +109,15 @@ const Home = () => {
         </div>
         <section className="justify-between mt-10 md:mt-32 md:flex">
           <div>
-            <h2 className="mb-8 text-2xl font-bold md:text-4xl">Popular Articles</h2>
+            <h2 className="mb-8 text-2xl font-bold text-gray-700 md:text-4xl">Popular Articles</h2>
             <PostsPopularList />
           </div>
           <Link href="/blog">
             <a className="flex flex-col items-center justify-center w-full py-8 mt-8 text-3xl text-center bg-blue-300 rounded-lg shadow-xl hover:bg-blue-400 md:w-56 md:mt-auto md:py-16 opacity-1 hover:shadow-2xl transition duration-200 ease-in">
-              <span className="text-4xl text-blue-700">
+              <span className="text-4xl text-lightBlue-700">
                 <IconCircleArrow />
               </span>
-              <span className="mt-3 font-bold text-blue-800">
+              <span className="mt-3 font-bold text-lightBlue-800">
                 Checkout
                 <br />
                 more articles
@@ -133,8 +133,8 @@ const Home = () => {
         </section>
         <SectionPackages>
           <article
-            className="px-8 py-4 bg-blue-700 rounded-lg shadow-xl col-span-1 md:col-span-2"
-            style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
+            className="px-8 py-6 bg-gradient-to-r from-blue-500 to-blue-400 rounded-lg shadow-xl col-span-1 md:col-span-2"
+            // style={{ background: 'linear-gradient(to right, #2f80ed 30%, #56ccf2)' }}
           >
             <h3 className="w-full text-2xl font-bold text-white">Other Projects</h3>
             <p className="mt-1 text-lg text-gray-100">

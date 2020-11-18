@@ -20,7 +20,7 @@ function PostContent(props) {
         <div className={cn({ 'line-clamp': !stateExpanded })}>
           <Link href={`?id=${post.id}`}>
             <a>
-              <h2 className="mt-4 text-2xl text-gray-800 font-heading">{post.title}</h2>
+              <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
             </a>
           </Link>
           <PublishAndReadTime post={post} />
@@ -59,7 +59,7 @@ function Unpolished(props) {
 
   return (
     <div
-      className="grid min-h-screen grid-cols-12 py-8 bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
+      className="grid min-h-screen grid-cols-12 py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Unpolished" />

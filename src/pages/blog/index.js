@@ -29,33 +29,31 @@ const Blog = (props) => {
 
   return (
     <div
-      className="relative grid min-h-screen grid-cols-12 py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40"
+      className="relative grid min-h-screen grid-cols-12 py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Blog" />
       <SiteNavbar activeLink="blog" />
       <main className="col-span-10 col-start-2 row-auto mt-24">
         <section>
-          <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Popular Posts</h2>
+          <h2 className="mb-8 text-2xl font-bold text-gray-700 md:text-4xl">Popular Posts</h2>
           <PostsPopularList />
         </section>
         <div className="flex flex-col-reverse justify-between mt-16 lg:flex-row">
           <section className="lg:w-3/4 xl:w-1/2">
-            <h2 className="text-2xl font-bold text-gray-800 md:text-4xl">Latest Posts</h2>
+            <h2 className="text-2xl font-bold text-gray-700 md:text-4xl">Latest Posts</h2>
             <ul>
               {shownPosts.map((slug) => {
                 const post = postsMap[slug];
                 return (
                   <li key={post.slug} className="pl-3 mt-8">
-                    <h3 className="text-xl font-medium text-gray-800 md:text-2xl hover:underline">
+                    <h3 className="text-xl font-medium text-gray-700 md:text-2xl hover:underline">
                       <Link href={'/blog/' + post.slug}>
                         <a>{post.title}</a>
                       </Link>
                     </h3>
                     <PublishAndReadTime post={post} />
-                    {['lg', 'xl'].includes(deviceWidth) && (
-                      <p className="hidden mt-3 text-base text-gray-700 lg:block md:text-lg">{post.description}</p>
-                    )}
+                    <p className="hidden mt-3 text-base text-gray-600 lg:block lg:text-base">{post.description}</p>
                   </li>
                 );
               })}
@@ -65,7 +63,7 @@ const Blog = (props) => {
             <section className="flex items-center mb-8 lg:hidden">
               <h4 className="mr-4 text-base text-gray-800">Filter By Category</h4>
               <select
-                className="px-2 py-1 bg-gray-200 shadow-md"
+                className="px-2 py-1 bg-gray-100 shadow-md"
                 value={stateActiveCategory}
                 onChange={(event) => setStateActiveCategory(event.target.value)}
               >
