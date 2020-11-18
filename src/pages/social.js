@@ -37,14 +37,14 @@ const links = [
 
 const Social = () => (
   <div
-    className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+    className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
     style={{ gridTemplateRows: 'auto 1fr auto' }}
   >
     <SiteHead pageName="Social" />
     <SiteNavbar />
     <main className="mt-24 col-start-2 col-span-10 row-auto">
       <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Social Links</h2>
-      <div className="md:grid row-gap-3" style={{ gridTemplateColumns: 'auto 1fr' }}>
+      <div className="md:grid gap-y-3" style={{ gridTemplateColumns: 'auto 1fr' }}>
         {
           links.map(link => (
             <>

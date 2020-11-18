@@ -59,7 +59,7 @@ function Unpolished(props) {
 
   return (
     <div
-      className="grid min-h-screen grid-cols-12 col-gap-4 py-8 bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
+      className="grid min-h-screen grid-cols-12 py-8 bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Unpolished" />

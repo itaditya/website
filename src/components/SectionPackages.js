@@ -10,7 +10,7 @@ export default function SectionPackages(props) {
     <section className={cn({ 'mt-56 flex md:flex flex-col items-center': true, [className]: true })}>
       <h2 className="text-4xl font-bold text-center">Open Source Tools</h2>
       <div
-        className="grid col-gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 row-gap-12 w-full mt-16"
+        className="grid gap-x-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 w-full mt-16"
       >
         {myPackages.map(pkg => (
           <article className="p-4 text-center bg-white rounded-lg shadow-xl" key={pkg.name}>
