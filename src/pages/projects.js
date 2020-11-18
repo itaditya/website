@@ -10,14 +10,14 @@ import myProjects from '../staticData/myProjects.json';
 const Projects = () => {
   return (
     <div
-      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 col-gap-4"
+      className="relative min-h-screen py-8 bg-gray-200 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Projects" />
       <SiteNavbar activeLink="projects" />
       <main className="px-8 mt-12 col-span-12 md:col-start-2 md:col-span-10">
         <h2 className="mb-40 text-5xl font-bold text-center text-gray-800 font-heading">Projects</h2>
-        <ul className="grid grid-cols-1 row-gap-8 md:row-gap-40 max-w-screen-sm mx-auto">
+        <ul className="grid grid-cols-1 gap-y-8 md:gap-y-40 max-w-screen-sm mx-auto">
           {myProjects.map((project, index) => (
             <li
               key={project.name}
