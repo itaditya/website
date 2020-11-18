@@ -1,4 +1,4 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   theme: {
@@ -41,7 +41,7 @@ module.exports = {
     },
     minWidth: {
       '1/3': '33%',
-    }
+    },
   },
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'visited', 'group-hover'],
@@ -50,4 +50,14 @@ module.exports = {
     borderWidth: ['responsive', 'hover', 'focus'],
   },
   plugins: [],
+  purge: {
+    enabled: process.env.PURGE_CSS,
+    content: ['./src/**/*.js'],
+    options: {
+      whitelist: ['html', 'body'],
+    },
+  },
+  future: {
+    purgeLayersByDefault: true,
+  },
 };
