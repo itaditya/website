@@ -162,7 +162,7 @@ const Home = () => {
               Subscribe if you want to read stuff about React, JavaScript, CSS and Design Systems
             </p>
           </div>
-          <div className="w-full h-56 bg-gray-300 md:w-3/4 lg:w-1/2" ref={newsletterRef}>
+          <div className="w-full h-56 bg-gray-200 md:w-3/4 lg:w-1/2" ref={newsletterRef}>
             {(stateSeenNl === 'seen' || stateSeenLatestArticle === 'seen') && <Newsletter />}
           </div>
         </section>
