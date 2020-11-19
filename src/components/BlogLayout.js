@@ -14,7 +14,7 @@ const mdxComponents = {
   h1: props => <MDXHeading level={1} className="text-lg md:text-5xl md:leading-5" showAnchorLink={false} {...props} />,
   h2: props => <MDXHeading level={2} className="mt-16 text-xl leading-tight md:text-3xl" {...props}></MDXHeading>,
   h3: props => <MDXHeading level={3} className="mt-10 text-lg leading-snug md:text-2xl" {...props}></MDXHeading>,
-  p: props => <p className="mt-4 text-gray-600 md:text-lg md:leading-8" {...props}></p>,
+  p: props => <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props}></p>,
   a: props => (
     <a
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
@@ -55,7 +55,7 @@ function BlogLayout(props) {
             {meta.title}
           </MDXHeading>
           <PublishAndReadTime post={meta} className="mt-3 mb-8" />
-          <p className="mt-4 mb-8 text-xl text-gray-600">{meta.description}</p>
+          <p className="mt-4 mb-8 text-xl text-gray-600 leading-8">{meta.description}</p>
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
         </article>
         <span className="block mt-20"></span>
