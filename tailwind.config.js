@@ -59,8 +59,4 @@ module.exports = {
       whitelist: ['html', 'body'],
     },
   },
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
 };
