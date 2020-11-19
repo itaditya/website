@@ -18,9 +18,9 @@ export function PostsPopularList() {
             >
               <IconJS />
             </span>
-            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Escaping from Async/Await Hell
-            </span>
+            </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               10 mins read
             </span>
@@ -33,9 +33,9 @@ export function PostsPopularList() {
             <span className="mt-1 lg:mt-0 text-3xl rounded-sm">
               <IconMongoDB />
             </span>
-            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Things I wish I knew before using MongoDB
-            </span>
+            </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               5 mins read
             </span>
@@ -48,9 +48,9 @@ export function PostsPopularList() {
             <span className="mt-2 lg:mt-0 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
-            <span className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
               Optimize Your React App with React.memo
-            </span>
+            </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
               11 mins read
             </span>

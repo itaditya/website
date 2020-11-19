@@ -62,7 +62,7 @@ export default function SiteNavbar(props) {
     <nav className="flex items-center justify-between px-6 py-4 col-span-12">
       <h4 className="text-2xl font-bold" aria-label="@dev__adi">
         <Link href="/">
-          <a>
+          <a className="text-gray-600 hover:text-gray-700 transition rounded-sm focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-8 ring-offset-gray-100">
             <span>@dev_</span>
             <span className="ml-1">_adi</span>
           </a>
@@ -74,9 +74,11 @@ export default function SiteNavbar(props) {
             <Link href={`/${link.href}`}>
               <a
                 className={cn({
-                  'block text-md md:text-xl text-gray-700 py-1 px-2 transition-colors duration-200 ease-in': true,
+                  'block text-md md:text-xl text-gray-700 py-1 px-2 transition duration-200 ease-in': true,
+                  'focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-2 ring-offset-gray-100': true,
                   'border-b-2 border-primary-400 text-primary-700': activeLink === link.href,
-                  'rounded-md hover:text-primary-800 hover:bg-primary-300': activeLink !== link.href,
+                  'rounded-md hover:text-primary-800 hover:bg-primary-300':
+                    activeLink !== link.href,
                   'hidden md:block': link.href !== 'blog',
                 })}
               >
@@ -92,7 +94,7 @@ export default function SiteNavbar(props) {
             </button>
             {stateIsExpanded && (
               <nav
-                className="fixed flex flex-col justify-center bg-gray-100"
+                className="fixed flex flex-col justify-center bg-gray-50"
                 style={{ top: 0, height: '100vh', width: '100%', left: 0 }}
               >
                 <button
@@ -107,7 +109,9 @@ export default function SiteNavbar(props) {
                   {linksExpanded.map((link) => (
                     <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
                       <Link href={`/${link.href}`}>
-                        <a className="block px-2 py-1 text-gray-700 text-md md:text-xl">{link.name}</a>
+                        <a className="block px-2 py-1 text-gray-700 text-md md:text-xl">
+                          {link.name}
+                        </a>
                       </Link>
                     </li>
                   ))}

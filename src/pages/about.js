@@ -37,7 +37,10 @@ const About = () => (
       </p>
       <div className="items-center justify-between xl:flex">
         <a
-          className="flex items-center mt-8 text-lg leading-relaxed text-primary-600"
+          className={`
+            flex items-center mt-8 text-lg leading-relaxed text-primary-600 hover:text-primary-700 transition
+            focus:outline-none focus:ring-2 focus:ring-primary ring-offset-8 ring-offset-gray-100 focus:ring-opacity-60
+          `}
           target="_blank"
           rel="noreferrer noopener"
           href="https://fayz.in/stories/s/1435/0/?ckt_id=ZGL1ZGVk&title=How_Aditya_got_his_dream_job"
@@ -46,7 +49,10 @@ const About = () => (
           <IconExternalLink className="text-primary" />
         </a>
         <a
-          className="flex items-center mt-8 text-lg leading-relaxed text-primary-600 md:mr-8"
+          className={`
+            flex items-center mt-8 text-lg leading-relaxed text-primary-600 hover:text-primary-700 transition md:mr-8
+            focus:outline-none focus:ring-2 focus:ring-primary ring-offset-8 ring-offset-gray-100 focus:ring-opacity-60
+          `}
           target="_blank"
           rel="noreferrer noopener"
           href="https://docs.google.com/document/d/1cfV1T7_WnY1LKWfdIgo34CDpU7_ne97mUfqqDdvixc8/export?format=pdf"

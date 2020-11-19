@@ -38,7 +38,10 @@ const Projects = () => {
                 {project.anchorLink && (
                   <span className="inline-block mt-3">
                     <a
-                      className="flex items-center text-base leading-relaxed group text-primary-600"
+                      className={`
+                        flex items-center text-base leading-relaxed group text-primary-600 rounded-sm
+                        focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-8 ring-offset-gray-100
+                      `}
                       target="_blank"
                       rel="noreferrer noopener"
                       href={project.anchorLink}
