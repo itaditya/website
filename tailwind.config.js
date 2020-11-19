@@ -47,10 +47,9 @@ module.exports = {
     },
   },
   variants: {
-    textColor: ['responsive', 'hover', 'focus', 'visited', 'group-hover'],
-    textDecoration: ['hover', 'focus', 'group-hover'],
-    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
-    borderWidth: ['responsive', 'hover', 'focus'],
+    extend: {
+      textColor: ['visited'],
+    },
   },
   plugins: [],
   purge: {
