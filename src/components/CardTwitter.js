@@ -36,7 +36,10 @@ export default function CardTwitter() {
             href="https://twitter.com/dev__adi"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center px-4 py-1 mt-4 bg-twitter-cta hover:bg-twitter-cta-600 focus:bg-twitter-cta-700 active:bg-twitter-cta-700 rounded-md transition-colors ease-in duration-100"
+            className={`
+              flex items-center px-4 py-1 mt-4 bg-twitter-cta rounded-md hover:bg-twitter-cta-600 active:bg-twitter-cta-700
+              focus:outline-none focus:ring-2 focus:ring-twitter-cta focus:ring-opacity-80 ring-offset-4 ring-offset-twitter-background transition
+            `}
           >
             <IconTwitter className="text-2xl" />
             <strong className="ml-1 font-bold">Follow</strong>

@@ -37,7 +37,7 @@
   },
   {
     "name": "Windows Hotspot",
-    "description": "Setup a Wi-Fi Hotspot with ease",
+    "description": "Setup a Wi-Fi Hotspot with one command",
     "links": {
       "github": "https://github.com/itaditya/hotspot",
       "website": "https://github.com/itaditya/hotspot/blob/master/README.md",
@@ -45,7 +45,7 @@
     }
   },
   {
-    "name": "Material React Icons",
+    "name": "Material Icons",
     "description": "Import Material Icons as React components",
     "links": {
       "github": "https://github.com/itaditya/material-design-icons",

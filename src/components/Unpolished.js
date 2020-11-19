@@ -20,7 +20,7 @@ function PostContent(props) {
         <div className={cn({ 'line-clamp': !stateExpanded })}>
           <Link href={`?id=${post.id}`}>
             <a>
-              <h2 className="mt-4 text-2xl text-gray-800 font-heading">{post.title}</h2>
+              <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
             </a>
           </Link>
           <PublishAndReadTime post={post} />
@@ -28,10 +28,23 @@ function PostContent(props) {
           <div dangerouslySetInnerHTML={{ __html: markup }}></div>
         </div>
         <div
-          className={cn({ "bottom-0 left-0 flex justify-center w-full": true, "absolute pt-16 pb-4": !stateExpanded })}
-          style={stateExpanded ? {} : { backgroundImage: 'linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1), hsl(0, 0%, 100%))' }}
+          className={cn({
+            'bottom-0 left-0 flex justify-center w-full': true,
+            'absolute pt-16 pb-4': !stateExpanded,
+          })}
+          style={
+            stateExpanded
+              ? {}
+              : {
+                  backgroundImage:
+                    'linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1), hsl(0, 0%, 100%))',
+                }
+          }
         >
-          <button className="px-3 py-1 text-gray-700 hover:bg-gray-200 focus:bg-gray-300 active:bg-gray-300 rounded-md transition ease-in-out duration-200" onClick={() => setStateExpanded((oldState) => !oldState)}>
+          <button
+            className="px-3 py-1 text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-4 rounded-md transition"
+            onClick={() => setStateExpanded((oldState) => !oldState)}
+          >
             {stateExpanded ? 'Read Less' : 'Read More'}
           </button>
         </div>
@@ -59,19 +72,21 @@ function Unpolished(props) {
 
   return (
     <div
-      className="grid min-h-screen grid-cols-12 py-8 bg-gray-200 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
+      className="grid min-h-screen grid-cols-12 py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
       style={{ gridTemplateRows: 'auto 1fr auto' }}
     >
       <SiteHead pageName="Unpolished" />
       <SiteNavbar />
       <aside className="top-0 col-span-10 col-start-2 pt-8 mt-10 lg:h-64 lg:sticky lg:col-start-9 lg:col-span-5 lg:row-start-2 xl:col-start-8 xl:col-span-4">
-        <h2 className="mb-8 text-4xl font-bold text-gray-700 xl:text-5xl font-heading">Adi's unpolished thoughts...</h2>
+        <h2 className="mb-8 text-4xl font-bold text-gray-700 xl:text-5xl font-heading">
+          Adi's unpolished thoughts...
+        </h2>
         <p className="text-lg text-gray-700 lg:text-xl">
-          These posts are my unpolished thoughts. They lack nuance and are not well researched. If I'm wrong about
-          anything please correct me on{' '}
+          These posts are my unpolished thoughts. They lack nuance and are not well researched. If
+          I'm wrong about anything please correct me on{' '}
           <a
             href="https://twitter.com/dev__adi"
-            className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+            className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
             style={{ textDecorationColor: 'currentColor' }}
             target="_blank"
             rel="noopener noreferrer"

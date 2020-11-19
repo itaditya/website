@@ -5,7 +5,7 @@ export function AlertWarning(props) {
   const fullClassName = cn({ 'text-center flex justify-center': true, [className]: true });
   return (
     <div role="alert" {...restProps} className={fullClassName}>
-      <span className="px-4 py-1 text-yellow-800 bg-orange-200 border-2 border-orange-400 rounded-lg">{children}</span>
+      <span className="px-4 py-1 text-yellow-900 bg-yellow-100 border-2 border-orange-400 rounded-lg">{children}</span>
     </div>
   );
 }
@@ -20,7 +20,7 @@ export function AlertOriginalPublish(props) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+        className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       >
         {publisherName}
       </a>
