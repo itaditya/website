@@ -24,6 +24,7 @@ export default function MDXHeading(props) {
     <Element id={slug} className={fullClassName} {...restProps}>
       {showAnchorLink && (
         <a href={`#${slug}`} className={fullAnchorClassName}>
+          <span className="sr-only">Link to this heading</span>
           <IconLink />
         </a>
       )}

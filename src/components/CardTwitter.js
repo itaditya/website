@@ -30,7 +30,7 @@ export default function CardTwitter() {
         </ul>
       </div>
       <div className="flex flex-col items-center mt-6 md:mt-0">
-        <img src="/dp_twitter.png" className="object-cover object-center w-32 h-32 rounded-full shadow-xl" />
+        <img src="/dp_twitter.png" alt="" className="object-cover object-center w-32 h-32 rounded-full shadow-xl" />
         <div className="inline-block">
           <a
             href="https://twitter.com/dev__adi"
