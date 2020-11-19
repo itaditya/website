@@ -18,7 +18,7 @@ const About = () => (
       <p className="text-2xl leading-relaxed text-gray-600">
         I am a <span className="text-gray-800">Web Developer</span> working as an SDE 1 at{' '}
         <a
-          className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+          className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
           target="_blank"
           rel="noreferrer noopener"
           href="https://hackerrank.com"

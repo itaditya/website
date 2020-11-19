@@ -17,7 +17,7 @@ const mdxComponents = {
   p: props => <p className="mt-4 text-gray-600 md:text-lg md:leading-8" {...props}></p>,
   a: props => (
     <a
-      className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+      className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"

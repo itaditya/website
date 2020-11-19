@@ -20,7 +20,7 @@ export function AlertOriginalPublish(props) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+        className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       >
         {publisherName}
       </a>

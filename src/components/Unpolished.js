@@ -86,7 +86,7 @@ function Unpolished(props) {
           I'm wrong about anything please correct me on{' '}
           <a
             href="https://twitter.com/dev__adi"
-            className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800"
+            className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
             style={{ textDecorationColor: 'currentColor' }}
             target="_blank"
             rel="noopener noreferrer"

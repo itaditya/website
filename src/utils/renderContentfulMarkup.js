@@ -23,7 +23,7 @@ const optionsContentful = {
       return `<img class="mt-4 w-full rounded-sm shadow-md" src="${fields.file.url}" alt="${fields.title}" width="${imageDetails.width}" height="${imageDetails.height}" />`;
     },
     [INLINES.HYPERLINK]: (node, next) => {
-      return `<a href=${node.data.uri} class="text-blue-600 underline hover:text-blue-700 visited:text-indigo-800" target="_blank" rel="noopener noreferrer">${next(node.content)}</a>`;
+      return `<a href=${node.data.uri} class="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600" target="_blank" rel="noopener noreferrer">${next(node.content)}</a>`;
     },
   },
 };
