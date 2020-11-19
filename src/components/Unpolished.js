@@ -42,7 +42,7 @@ function PostContent(props) {
           }
         >
           <button
-            className="px-3 py-1 text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-4 rounded-md transition ease-in-out duration-200"
+            className="px-3 py-1 text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-4 rounded-md transition"
             onClick={() => setStateExpanded((oldState) => !oldState)}
           >
             {stateExpanded ? 'Read Less' : 'Read More'}

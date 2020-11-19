@@ -38,8 +38,8 @@ module.exports = {
           900: 'rgba(0, 0, 0, 0.9)',
         },
       },
-      width: {
-        'max-content': 'max-content',
+      transitionDuration: {
+        DEFAULT: '200ms',
       },
     },
     minWidth: {

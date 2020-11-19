@@ -81,16 +81,16 @@ const Blog = (props) => {
             <section className="hidden lg:block">
               <div>
                 <h4 className="mb-1 text-xl text-gray-800 md:text-2xl">Categories</h4>
-                <ul className="mt-3 text-lg text-gray-700 transition-colors duration-200">
+                <ul className="mt-5 text-lg text-gray-700 space-y-2">
                   {Object.keys(categoryMap)
                     .filter((category) => category !== 'all')
                     .map((category) => (
                       <li
                         key={category}
                         className={cn({
-                          'mt-1 ml-2': true,
+                          'ml-2 transform transition ease-out': true,
                           'text-primary-600': stateActiveCategory === category,
-                          'hover:text-gray-900': stateActiveCategory !== category,
+                          'hover:text-gray-900 hover:translate-x-1': stateActiveCategory !== category,
                         })}
                       >
                         <button onClick={() => setStateActiveCategory(category)}>
@@ -98,9 +98,12 @@ const Blog = (props) => {
                         </button>
                       </li>
                     ))}
-                  <li className="mt-3 text-base text-blue-600">
+                  <li className="pt-1">
                     <button
-                      className="flex items-center"
+                      className={`
+                        flex items-center text-base transition text-blue-600 hover:bg-gray-200 hover:text-blue-500 py-1 px-2 rounded-md
+                        focus:outline-none focus:ring-2 focus:ring-opacity-70 focus:ring-primary-400
+                      `}
                       onClick={() => setStateActiveCategory('all')}
                     >
                       <IconCross className="mr-1 text-lg" />

@@ -23,38 +23,38 @@ export default function SiteNavbar(props) {
   const links = [
     {
       href: 'blog',
-      name: 'Blog',
+      text: 'Blog',
     },
     {
       href: 'projects',
-      name: 'Projects',
+      text: 'Projects',
     },
     {
       href: 'about',
-      name: 'About',
+      text: 'About',
     },
   ];
 
   const linksExpanded = [
     {
       href: 'projects',
-      name: 'Projects',
+      text: 'Projects',
     },
     {
       href: 'about',
-      name: 'About',
+      text: 'About',
     },
     {
       href: 'labs',
-      name: 'Experiments',
+      text: 'Experiments',
     },
     {
       href: 'social',
-      name: 'Connect with me',
+      text: 'Connect with me',
     },
     {
       href: 'work',
-      name: 'Work',
+      text: 'Work',
     },
   ];
 
@@ -74,7 +74,7 @@ export default function SiteNavbar(props) {
             <Link href={`/${link.href}`}>
               <a
                 className={cn({
-                  'block text-md md:text-xl text-gray-700 py-1 px-2 transition duration-200 ease-in': true,
+                  'block text-md md:text-xl text-gray-700 py-1 px-2 transition': true,
                   'focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-2 ring-offset-gray-100': true,
                   'border-b-2 border-primary-400 text-primary-700': activeLink === link.href,
                   'rounded-md hover:text-primary-800 hover:bg-primary-300':
@@ -82,7 +82,7 @@ export default function SiteNavbar(props) {
                   'hidden md:block': link.href !== 'blog',
                 })}
               >
-                {link.name}
+                {link.text}
               </a>
             </Link>
           </li>
@@ -110,7 +110,7 @@ export default function SiteNavbar(props) {
                     <li key={link.href} className="py-2 text-3xl" onClick={handleCloseMenu}>
                       <Link href={`/${link.href}`}>
                         <a className="block px-2 py-1 text-gray-700 text-md md:text-xl">
-                          {link.name}
+                          {link.text}
                         </a>
                       </Link>
                     </li>

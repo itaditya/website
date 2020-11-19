@@ -24,7 +24,7 @@ export default function SectionPackages(props) {
                   rel="noopener noreferrer"
                   className="block p-2 text-2xl text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
-                  <span className="block p-1 bg-blue-500 rounded-full hover:shadow-lg transition duration-200 ease-in">
+                  <span className="block p-1 bg-blue-500 rounded-full hover:shadow-lg transition">
                     <IconGlobe />
                   </span>
                 </a>
@@ -37,7 +37,7 @@ export default function SectionPackages(props) {
                   className="block p-2 text-2xl rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
                   <span
-                    className="block p-1 rounded-full hover:shadow-lg transition duration-200 ease-in"
+                    className="block p-1 rounded-full hover:shadow-lg transition"
                     style={{ backgroundColor: 'hsl(3.2, 52.4%, 48.6%)' }}
                   >
                     <IconNpm />
@@ -51,7 +51,7 @@ export default function SectionPackages(props) {
                   rel="noopener noreferrer"
                   className="block p-2 text-3xl rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
-                  <span className="rounded-full hover:shadow-lg transition duration-200 ease-in">
+                  <span className="rounded-full hover:shadow-lg transition">
                     <IconGitHub />
                   </span>
                 </a>

@@ -30,7 +30,7 @@ const Projects = () => {
               })}
             >
               <div className="pl-2 mt-3 md:mt-0 min-w-1/3">
-                <h3 className="text-xl text-gray-700 md:text-3xl">{project.name}</h3>
+                <h3 className="text-xl text-gray-700 md:text-3xl md:leading-relaxed">{project.name}</h3>
                 <span className="inline-block px-2 mb-1 text-sm text-blue-600 bg-blue-200 border border-blue-300 rounded-md">
                   {project.label}
                 </span>
@@ -39,18 +39,18 @@ const Projects = () => {
                   <span className="inline-block mt-3">
                     <a
                       className={`
-                        flex items-center text-base leading-relaxed group text-primary-600 rounded-sm
+                        flex items-center text-base group text-primary-600 rounded-sm
                         focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-8 ring-offset-gray-100
                       `}
                       target="_blank"
                       rel="noreferrer noopener"
                       href={project.anchorLink}
                     >
-                      <span className="mr-2 text-xl group-hover:text-primary-700 transition-colors duration-200">
+                      <span className="mr-2 text-xl group-hover:text-primary-700 transition">
                         {project.anchorText}
                       </span>
                       <IconExternalLink
-                        className="text-primary group-hover:text-primary-700 group-hover:font-bold transition-colors duration-300"
+                        className="text-primary group-hover:text-primary-700 group-hover:font-bold transition duration-300"
                         strokeWidth={3}
                       />
                     </a>

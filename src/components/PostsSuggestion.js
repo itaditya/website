@@ -18,7 +18,7 @@ export function PostsPopularList() {
             >
               <IconJS />
             </span>
-            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-700 hover:underline sm:text-lg xl:text-2xl">
               Escaping from Async/Await Hell
             </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
@@ -33,7 +33,7 @@ export function PostsPopularList() {
             <span className="mt-1 lg:mt-0 text-3xl rounded-sm">
               <IconMongoDB />
             </span>
-            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-700 hover:underline sm:text-lg xl:text-2xl">
               Things I wish I knew before using MongoDB
             </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
@@ -48,7 +48,7 @@ export function PostsPopularList() {
             <span className="mt-2 lg:mt-0 text-2xl rounded-full" style={{ color: 'hsl(192.7, 63.5%, 54.9%)' }}>
               <IconReact />
             </span>
-            <h3 className="max-w-2xl ml-4 text-base text-gray-800 hover:underline sm:text-lg xl:text-2xl">
+            <h3 className="max-w-2xl ml-4 text-base text-gray-700 hover:underline sm:text-lg xl:text-2xl">
               Optimize Your React App with React.memo
             </h3>
             <span className="hidden px-2 ml-4 text-sm text-blue-800 bg-blue-200 border border-blue-300 sm:block rounded-md">
@@ -99,7 +99,7 @@ export function PostNextRead(props) {
           <Link href={'/blog/' + stateNextArticle.slug}>
             <a className="flex flex-col items-center text-center group" data-percy-hidden>
               <span className="text-3xl text-center text-gray-600 md:text-5xl group-hover:text-blue-700"><IconChevronRight /></span>
-              <h3 className="mt-4 text-2xl font-medium text-gray-700 group-hover:text-blue-700 transition-colors duration-200">Next Up: {stateNextArticle.title}</h3>
+              <h3 className="mt-4 text-2xl font-medium text-gray-700 group-hover:text-blue-700 transition">Next Up: {stateNextArticle.title}</h3>
             </a>
           </Link>
         )

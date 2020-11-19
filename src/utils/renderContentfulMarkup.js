@@ -8,9 +8,9 @@ const optionsContentful = {
   },
   renderNode: {
     [BLOCKS.HEADING_3]: (node, next) =>
-      `<h3 class="mt-8 leading-tight font-heading text-gray-700 text-xl">${next(node.content)}</h3>`,
+      `<h3 class="mt-8 font-heading text-gray-700 text-xl">${next(node.content)}</h3>`,
     [BLOCKS.HEADING_4]: (node, next) =>
-      `<h4 class="mt-6 leading-snug font-heading text-gray-700 text-lg">${next(node.content)}</h4>`,
+      `<h4 class="mt-6 font-heading text-gray-700 text-lg">${next(node.content)}</h4>`,
     [BLOCKS.PARAGRAPH]: (node, next) => `<p class="mt-4 text-gray-500 leading-relaxed text-base">${next(node.content)}</p>`,
     [BLOCKS.UL_LIST]: (node, next) =>
       `<ul class="mt-4 ml-8 list-disc text-gray-500 text-base">${next(node.content)}</ul>`,
