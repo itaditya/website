@@ -29,13 +29,17 @@ Consider if you wrote a script to order a pizza and a drink. The script might lo
 (async () => {
   const pizzaData = await getPizzaData()    // async call
   const drinkData = await getDrinkData()    // async call
+
   const chosenPizza = choosePizza()    // sync call
   const chosenDrink = chooseDrink()    // sync call
+
   await addPizzaToCart(chosenPizza)    // async call
   await addDrinkToCart(chosenDrink)    // async call
+
   orderItems()    // async call
 })()
 ```
+<CodeDescription children="Naive implementation to order food" />
 
 On the surface it looks correct, and it does work. But this is not a good implementation, because it leaves concurrency out of the picture. Let’s understand what its doing so that we can nail down the issue.
 
