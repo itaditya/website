@@ -25,6 +25,18 @@ While working with Asynchronous JavaScript, people often write multiple statemen
 
 Consider if you wrote a script to order a pizza and a drink. The script might look like this:
 
+```js
+(async () => {
+  const pizzaData = await getPizzaData()    // async call
+  const drinkData = await getDrinkData()    // async call
+  const chosenPizza = choosePizza()    // sync call
+  const chosenDrink = chooseDrink()    // sync call
+  await addPizzaToCart(chosenPizza)    // async call
+  await addDrinkToCart(chosenDrink)    // async call
+  orderItems()    // async call
+})()
+```
+
 On the surface it looks correct, and it does work. But this is not a good implementation, because it leaves concurrency out of the picture. Let’s understand what its doing so that we can nail down the issue.
 
 ## Explanation
@@ -156,7 +168,7 @@ async function orderItems() {
   const promises = []
   for(var i = 0; i < noOfItems; i++) {
     const orderPromise = sendRequest(items[i])    // async call
-    promises.push(orderPromise)    // sync call
+    promises.push(orderPromise)
   }
   await Promise.all(promises)    // async call
 }
