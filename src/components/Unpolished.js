@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
@@ -16,11 +15,11 @@ function PostContent(props) {
   const markup = renderContentfulMarkup(post.content);
   return (
     <article
-      data-post-id={post.id}
+      id={post.id}
       className="relative px-8 py-5 mb-12 bg-white rounded-md shadow-lg scroll-mt overflow-hidden"
     >
       <div className={cn({ 'line-clamp': !stateExpanded })}>
-        <Link href={`?id=${post.id}`}>
+        <Link href={`#${post.id}`}>
           <a>
             <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
           </a>
@@ -57,19 +56,6 @@ function PostContent(props) {
 
 function Unpolished(props) {
   const { posts } = props;
-  const router = useRouter();
-  const linkedPostId = router.query.id;
-
-  useEffect(() => {
-    if (linkedPostId) {
-      const elem = document.querySelector(`[data-post-id="${linkedPostId}"]`);
-      if (elem) {
-        elem.scrollIntoView({
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [linkedPostId]);
 
   return (
     <div
