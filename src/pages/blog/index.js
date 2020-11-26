@@ -35,7 +35,7 @@ const Blog = (props) => {
       <SiteHead pageName="Blog" />
       <SiteNavbar activeLink="blog" />
       <main className="col-span-10 col-start-2 row-auto mt-24">
-        <section className="w-max">
+        <section className="lg:w-max">
           <h2 className="mb-8 text-2xl font-bold text-gray-700 md:text-4xl">Popular Posts</h2>
           <PostsPopularList />
         </section>
