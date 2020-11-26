@@ -15,42 +15,43 @@ function PostContent(props) {
   const [stateExpanded, setStateExpanded] = useState(false);
   const markup = renderContentfulMarkup(post.content);
   return (
-    <div data-post-id={post.id} className="py-4 mb-4">
-      <article className="relative px-8 py-5 bg-white rounded-md shadow-lg overflow-hidden">
-        <div className={cn({ 'line-clamp': !stateExpanded })}>
-          <Link href={`?id=${post.id}`}>
-            <a>
-              <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
-            </a>
-          </Link>
-          <PublishAndReadTime post={post} />
-          <p className="mt-4 mb-6 text-lg text-gray-600">{post.description}</p>
-          <div dangerouslySetInnerHTML={{ __html: markup }}></div>
-        </div>
-        <div
-          className={cn({
-            'bottom-0 left-0 flex justify-center w-full': true,
-            'absolute pt-16 pb-4': !stateExpanded,
-          })}
-          style={
-            stateExpanded
-              ? {}
-              : {
-                  backgroundImage:
-                    'linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1), hsl(0, 0%, 100%))',
-                }
-          }
+    <article
+      data-post-id={post.id}
+      className="relative px-8 py-5 mb-12 bg-white rounded-md shadow-lg scroll-mt overflow-hidden"
+    >
+      <div className={cn({ 'line-clamp': !stateExpanded })}>
+        <Link href={`?id=${post.id}`}>
+          <a>
+            <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
+          </a>
+        </Link>
+        <PublishAndReadTime post={post} />
+        <p className="mt-4 mb-6 text-lg text-gray-600">{post.description}</p>
+        <div dangerouslySetInnerHTML={{ __html: markup }}></div>
+      </div>
+      <div
+        className={cn({
+          'bottom-0 left-0 flex justify-center w-full': true,
+          'absolute pt-16 pb-4': !stateExpanded,
+        })}
+        style={
+          stateExpanded
+            ? {}
+            : {
+                backgroundImage:
+                  'linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1), hsl(0, 0%, 100%))',
+              }
+        }
+      >
+        <button
+          className="px-3 py-1 text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-4 rounded-md transition"
+          onClick={() => setStateExpanded((oldState) => !oldState)}
         >
-          <button
-            className="px-3 py-1 text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 ring-offset-4 rounded-md transition"
-            onClick={() => setStateExpanded((oldState) => !oldState)}
-          >
-            {stateExpanded ? 'Read Less' : 'Read More'}
-          </button>
-        </div>
-        {!stateExpanded && <div className="pb-10"></div>}
-      </article>
-    </div>
+          {stateExpanded ? 'Read Less' : 'Read More'}
+        </button>
+      </div>
+      {!stateExpanded && <div className="pb-10"></div>}
+    </article>
   );
 }
 
