@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .animation-fade-in {
   animation: fade-in 0.6s ease-in-out;
 }
