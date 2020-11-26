@@ -42,9 +42,6 @@ module.exports = {
         DEFAULT: '200ms',
       },
     },
-    minWidth: {
-      '1/3': '33%',
-    },
   },
   variants: {
     extend: {
