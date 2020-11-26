@@ -5,7 +5,7 @@ import IconGlobe from '_components/icons/IconGlobe';
 import myPackages from '../staticData/myPackages.json';
 
 export default function SectionPackages(props) {
-  const { children, className } = props;
+  const { children, className = '' } = props;
   return (
     <section
       className={cn({ 'mt-56 flex md:flex flex-col items-center': true, [className]: true })}
@@ -24,6 +24,7 @@ export default function SectionPackages(props) {
                   rel="noopener noreferrer"
                   className="block p-2 text-2xl text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
+                  <span className="sr-only">Docs</span>
                   <span className="block p-1 bg-blue-500 rounded-full hover:shadow-lg transition">
                     <IconGlobe />
                   </span>
@@ -36,6 +37,7 @@ export default function SectionPackages(props) {
                   rel="noopener noreferrer"
                   className="block p-2 text-2xl rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
+                  <span className="sr-only">NPM</span>
                   <span
                     className="block p-1 rounded-full hover:shadow-lg transition"
                     style={{ backgroundColor: 'hsl(3.2, 52.4%, 48.6%)' }}
@@ -51,6 +53,7 @@ export default function SectionPackages(props) {
                   rel="noopener noreferrer"
                   className="block p-2 text-3xl rounded-full focus:outline-none focus:ring-2 focus:ring-primary-400"
                 >
+                  <span className="sr-only">GitHub</span>
                   <span className="rounded-full hover:shadow-lg transition">
                     <IconGitHub />
                   </span>

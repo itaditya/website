@@ -31,7 +31,7 @@ const Projects = () => {
             >
               <div className="pl-2 mt-3 md:mt-0 min-w-1/3">
                 <h3 className="text-xl text-gray-700 md:text-3xl md:leading-relaxed">{project.name}</h3>
-                <span className="inline-block px-2 mb-1 text-sm text-blue-600 bg-blue-200 border border-blue-300 rounded-md">
+                <span className="inline-block px-2 mb-1 text-sm text-blue-800 bg-blue-100 border border-blue-300 rounded-md">
                   {project.label}
                 </span>
                 <p className="mt-2 text-lg text-gray-600">{project.description}</p>
@@ -59,6 +59,7 @@ const Projects = () => {
               </div>
               <img
                 src={project.pictureUrl}
+                alt=""
                 className="w-full shadow-md rounded-md"
                 width={420}
                 height={200}
