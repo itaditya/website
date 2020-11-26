@@ -16,25 +16,25 @@ const Projects = () => {
       <SiteHead pageName="Projects" />
       <SiteNavbar activeLink="projects" />
       <main className="px-8 mt-12 col-span-12 md:col-start-2 md:col-span-10">
-        <h2 className="mb-40 text-5xl font-bold text-center text-gray-800 font-heading">
+        <h2 className="mb-20 lg:mb-40 text-5xl font-bold text-center text-gray-800 font-heading">
           Projects
         </h2>
-        <ul className="grid grid-cols-1 gap-y-8 md:gap-y-40 max-w-screen-md mx-auto">
+        <ul className="grid grid-cols-1 gap-y-12 lg:gap-y-40">
           {myProjects.map((project, index) => (
             <li
               key={project.name}
               className={cn({
-                'flex flex-col-reverse items-center md:space-x-10': true,
-                'md:flex-row': index % 2 === 0,
-                'md:flex-row-reverse md:space-x-reverse': index % 2 !== 0,
+                'flex flex-col-reverse items-center lg:space-x-10': true,
+                'lg:flex-row': index % 2 === 0,
+                'lg:flex-row-reverse lg:space-x-reverse': index % 2 !== 0,
               })}
             >
-              <div className="pl-2 mt-3 md:mt-0 min-w-1/3">
+              <div className="pl-2 mt-3 lg:mt-0">
                 <h3 className="text-xl text-gray-700 md:text-3xl md:leading-relaxed">{project.name}</h3>
                 <span className="inline-block px-2 mb-1 text-sm text-blue-800 bg-blue-100 border border-blue-300 rounded-md">
                   {project.label}
                 </span>
-                <p className="mt-2 text-lg text-gray-600">{project.description}</p>
+                <p className="mt-2 text-lg text-gray-600 max-w-xs">{project.description}</p>
                 {project.anchorLink && (
                   <span className="inline-block mt-3">
                     <a
@@ -60,7 +60,7 @@ const Projects = () => {
               <img
                 src={project.pictureUrl}
                 alt=""
-                className="w-full shadow-md rounded-md"
+                className="flex-1 shadow-md rounded-md"
                 width={420}
                 height={200}
               />
