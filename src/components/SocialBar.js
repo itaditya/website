@@ -24,6 +24,7 @@ export default function SocialBar(props) {
             className="block p-2 text-3xl text-white rounded-full transition focus:outline-none focus:ring-2"
             style={{ '--tw-ring-color': 'hsl(202.8, 89.1%, 53.1%)' }}
           >
+            <span className="sr-only">Twitter</span>
             <span
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition"
               style={{ backgroundColor: 'hsl(202.8, 89.1%, 53.1%)' }}
@@ -44,6 +45,7 @@ export default function SocialBar(props) {
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition"
               style={{ backgroundColor: '#12100E' }}
             >
+              <span className="sr-only">Medium</span>
               <IconMedium />
             </span>
           </a>
@@ -60,6 +62,7 @@ export default function SocialBar(props) {
               className="block p-1 rounded-full shadow-md hover:shadow-lg transition"
               style={{ backgroundColor: 'hsl(0, 75.4%, 50.6%)' }}
             >
+              <span className="sr-only">YouTube</span>
               <IconYouTube />
             </span>
           </a>
@@ -72,6 +75,7 @@ export default function SocialBar(props) {
             className="block p-2 text-4xl text-white rounded-full transition focus:outline-none focus:ring-2"
             style={{ '--tw-ring-color': '#12100E' }}
           >
+            <span className="sr-only">GitHub</span>
             <span className="rounded-full shadow-md hover:shadow-lg transition">
               <IconGitHub />
             </span>

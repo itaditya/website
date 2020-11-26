@@ -89,7 +89,8 @@ export default function SiteNavbar(props) {
         ))}
         {['xs', 'sm'].includes(deviceWidth) && (
           <li className="flex items-center pr-1 ml-6 md:hidden">
-            <button className="text-xl text-gray-700" onClick={handleOpenMenu} aria-label="More">
+            <button className="text-xl text-gray-700" onClick={handleOpenMenu}>
+              <span className="sr-only">More</span>
               <IconMenu />
             </button>
             {stateIsExpanded && (

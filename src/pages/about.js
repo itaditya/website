@@ -63,7 +63,7 @@ const About = () => (
       </div>
     </main>
     <aside className="items-center hidden mt-16 md:flex col-start-8 col-span-4">
-      <img className="rounded-lg shadow-lg" src="/talk.jpg" />
+      <img className="rounded-lg shadow-lg" src="/talk.jpg" alt="" />
     </aside>
     <SocialBar />
     <SiteFooter />
