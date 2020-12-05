@@ -11,11 +11,30 @@ import { PostNextRead } from '_components/PostsSuggestion';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
 
 const mdxComponents = {
-  h1: props => <MDXHeading level={1} className="text-lg md:text-5xl md:leading-5" showAnchorLink={false} {...props} />,
-  h2: props => <MDXHeading level={2} className="mt-16 text-xl leading-tight md:text-3xl" {...props}></MDXHeading>,
-  h3: props => <MDXHeading level={3} className="mt-10 text-lg leading-snug md:text-2xl" {...props}></MDXHeading>,
-  p: props => <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props}></p>,
-  a: props => (
+  h1: (props) => (
+    <MDXHeading
+      level={1}
+      className="text-lg md:text-5xl md:leading-5"
+      showAnchorLink={false}
+      {...props}
+    />
+  ),
+  h2: (props) => (
+    <MDXHeading
+      level={2}
+      className="mt-16 text-xl leading-tight md:text-3xl"
+      {...props}
+    ></MDXHeading>
+  ),
+  h3: (props) => (
+    <MDXHeading
+      level={3}
+      className="mt-10 text-lg leading-snug md:text-2xl"
+      {...props}
+    ></MDXHeading>
+  ),
+  p: (props) => <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props}></p>,
+  a: (props) => (
     <a
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       style={{ textDecorationColor: 'currentColor' }}
@@ -24,19 +43,26 @@ const mdxComponents = {
       {...props}
     ></a>
   ),
-  ul: props => <ul className="mt-4 ml-8 text-gray-600 list-disc md:text-xl" {...props}></ul>,
-  ol: props => <ol className="mt-4 ml-8 text-gray-600 list-decimal md:text-xl" {...props}></ol>,
-  li: props => <li className="mt-2 md:text-lg" {...props}></li>,
-  hr: props => <hr className="my-16 border-gray-300" {...props}></hr>,
+  ul: (props) => <ul className="mt-4 ml-8 text-gray-600 list-disc md:text-xl" {...props}></ul>,
+  ol: (props) => <ol className="mt-4 ml-8 text-gray-600 list-decimal md:text-xl" {...props}></ol>,
+  li: (props) => <li className="mt-2 md:text-lg" {...props}></li>,
+  hr: (props) => <hr className="my-16 border-gray-300" {...props}></hr>,
   img: MDXImage,
-  pre: props => <div className="mt-10 mb-4" {...props}></div>,
+  pre: (props) => <div className="mt-10 mb-4" {...props}></div>,
   code: CodeBlock,
-  inlineCode: props => (
+  inlineCode: (props) => (
     <code
       className="px-2 py-1 text-sm bg-gray-200 text-red-700 rounded-md whitespace-nowrap"
       {...props}
     ></code>
   ),
+  blockquote: (props) => {
+    return (
+      <blockquote className="border-l-4 border-gray-700 italic pl-5 pb-1 mt-12">
+        <div className="-mt-4" {...props} />
+      </blockquote>
+    );
+  },
 };
 
 function BlogLayout(props) {

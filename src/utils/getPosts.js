@@ -27,6 +27,12 @@ export default function getPosts() {
     }))
   
     filePromise.push(new Promise(resolve => {
+      import('_posts/hook-redux-react.mdx').then(data => {
+        resolve(data.meta);
+      });
+    }))
+  
+    filePromise.push(new Promise(resolve => {
       import('_posts/named-args.mdx').then(data => {
         resolve(data.meta);
       });

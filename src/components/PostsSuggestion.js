@@ -74,6 +74,10 @@ const popularPosts = [
     slug: 'react-renderprops-hoc',
     title: <Fragment>Understanding React Render <br /> Props and HOC</Fragment>,
   },
+  {
+    slug: 'hook-redux-react',
+    title: <Fragment>How to Hook Redux in a React <br /> application</Fragment>,
+  },
 ];
 
 function getNextArticle(currentPostSlug) {
