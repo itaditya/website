@@ -1,0 +1,288 @@
+import BlogLayout from '_components/BlogLayout';
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Testing a Redux Hooked App',
+  slug: 'testing-redux-hooked-app',
+  date: '2020-10-13T00:00:00.000Z',
+  description: 'Learn how to write integration tests for a food ordering app using React Testing Library.',
+  readingTime: '8 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/testing-redux-hooked-app.jpg',
+  canonicalUrl: 'https://blog.bitsrc.io/testing-a-redux-hooked-app-a8e9d1609061',
+  tags: ['react', 'testing'],
+};
+
+![Food Ordering app](/posts/demo-food-app.gif)
+
+The tests are [available on GitHub](https://github.com/itaditya/redux-hooks-for-food-delivery/blob/master/src/App.test.js). The app above is already implemented in my [previous post](/blog/hook-redux-react) using Redux hooks and React although you don't need to know the internals to follow this article.
+
+## Choose a testing strategy
+
+For testing UIs we have three options — End to End tests, Integration tests, Unit tests. So which strategy should we use? I like this ideology from Kent Dodds.
+
+> The more your tests resemble the way your software is used, the more confidence they can give you.
+
+In an ideal world we would write everything as E2E tests since they resemble how people use our app the most. But in practice they are hard to setup and slow to run. So we keep **E2E tests for critical user flows only.** (We’ll learn E2E testing in my upcoming article)
+
+For everything else the next best thing we can do is write integration tests. For that my library of choice is React Testing Library (aka RTL). Here’s an example —
+
+```jsx
+test('only show veg food when veg filter is applied', () => {
+  // arrange
+  render(<App {...props} />);
+
+  // act
+  fireEvent.click(screen.getByRole('checkbox', { name: /Veg Only/i }));
+
+  // assert
+  expect(screen.queryByText(/Sausage McMuffin/i)).toBe(null);
+  expect(screen.getByText(/Mushroom Pizza/i)).toBeInTheDocument();
+});
+
+```
+<CodeDescription children="An integration test with React Testing Library" />
+
+We first render our App component. Then toggle the Veg Only checkbox and at last check that the right food items are shown in the menu. **By reading the above code could you even tell if our app uses React, Redux or Hooks**? That’s what integration testing is all about. Let’s dig deeper on why this approach is better than doing unit testing with Enzyme’s shallow rendering.
+
+### We abstract some logic of a component into a separate component.
+
+If we move some code from a component to a reusable child component, our Enzyme based tests will stop working.
+
+However, integration tests don’t care about the internal details of a component. If we have written tests for a component, everything inside of it will be executed. So if some code is moved to a child component it doesn’t matter. Just like how it won’t matter to the users.
+
+> When you refactor you shouldn’t need to update your tests. If that happens what confidence are the tests giving you?
+
+### We change the name of a child component’s prop
+
+Suppose a component uses a Button component inside. The Button component had an onClick prop which was called when the user pressed the button. If we use shallow rendering for our component tests then Button component’s internals won’t be rendered. That means if we simulate a click event nothing would happen. Instead, we need to manually call the Button’s onClick prop.
+
+That’s fine for now but watch what happens when the Button component’s onClick prop is renamed to onPress prop. Our component’s tests will keep passing however the application will stop working for real users. This is not a problem when writing integration tests with React Testing Library.
+
+### This is bad, right?
+
+With just two situations its clear that Shallow Rendering **fails when it shouldn’t but passes when it absolutely should fail**.
+
+For these reasons, I’m convinced that the norm should be integration tests. However, just so there’s no confusion I’m adding these points.
+
+* When rendering a deep child component is a headache it's fine if you mock it. Some mocking is fine compared to mocking everything by default.
+* Unit tests are great for situations like say you want to ensure that a utility function works for all kinds of input arguments.
+* Think of three types of tests as a layered sieve. E2E catches severe bugs, integration tests smaller bugs and unit tests catches micro-bugs.
+
+## Testing our Food Ordering App
+
+![Photo by Andy Kelly on Unsplash](https://miro.medium.com/max/1400/0*306B1z3XJLN-PjgD)
+
+We start by writing the tests for our top-most component which is the App component. Just like we rendered App inside index.js we’ll do the same in the tests. That means wrapping our App in Redux provider etc. Let’s take a look at our integration tests step by step.
+
+### Test loading indicator
+
+```jsx
+import React from 'react';
+import { Provider } from 'react-redux';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+
+import App from './App';
+import { createReduxStore } from './redux';
+
+describe('Test App', () => {
+  function renderApp(store = createReduxStore(), props = {}) {
+    return render(
+      <Provider store={store}>
+        <App {...props} />
+      </Provider>,
+    );
+  }
+
+  test('show loading indicator till API responds', async () => {
+    renderApp();
+
+    // during loading, show app name and loading indicator
+    expect(screen.getByRole('heading')).toHaveTextContent('Ordux');
+    expect(screen.getByRole('status')).toHaveTextContent('Loading...');
+
+    await waitForElementToBeRemoved(() => screen.getByText(/Loading/i));
+  });
+});
+```
+<CodeDescription children="Testing the loading screen" />
+
+In this test starting from line 18, we want to ensure that while the app is loading, we show our app name and a loading indicator to the user. Its done through the following steps —
+
+**i. We call the renderApp function.**
+
+We’ve made a helper function called renderApp. It wraps the App component with a Redux provider and pass it a store instance. We also allow passing custom props to the App component. Inside our test we call renderApp. This will render our App component to JSDOM. After that we’ll be able to use **screen** to get stuff from the rendered DOM.
+
+By passing the store this way, we ensure that each test gets its own store and doesn’t modify the store for next test. When we want to modify the store before rendering we can create one in the test itself and pass that to renderApp [like this](https://github.com/itaditya/redux-hooks-for-food-delivery/blob/master/src/Comps.test.js#L65-L67).
+
+**ii. We assert that Ordux heading is displayed.**
+
+If you’re familiar with testing then you know that we use expect to check whether the received output matches the expected output.
+
+We need to assert that our page heading has the text **Ordux**. So we need to extract the text content of heading. But even before that we need to be able to find the rendered heading DOM node. You might be surprised that **we’re not using CSS classes, test id attributes or a component name** to find the heading DOM node.
+
+Instead, we’re using **getByRole(‘heading’)**. All h1 to h6 elements have the aria role of heading and this method uses **roles** to get the DOM nodes. Notice that it resembles how screen-reader users would find the heading.
+
+**iii. We assert that Loading message is displayed.**
+
+Previously we use the heading role for the assertion. In line 23, we’re using the role of **status**. But there is no `<status>` element in HTML so what’s happening?
+
+Let’s look at what App component is doing —
+
+```jsx
+// App.js
+function App() {
+  const stateAPIStatus = useLoadFoodData();
+
+  return (
+    <div className="food-app">
+      <header>
+        <h1>Ordux</h1>
+      </header>
+      <Message status={stateAPIStatus} />
+    </div>
+  );
+}
+
+// Comps.js
+function Message(props) {
+  const { status } = props;
+
+  const messages = {
+    loading: 'Loading...',
+    error: (
+      <>
+        Menu failed to load.
+        <br />
+        Please try again...
+      </>
+    ),
+  };
+
+  const messageText = messages[status];
+
+  if (!messageText) {
+    return null;
+  }
+
+  return (
+    <div
+      className={`message-${status}`}
+      role={status === 'error' ? 'alert' : 'status'}
+      aria-live="polite"
+      aria-busy={status === 'loading'}
+    >
+      {messageText}
+    </div>
+  );
+}
+```
+<CodeDescription children="Integrate Message component from Comps.js into App.js" />
+
+**useLoadFoodData** tells App the current status of the API call. App then passes the status to Message component. When status prop is equal to loading, Message will render an [aria live region](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) with role as **status**. This way screen reader users would be informed when some content is updated via JS.
+
+In a way, RTL forces us to step up our accessibility game. Had we just used a classname to query a DOM node we might have missed using an aria live region and screen reader users won’t know that loading is finished and that they can start interacting with the app.
+
+Note — In our test above, we are calling waitForElementToBeRemoved. That is for [fixing the act warning](https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning/). In short we’re telling React that the state update which leads to removing of loading indicator is intentional.
+
+### Test for Veg Only checkbox
+
+In our app, users can click on the Veg Only checkbox and it will show them only vegetarian food items. Let’s see how we can test that flow.
+
+```jsx
+import { render, fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
+
+import * as utils from './utils';
+
+jest.mock('./utils');
+
+const foodData = [
+  {
+    id: 'SM',
+    label: 'Sausage McMuffin',
+    description: 'Description of McMuffin',
+    price: 12,
+  },
+  {
+    id: 'MP',
+    label: 'Mushroom Pizza',
+    diet: 'veg',
+    description: 'Description of Pizza',
+    price: 20,
+  },
+];
+
+describe('Test App', () => {
+  beforeEach(() => {
+    utils.loadFoodData.mockImplementation(() => Promise.resolve(foodData));
+  });
+
+  afterEach(() => {
+    utils.loadFoodData.mockRestore();
+  });
+
+  test('only show veg food when veg filter is applied', async () => {
+    renderApp();
+    await waitForElementToBeRemoved(() => screen.getByText(/Loading/i));
+
+    // enable Veg Only filter
+    fireEvent.click(screen.getByRole('checkbox', {name: /Veg Only/i}));
+
+    expect(screen.queryByText(/Sausage McMuffin/i)).toBe(null)
+    expect(screen.getByText(/Mushroom Pizza/i)).toBeInTheDocument();
+
+
+    // disable Veg Only filter
+    fireEvent.click(screen.getByRole('checkbox', {name: /Veg Only/i}));
+
+    expect(screen.getByText(/Sausage McMuffin/i)).toBeInTheDocument();
+    expect(screen.getByText(/Mushroom Pizza/i)).toBeInTheDocument();
+  });
+});
+```
+<CodeDescription children="Testing Veg Only checkbox" />
+
+**i. We mock the API call using jest.**
+
+When we write integration tests we often mock API calls so that our CI testing pipeline stays simple and also run fast. It also enables us to simulate situations like API taking too long or giving the wrong response.
+
+There are a couple of ways to mock our APIs. [Kent Dodds prefers msw](https://testing-library.com/docs/react-testing-library/example-intro/#full-example) but for this post we’ll just mock the **loadFoodData utility** so that it doesn’t make an API call. Inside the **beforeEach** we mock the implementation of loadFoodData so that a promise resolves with static data. Inside **afterEach** we restore the utility so that some other test could access the real loadFoodData utility if needed.
+
+Next we render the App component and wait till the loading indicator is removed from DOM. When that happens we know that API is done loading and our menu would be visible.
+
+**ii. Trigger click events.**
+
+Now we need to turn on Veg Only checkbox. We find the checkbox DOM node using **getByRole**. If there are multiple checkbox, we can target a particular one by matching its **name**. We then click on the checkbox using **fireEvent.click**.
+
+**iii. Test that enabling Veg Only filter hides items.**
+
+After we click on the checkbox, out of the two food items we should only see the Veg one. To assert that, we need to get the DOM nodes for the two food items. Here we’ll use queryByText and getByText. Just like people find stuff by reading text, we find the DOM nodes using the text written in it.
+
+But why do we need two separate methods? The reason is that getByText raises an error if it doesn’t find any matching DOM node. This is useful when we expected a DOM node to be present but its not there. Notice that we have used **getByText** along with **toBeInTheDocument**. However when we want to assert that a DOM node is not present then we use **queryByText**. It will not throw an error instead it will just return null.
+
+From line 43 we test that when we disable the filter it starts showing the two items again. With that we’re done testing the entire Veg Only filter flow.
+
+If you want to see an even bigger example of integration testing then [check this test on GitHub](https://github.com/itaditya/redux-hooks-for-food-delivery/blob/master/src/App.test.js#L55). It tests that when we add and remove items from cart, the right quantity is shown and the final price in the footer also updates.
+
+### Testing Approach summarized
+
+The way I write tests can be summarized like this —
+
+* I start with the top-most component App, render it as root and then test full user flows. Its not a problem if a test block becomes long.
+* I render the component inside each test instead of beforeEach because I might want to setup something in a test before rendering or pass additional props to the component when it mounts.
+* I target DOM nodes using their aria roles or text content since those are things that matter to user. The user clicks on the **button** with text **Submit**. They aren’t informed of the classes or ids on the button.
+* If there are edge cases not covered by the normal user flows then I write separate tests for those and generally they stay small.
+* Child components can do extra stuff which App doesn’t care about. Those can be tested in a [separate test where Child component is rendered](https://github.com/itaditya/redux-hooks-for-food-delivery/blob/master/src/Comps.test.js) as root.
+
+## Conclusion
+
+In this article we learned how to pick a testing strategy, mock API calls and write integration tests for entire user flows. But there’s one more surprise.
+
+Notice that only the rendering step required knowledge of React. The other steps didn’t care about implementation details. They just interacted with the DOM directly. Because of this reason Testing Library is able to support various UI frameworks. That means whatever you’ve learned in this article can be applied [when testing other framework apps](https://testing-library.com/docs/vue-testing-library/intro/).
+
+If you liked the article please <TwitterShare meta={meta} children="share it on Twitter" /> and other networks. It helps me keep writing better articles.
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}
