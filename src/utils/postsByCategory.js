@@ -2,6 +2,7 @@ export const tagNameMapping = {
   all: 'All Posts',
   javascript: 'JavaScript',
   react: 'React',
+  state_management: 'State Management',
   mongodb: 'MongoDB',
   tailwindcss: 'TailwindCSS',
   design_systems: 'Design Systems',
