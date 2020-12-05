@@ -5,6 +5,7 @@ export const tagNameMapping = {
   mongodb: 'MongoDB',
   tailwindcss: 'TailwindCSS',
   design_systems: 'Design Systems',
+  redux: 'Redux',
 };
 
 export default function postsByCategory(posts) {
