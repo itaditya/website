@@ -50,6 +50,12 @@ export default function getPosts() {
       });
     }))
   
+    filePromise.push(new Promise(resolve => {
+      import('_posts/testing-redux-hooked-app.mdx').then(data => {
+        resolve(data.meta);
+      });
+    }))
+  
 return Promise.all(filePromise);
 }
 

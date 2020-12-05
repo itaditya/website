@@ -7,6 +7,7 @@ export const tagNameMapping = {
   tailwindcss: 'TailwindCSS',
   design_systems: 'Design Systems',
   redux: 'Redux',
+  testing: 'Testing',
 };
 
 export default function postsByCategory(posts) {
