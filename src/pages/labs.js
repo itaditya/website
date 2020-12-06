@@ -118,7 +118,7 @@ const Labs = () => {
         </section>
         <section className="justify-between md:flex">
           <div className="flex-1 mt-16 md:mr-20" style={{ height: '640px ' }}>
-            <CodeSandboxEmbed id="xstate-otp-animated-c4rey" title="Otp Verification with XState" />
+            <CodeSandboxEmbed id="xstate-otp-animated-5two5" title="Otp Verification with XState" />
           </div>
           <div className="mt-16" style={{ height: '640px ' }}>
             <CodeSandboxEmbed className="codesandbox-xs" id="2p52nx3wnj" title="Shake or Tap for jokes" />
