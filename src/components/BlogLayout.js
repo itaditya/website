@@ -58,8 +58,7 @@ const mdxComponents = {
   ),
   blockquote: (props) => {
     return (
-      <blockquote className="border-l-4 border-gray-700 italic pl-5 pb-1 mt-12">
-        <div className="-mt-4" {...props} />
+      <blockquote className="border-l-4 border-gray-700 italic pl-5 pb-1 mt-8 blogpost-blockquote" {...props}>
       </blockquote>
     );
   },
