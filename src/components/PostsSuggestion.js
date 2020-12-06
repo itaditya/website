@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import IconReact from '_components/icons/IconReact';
 import IconJS from '_components/icons/IconJS';
-import IconMongoDB from '_components/icons/IconMongoDB';
 import IconChevronRight from '_components/icons/IconChevronRight';
 
 export function PostsPopularList() {
