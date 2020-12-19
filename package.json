@@ -7,8 +7,7 @@
     "start": "next dev",
     "build": "next build",
     "export": "next export",
-    "gen:postFile": "node scripts/generatePostFile.js",
-    "gen:getPosts": "node scripts/generateGetPostsFile.js > src/utils/getPosts.js",
+    "gen:post": "node scripts/generatePostFile.js",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:visual": "percy exec -- cypress run"
@@ -27,6 +26,7 @@
     "@contentful/rich-text-html-renderer": "^13.4.0",
     "@percy/cypress": "^2.3.1",
     "autoprefixer": "^10.0.2",
+    "babel-plugin-import-glob-array": "^0.2.0",
     "contentful": "^7.14.3",
     "cypress": "^4.3.0",
     "postcss": "^8.1.7",
