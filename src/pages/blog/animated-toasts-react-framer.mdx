@@ -1,0 +1,297 @@
+import BlogLayout from '_components/BlogLayout';
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Implement Animated Toasts in React',
+  slug: 'animated-toasts-react-framer',
+  date: '2020-12-02T06:22:23.517Z',
+  description:
+    'Learn how to make a Toast component with animations using React, Framer Motion, and Zustand.',
+  readingTime: '6 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/animted-toasts-react-framer.jpg',
+  coverPicUrl:
+    'https://blog.logrocket.com/wp-content/uploads/2020/12/implementing-animated-toasts-react-nocdn.png',
+  canonicalUrl: 'https://blog.logrocket.com/implementing-animated-toasts-in-react/',
+  tags: ['react'],
+};
+
+<MDXImage alt="" src={meta.coverPicUrl} />
+
+A toast is a UI element that provides messages to a user in a non-interruptive manner. They usually pop up from the bottom of the screen and disappear after a short while.
+
+For the purposes of this post, let’s say we want to build toasts such that, on mount, they fade into the bottom right part of the screen. When we add another toast, the previous toast should animate up, and the new toast fades in at the end. We’ll use Framer Motion and React portals for this.
+
+We also want a feature to close all toasts together. For this, it’s good to have a central state management specifically for toasts. We’ll use Zustand for that.
+
+It also lets us do advanced stuff like setting limits on how many toasts can show up on screen and setting a default duration after which toasts should disappear. Implementing the advanced stuff is left as an exercise to the reader, though.
+
+This will be the final product:
+
+![Animated Toasts Demo](https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/12/react-toasts-implementation-preview.gif?resize=730%2C819&ssl=1)
+
+You can play around with the [demo in this CodeSandbox](https://codesandbox.io/s/simple-toast-with-zustand-framer-motion-re7hr?file=/src/App.js:572-678).
+
+## Structure of our React toast implementation
+
+For our animated toast, we’ll approach it like we’re making a library. The library could have many parts, but only some are exposed to the users. We’ll make a `Toasts.js` file that contains three parts:
+
+1. **A hook for our Zustand store**: We initialize a Zustand store by passing it the initial state and update methods. It then returns a custom hook, which we’ll use in the `Toast` component and `useToastControls` hook.
+2. **Toast component**: This component gets the store state from the Zustand custom hook and decides whether it should render toast content or not.
+3. **useToastControls custom hook**: We can’t let users have complete access to the Zustand store, so we’ll export this custom hook instead.
+
+## Usage of our toast
+
+Before we start implementing each of the above, let’s see how it's going to be used typically:
+
+```jsx {4,10-12}
+import { Toast, useToastControls } from './Toasts';
+
+function App() {
+  const { show, closeAll } = useToastControls();
+
+  return (
+    <div className="app">
+      <button onClick={() => show('toast-first')}>Show Toast</button>
+      <button onClick={closeAll}>Close all</button>
+      <Toast uniqueId="toast-first" className="toast-blue">
+        Hey! I'm a toast
+      </Toast>
+    </div>
+  );
+}
+```
+
+<CodeDescription children="How to use our Toasts" />
+
+We can render any number of `Toast` components but each of them should have a `uniqueId` prop. We can also choose to give the toast some classes or content to render inside.
+
+The useToastsControl custom hook will give us methods like `show`, `close`, and `closeAll`. To show a toast, we have to pass that toast’s `uniqueId` to the `show` method.
+
+Since we’ll need to use React portals to render the toast, we need a DOM node already present in the page. For that, we’ll change the `index.html` (in a CRA app) to this:
+
+```jsx
+<div id="root"></div>
+<div id="toasts-portal"></div>
+```
+
+<CodeDescription children="Add DOM node for toasts portal" />
+
+We’ll also add some CSS to position the `'#toasts-portal'` container in the bottom right. Then we’ll make it a flexbox so that the toasts stack on top of each other with some gap in between.
+
+```css
+#toasts-portal {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+}
+```
+
+<CodeDescription children="Styles for toasts container" />
+
+## Implementation time
+
+Now that we know how it’s going to be used, let’s go ahead and implement the three parts of the `Toasts.js` file.
+
+### Zustand store
+
+Zustand is a small (~700B) state management library. The way it works is that we call the `create` method with a callback function. This function returns a store object. We can keep various states in the store, as well as methods that can update the state.
+
+The `create` method then returns a custom hook, which, in our case, we’ve named `useToastStore`. We can call this custom hook in any React component to get access to the state and methods kept in that Zustand store.
+
+> **Sidenote**: The great thing about Zustand is that we’re not restricted to a single store. We can create multiple stores for various use cases. Just like toasts, modals can have their own store, API cache can have a different one, user session management can also have a different one, and so on. If some state changes in one store, only components using that store will re-render without any extra comparisons.
+
+In `Toasts.js`, the Zustand store is made like this. Keep in mind that it’s not exported:
+
+```js {2}
+const useToastStore = create((set, get) => ({
+  toastList: new Set(),
+  show(toastId) {
+    const { toastList } = get();
+
+    const newToastList = new Set(toastList);
+    newToastList.add(toastId);
+
+    set({
+      toastList: newToastList,
+    });
+  },
+  close(toastId) {
+    const { toastList } = get();
+
+    const newToastList = new Set(toastList);
+    newToastList.delete(toastId);
+
+    set({
+      toastList: newToastList,
+    });
+  },
+  closeAll() {
+    const newToastList = new Set();
+
+    set({
+      toastList: newToastList,
+    });
+  },
+}));
+```
+
+The callback function returns an object with a state named `toastList` and three methods: `show`, `close`, and `closeAll`.
+
+The toastList state is a [Set object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) where we will store the list of toast IDs that are currently shown on the screen. Why did I choose a Set? Because it ensures that each ID in it is unique. Also, I was bored of using arrays for everything.
+
+The methods then take care of adding or removing the toast IDs from toastList state.
+
+The `show` method accepts a toastId as an argument. It gets the current toastList state by calling the `get` method, then it creates a new Set instance with values from the current toastList. After that, the toastId is added to newToastList. Finally, we set the toastList state to newToastList using the `set` method.
+
+The `closeAll` method just sets the toastList to an empty Set instance. The reason we need to create a new Set instance in each method is because, just like in React, state updates in Zustand need to be immutable.
+
+Also, if you’re wondering where these `get` and `set` methods came from, check the starting of the callback function — it receives these methods as arguments.
+
+### Toast component
+
+The Toast component does most of the heavy lifting, so we’ll implement it step by step:
+
+1. Access the store and check whether it should render any content.
+2. Animate the content if it does render.
+3. Declare an effect for closing itself after some duration.
+
+### Step 1: Accessing the store
+
+Inside the component, we call the `useToastStore` custom hook. By default, it would return everything in the store. That means if anything in the store changes, then the `Toast` component will re-render.
+
+If you have small stores, then this isn’t an issue. But when it does become a problem you can do it the way I’m showing below.
+
+```js {7}
+import shallow from 'zustand/shallow';
+
+export function Toast(props) {
+  const { uniqueId, config = {}, className, children } = props;
+  const { duration = 3500, role = 'status' } = config;
+
+  const { toastList, close } = useToastStore(
+    (store) => ({
+      toastList: store.toastList,
+      close: store.close,
+    }),
+    shallow,
+  );
+
+  const isShown = toastList.has(uniqueId);
+
+  return (); // will be expanded in the next step
+}
+```
+
+Since we only want the `toastList` state and `close` method, we can selectively pick only those two from the store. This is done by passing a selector function to `useToastStore`.
+
+The selector returns an object, so we will also tell `useToastStore` to shallow-compare the data returned by the selector. This is similar to how the new Redux hooks are used. [If you don’t know about them you can read my article on them.](/blog/hook-redux-react)
+
+Now that we have the toastList from the store and `uniqueId` from the `Toast` component’s prop, we can check whether that uniqueId belongs in the toastList with the `toastList.has` method. We store the result of it in the `isShown` variable which we’ll use in the next step.
+
+### Step 2: Animating the content
+
+We need to render the toast’s content inside the `"#toasts-portal"` DOM node so that it always comes at the bottom corner of screen. For that, we’ll use portals.
+
+To get the enter animations working we’ll use the motion utility from the **framer-motion package**. When `isShown` is true, the motion.div component will mount, and it will transition from the values provided in the `initial` prop to the values of `animate` prop.
+
+But when `isShown` becomes false and the `motion.div` component unmounts we want an exit animation too. For that we need to wrap everything in the AnimatePresence component and pass a unique `key` to motion.div component. Then we use the `exit` prop to specify the exit animation. Note that AnimatePresence will stay mounted regardless of `isShown`.
+
+The other interesting thing is that we’re passing a `layout` prop to `motion.div` which ensures that upward movement of a toast is also animated.
+
+Apart from that it's just a simple div with classes, relevant ARIA role, and children.
+
+```jsx {11-14}
+import { AnimatePresence, motion } from 'framer-motion';
+
+export function Toast(props) {
+  // stuff from previous step
+
+  return createPortal(
+    <AnimatePresence>
+      {isShown && (
+        <motion.div
+          key={uniqueId}
+          layout
+          initial={{ opacity: 0, y: 50, scale: 0.3 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.5 }}
+          className={cn('toast', className)}
+          role={role}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.querySelector('#toasts-portal'),
+  );
+}
+```
+
+### Step 3: Declaring an effect for closing itself
+
+The last step of the `Toast` component is declaring an effect that closes the toast. After a given duration, we call the `close` method of the Zustand store with the `uniqueId` prop as its argument.
+
+```js {12}
+import { useEffect } from 'react';
+
+export function Toast(props) {
+  const isShown = toastList.has(uniqueId);
+
+  useEffect(() => {
+    if (!duration || !isShown) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      close(uniqueId);
+    }, duration);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+
+  }, [uniqueId, isShown, duration, close]);
+}
+```
+
+With that, we’ve finished the `Toast` implementation. The next part is a little extra thing I’ve added just to show how a library can hide internal implementation details.
+
+### useToastControls custom hook
+
+Our toast implementation encapsulates the logic to show messages to users. The benefit is that the internal implementation can change without breaking any user’s code.
+
+In `Toasts.js`, the Zustand store is an implementation detail. It contains the toastList set. If a user gets access to toastList, they might modify it however they like and cause bugs. As such, we want to add constraints so that users can call the **show**, **close**, and **closeAll** methods but can’t modify the `oastList state directly.
+
+For that, we make a custom Hook that selects the `show`, `close`, and `closeAll` methods and returns them. Now we can export this useToastControls custom hook instead of useToastStore.
+
+```js
+export function useToastControls() {
+
+  const controls = useToastStore(
+    (store) => ({
+      show: store.show,
+      close: store.close,
+      closeAll: store.closeAll,
+    }),
+    shallow,
+  );
+
+  return controls;
+}
+```
+
+## Conclusion
+
+Putting everything together, our `Toasts.js` file will look like this [CodeSandbox](https://codesandbox.io/s/simple-toast-with-zustand-framer-motion-re7hr?file=/src/Toasts.js:782-812).
+
+I hope you enjoyed the article and learned at least one new thing. It'd be a big help if you <TwitterShare meta={meta} children="share this article on Twitter" /> with your peers.
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}
