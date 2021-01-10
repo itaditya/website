@@ -2,6 +2,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html.normal-scroll {
+  scroll-behavior: auto;
+}
+
 .blogpost-blockquote > p {
   margin-top: 0;
 }

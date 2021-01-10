@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import Router, { useRouter } from 'next/router';
 import nanoid from 'nanoid';
 
 let metrics = [];
@@ -43,4 +45,23 @@ export function collectMetrics(metric) {
   const d = new Date();
   metric.createdAt = d.toISOString();
   metrics.push(metric);
+}
+
+export function useMetrics() {
+  const router = useRouter();
+
+  useEffect(() => {
+    setupMetrics();
+    collectMetrics({
+      type: 'entry',
+      path: Router.pathname, // avoid stale closures
+    });
+    router.events.on('routeChangeStart', (url) => {
+      collectMetrics({
+        type: 'navigation',
+        path: url,
+        fromPath: Router.pathname, // avoid stale closures
+      });
+    });
+  }, []);
 }
