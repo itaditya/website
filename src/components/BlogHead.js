@@ -3,7 +3,7 @@ import Head from 'next/head';
 export default function BlogHead(props) {
   const { postInfo } = props;
 
-  const postUrl = 'https://devadi.netlify.com/blog/' + postInfo.slug;
+  const postUrl = 'https://devadi.netlify.app/blog/' + postInfo.slug;
   const imageUrl = postInfo.previewPicUrl || postInfo.coverPicUrl;
 
   return (
