@@ -1,0 +1,195 @@
+import BlogLayout from '_components/BlogLayout';
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Bring app components to Storybook',
+  slug: 'app-components-in-storybook',
+  date: '2021-01-14T10:49:52.020Z',
+  description: 'Mock API requests made by components with MSW addon right from the story.',
+  readingTime: '6 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/app-components-in-storybook.jpg',
+  canonicalUrl: 'https://devadi.netlify.app/blog/app-components-in-storybook',
+  tags: ['react', 'testing'],
+};
+
+Storybook is great for documenting presentational components. The [huge ecosystem of addons](https://storybook.js.org/blog/revamping-storybooks-addon-ecosystem/) gives us awesome goodies like automated visual tests, responsive views, theme togglers, accessibility checks and so much more.
+
+But applications have components that make API calls to fetch data. These “app components” can be as large as entire pages. Libraries like React Query & Apollo have a useQuery hook which makes data fetching seem trivial. Once React Suspense becomes stable, even more components will have data fetching inside of them.
+
+I created the [MSW addon](https://www.npmjs.com/package/msw-storybook-addon) to simplify mocking API requests for stories. It doesn’t depend on any UI framework or data fetching library. Even GraphQL requests can be mocked. Now your app components can share the benefits of the Storybook ecosystem no matter what tech stack you use.
+
+![Story with mocked API data](https://miro.medium.com/max/1400/0*uaPHIjbiuAQO5L-h)
+
+I would like to mention that the real magic behind my addon is an awesome tool called Mock Service Worker (MSW). With MSW we can intercept requests on the network level and provide mocked data in the response. My addon just brings MSW to its full potential in the Storybook environment.
+
+
+## Benefits of writing stories for app components
+
+As an application grows, the responsibility of a component also increases. A single component can fetch data from multiple endpoints, apply various styles and render different UI based on feature flags, user’s country or the host device. In this situation, it’s important that all the behaviors of such components are documented and discoverable.
+
+Storybook let us pass different props to a component in each story. With MSW addon each story can also provide the response of the APIs that are called in the component. This way we can document all the behaviors of a component and that has a huge payoff.
+
+
+
+1. We get to develop components in an isolated sandbox with mocked API calls.
+2. We don’t need to wrangle with the database, switch feature flags or change A/B test buckets just to check how an unfamiliar part of our app behaves.
+3. Component reuse is maximised. New teammates don’t have to ask if some UI is already built. They can just visit the storybook and see what components fit their needs.
+4. With [Chromatic](https://www.chromatic.com/), we get automated visual snapshots for each story. If a bug in a component causes style breakage we’ll be notified in the PR.
+5. We can reuse our mocks in both stories and behavioral tests since MSW itself supports Node.js. So we get a 2x benefit for the same effort.
+6. Addons like [Accessibility](https://www.npmjs.com/package/%40storybook%2Faddon-a11y) & [Mobile UX](https://www.npmjs.com/package/storybook-mobile) gives us hints on how to improve our app’s UI.
+7. With [Figma addon](https://www.npmjs.com/package/storybook-addon-designs) we can embed live mockups alongside the component story.
+
+The [Storybook catalog](https://storybook.js.org/addons) is filled with useful addons like above so definitely check it out. Even better, make your own addons by following this [tutorial](https://www.chromatic.com/blog/how-to-build-a-storybook-addon/).
+
+
+## Get Started with MSW addon
+
+First we need to install the following packages from npm.
+
+```sh
+npm i -D msw msw-storybook-addon
+```
+<CodeDescription children="Install required dependencies" />
+
+Then enable msw on our storybook by adding these lines in `./storybook/preview.js` file.
+
+```js
+import { addDecorator } from '@storybook/react';
+import { initializeWorker, mswDecorator } from 'msw-storybook-addon';
+
+initializeWorker();
+addDecorator(mswDecorator);
+```
+<CodeDescription children="Add MSW decorator to Storybook" />
+
+Since MSW uses a service worker to mock APIs we need to generate one in the same public folder that the app uses.
+
+```sh
+npx msw init public/
+```
+<CodeDescription children="Generate Service Worker file in public folder" />
+
+Then we can tell Storybook to also use the same public folder.
+
+```sh
+npx start-storybook -s public -p 6006
+```
+<CodeDescription children="Start Storybook" />
+
+The location of the public folder depends on the tech stack. [MSW guide](https://mswjs.io/docs/getting-started/integrate/browser) have a page dedicated to this.
+
+The last step is to provide an array of mock handlers to the msw parameter of the relevant story like we do below. If you’re unfamiliar with msw api check their [guide](https://mswjs.io/docs/getting-started/mocks/rest-api).
+
+```jsx
+import { rest } from 'msw';
+
+export const SuccessBehavior = () => <UserProfile />;
+
+SuccessBehavior.story = {
+ parameters: {
+   msw: [
+     rest.get('/user', (req, res, ctx) => {
+       return res(
+         ctx.json({
+           firstName: 'Neil',
+           lastName: 'Maverick',
+         }),
+       );
+     }),
+   ]
+ },
+};
+```
+<CodeDescription children="Provide mock handlers to msw parameter" />
+
+Now if your component makes an API call to **/user** the response will be the mocked one as seen below.
+
+![Demo of mocked /user API](https://miro.medium.com/max/1400/0*9A3YgSxxpF2uOlgT)
+
+What’s cool is that our mocks work as it is with Fetch, XHR, Axios. Libraries like React Query, Apollo & Urql also work with a tiny bit of setup code. Examples for each of them are present in the [addon documentation](https://msw-sb.netlify.app/?path=/story/guides-introduction--page#demos).
+
+Also note that we can create multiple stories for a component and provide different responses in each story. That way we can document what UserProfile will render when API returns correct data, incorrect data or when it fails.
+
+## Writing full page stories
+
+Since we are able to mock API requests in Storybook, it's also possible to write stories for page components. Let me show how to do it with an example.
+
+Consider an app which uses React Router to render a Film component at route `/films/:filmId`. The Film component uses the **filmId** param to fetch data for that film from [Star Wars API](https://swapi.dev/) and show that film’s title. 
+
+The component will look like this.
+
+```jsx
+import { useParams } from 'react-router-dom';
+
+export default function Film() {
+  const { filmId } = useParams();
+  const film = useFetchFilm(filmId);
+
+  return <h1>{film.title}</h1>;
+}
+```
+<CodeDescription children="Film.js" />
+
+If we visit /films/1, a request will go to https://swapi.dev/api/films/1 and “A New Hope” will be rendered as heading.
+
+Let’s assume the stories for this page are in Film.stories.js. If in a story we simply render the Film component we’ll get two errors. First useParams hook will not work since the Film component is not rendered inside a Router. Second the API will fail since there is no mock handler.
+
+To make useParams hook work we wrap the Film component with MemoryRouter and provide it a route path. Then we tell React Router to render the Film component on that path.
+
+
+```jsx
+import { MemoryRouter as Router, Route } from 'react-router-dom';
+import Film from './Film';
+
+const MockTemplate = () => (
+  <Router initialEntries={['/films/1']}>
+    <Route exact path="/films/:filmId">
+      <Film />
+    </Route>
+  </Router>
+);
+```
+<CodeDescription children="Film.stories.js" />
+
+Now that we have a template component we can reuse it in all the stories. Although we can still change the mock handler in each story thanks to the way Storybook works.
+
+```jsx
+import { rest } from 'msw';
+
+export const NewHopeFilm = MockTemplate.bind({});
+NewHopeFilm.story = {
+ parameters: {
+   msw: [
+     rest.get('https://swapi.dev/api/films/1', (req, res, ctx) => {
+       return res(
+         ctx.json({
+           title: '(Mocked) A New Hope',
+         }),
+       );
+     }),
+   ],
+ },
+};
+```
+<CodeDescription children="Film.stories.js" />
+
+After doing these steps here's how Storybook should render the story.
+
+![Demo of page story](https://miro.medium.com/max/3200/0*QrtpaoGwabYjO6SS)
+
+Also note that you’re not limited to just inidividual page components. You can even write stories for entire subsections of your app. See this example of React Router + React Query app in the [addon docs](http://localhost:6006/?path=/story/guides-introduction--page#render-pages-in-storybook).
+
+## Final Thoughts
+
+Hope you find my addon useful. Here are some links you can check if you want to dig deeper.
+
+*   [MSW Storybook](https://msw-sb.netlify.app/)
+*   [MSW Storybook source](https://github.com/itaditya/msw-storybook-addon/tree/master/packages/docs)
+*   [GitHub repo](https://github.com/itaditya/msw-storybook-addon/) (please give it a star).
+*   [npm package](https://www.npmjs.com/msw-storybook-addon)
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}
