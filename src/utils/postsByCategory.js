@@ -8,6 +8,8 @@ export const tagNameMapping = {
   design_systems: 'Design Systems',
   redux: 'Redux',
   testing: 'Testing',
+  git: 'Git',
+  github: 'GitHub',
 };
 
 export default function postsByCategory(posts) {

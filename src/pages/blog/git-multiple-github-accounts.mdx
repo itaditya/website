@@ -1,0 +1,249 @@
+import BlogLayout from '_components/BlogLayout';
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import { AlertOriginalPublish } from '_components/PostAlerts';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Setup Git for work & personal GitHub accounts',
+  slug: 'git-multiple-github-accounts',
+  date: '2021-08-08T05:03:38.787Z',
+  description: "So you joined a new company and made a dedicated GitHub account for work. Maybe you thought it would be more secure, maybe you were feeling adventurous or maybe you thought that's what hardcore engineers do.",
+  readingTime: '5 mins',
+  previewPicUrl: 'https://devadi.netlify.app/previews/git-multiple-github-accounts.jpg',
+  coverPicUrl: '/covers/git-multiple-github-accounts.jpg',
+  tags: ['git', 'github'],
+};
+
+<MDXImage alt="Future me being too late to warn Past me" src={meta.coverPicUrl} />
+
+5 days later you're pulling your hair trying to make Git play nice with multiple GitHub accounts. You find articles that assume a lot and still the end result is painful to use. You're already regretting it but time travel doesn't exist yet so you're stuck with your poor life choices. Fret not! I have suffered the pain and wrote this article to make it smooth sailing for you.
+
+## Quick summary of what I'll cover
+
+1. How to organize your Work repos locally.
+1. Make git commit auto-select Work or Personal E-mail.
+1. Set up remote urls for Work repos differently.
+1. Link your GitHub accounts with dedicated SSH keys.
+1. Customize your VS Code extensions for Work repos.
+
+## How to organize your Work repos locally
+
+First, we'll need to keep all our Work repos in a common directory so it's easy for Git to differentiate Work repos from Personal repos. Here's how I like to keep it.
+
+```
+/Users/aditya (home directory)
+├── Coding
+    ├── work
+    │   ├── secret-work-repo
+    │   ├── billion-dollar-mvp
+    │   ├── legacy_monolith
+    │   └── one_person_microservice
+    │
+    └── personal
+        ├── website
+        ├── vite-react-ssr
+        ├── failed_indie_product
+        └── msw-storybook-addon
+```
+<CodeDescription>Overview of how repos are organized</CodeDescription>
+
+Now all Work repos are inside `~/Coding/work` and all personal repos are inside `~/Coding/personal`. If you use different directory names, make sure to modify what you copy from this article accordingly.
+
+## Make git commit auto-select Work or Personal E-mail
+
+While setting up Git on a new system, we usually add a global `name` and `email`. On making commits, Git uses this info to attach author details. That's how we can later identify who made the commit in `git log`. But this config is global, which means all repos would use the same details.
+
+However, we want that our commits inside Work repos should use the E-mail of our Work GitHub account. Whereas for the commits we make inside Personal repos, the E-mail should be of our Personal GitHub account.
+
+One option is to not set these details globally. Instead in each repo set the details locally. But that's so tedious. Here's a much better way.
+
+Open the global git config file located at `~/.gitconfig`. It would look like this.
+
+```bash
+# This is Git's per-user configuration file.
+
+[user]
+	name = Your Name
+	email = email_personal@gmail.com
+```
+<CodeDescription>Existing content of .gitconfig file</CodeDescription>
+
+Modify the `.gitconfig` file to look like the code shown below. We're telling Git to use a separate config file based on which repo it is running in.
+
+```bash
+# This is Git's per-user configuration file.
+
+[include]
+	path = ~/git-personal.conf
+[includeIf "gitdir:~/Coding/work/"]
+	path = ~/git-work.conf
+```
+<CodeDescription>New content of .gitconfig file</CodeDescription>
+
+By having all our Work repos inside one directory it becomes easy to choose a work-specific git config file conditionally. The config which is common in both can stay inside `.gitconfig`.
+
+Now, let's create these two config files in the home directory. Change the E-mail values in both files with your respective ones.
+
+```bash
+# Personal git config
+
+[user]
+	name = Your Name
+	email = email_personal@gmail.com
+```
+<CodeDescription>Content of git-personal.conf file</CodeDescription>
+
+```bash
+# Work git config
+
+[user]
+	name = Your Name
+	email = email_work@org_domain.com
+```
+<CodeDescription>Content of git-work.conf file</CodeDescription>
+
+You can check if the right E-mail is coming by running `git config user.email` in the respective repo.
+
+## Set up remote urls for Work repos differently.
+
+Next, we need to make sure that when we sync our local Work repo to GitHub, it uses the credentials of our Work account instead of Personal account. For Personal repos, no change is required but for each of the Work repos, we need to first change the remote urls.
+
+On GitHub, if your Work repo is at `https://github.com/org_name/repo_name` then usually you would clone it with SSH keys like this 
+
+```bash
+git clone git@github.com:org_name/repo_name.git
+```
+<CodeDescription>Psst... Don't run this command now</CodeDescription>
+
+In our situation, we need to modify the command a bit. 
+
+```bash
+git clone git@github-work:org_name/repo_name.git
+```
+<CodeDescription>Notice github.com is changed to github-work</CodeDescription>
+
+### What to do If I already have the repos cloned?
+
+You might have cloned some Work repos already and painstakingly set everything up. You wouldn't want to undo all that effort. The easy way out is to just change the url of the `origin` remote.
+
+```bash
+git remote set-url origin git@github-work:org_name/repo_name.git
+```
+<CodeDescription>Run this inside your existing Work repo</CodeDescription>
+
+### Keep the actual url as a different remote
+
+You should also add the actual git url as a separate remote in your Work repos. This will come in handy in the last section of this article.
+
+```bash
+git remote add original git@github.com:org_name/repo_name.git
+```
+<CodeDescription>Run this inside each of your Work repo</CodeDescription>
+
+To verify if you've done everything correctly, run `git remote -v` in each of your Work repo. You should see this result.
+
+```bash
+origin    git@github-work:org_name/repo_name.git (fetch)
+origin    git@github-work:org_name/repo_name.git (push)
+
+original  git@github.com:org_name/repo_name.git (fetch)
+original  git@github.com:org_name/repo_name.git (push)
+```
+<CodeDescription>origin and original remotes in a Work repo</CodeDescription>
+
+## Link your GitHub accounts with dedicated SSH keys.
+
+In the last section, we changed the remote urls for all of our Work repos. In this section, we'll use that fact to pick the right SSH key when we sync our repo to GitHub. Since you probably haven't set up different SSH keys on GitHub, I'll cover how to do that as well.
+
+### Generate an SSH key pair for both Work & Personal Accounts
+
+Run the following code to generate two sets of SSH keys. Replace the E-mail values with your GitHub ones. You can change the passphrase to what you like or remove that flag. For me, having two different passphrases acts like an extra reminder of which GitHub account I'm using on code push.
+
+```bash
+# Enter .ssh directory
+cd ~/.ssh
+
+# Generate SSH key for Personal account
+ssh-keygen -t rsa -f "id_rsa_personal" -C "email_personal@gmail.com" -P "pass_personal"
+
+# Generate SSH key for Work account
+ssh-keygen -t rsa -f "id_rsa_work" -C "email_work@org_domain.com" -P "pass_work"
+```
+<CodeDescription>Generating SSH keys with respective E-mails</CodeDescription>
+
+If the above commands ran correctly you should see the four files in `.ssh` directory.
+
+```
+~/.ssh
+├── id_rsa_personal (private key for Personal account)
+├── id_rsa_personal.pub (public key for Personal account)
+├── id_rsa_work (private key for Work account)
+├── id_rsa_work.pub (public key for Work account)
+├── config
+└── known_hosts
+```
+<CodeDescription>SSH keys for both Work and Personal accounts</CodeDescription>
+
+### Add respective SSH public key in your GitHub accounts.
+
+Next, we need to add each public key to its respective GitHub account. For the Work account, here are the steps.
+
+1. Copy the contents of `id_rsa_work.pub`.
+2. Login to your GitHub Work account.
+3. Go to the [Add SSH Key page](https://github.com/settings/ssh/new).
+4. Provide a title like "Macbook Pro".
+5. Paste the contents of public key into the "Key" field.
+6. Click the Add SSH Key button and complete the password confirmation.
+
+You need to do the same for your Personal account. There you'll paste the content of `id_rsa_personal.pub` after logging into your Personal GitHub account. If you need a detailed walkthrough with pictures, check the [official GitHub Docs](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+
+### Add configuration to choose SSH key based on remote origin path
+
+As far as GitHub is concerned, only one small step is remaining. We need to tell SSH to pick the right key depending on which repo we're pushing from.
+
+Create a file called `config` inside `.ssh` folder if one doesn't exist already. Then paste this snippet.
+
+```bash
+# Personal Account
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_personal
+
+# Work Account
+Host github-work
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_work
+```
+<CodeDescription>Content of .ssh/config</CodeDescription>
+
+Since we modified the `origin` remote urls of Work repos, we can now use that to pick the `id_rsa_work` key. If in a Work repo you forgot to change the remote url then it will try to use your Personal key which wouldn't have access. If that happens, now you know what to do.
+
+## Customize your VS Code extensions for Work repos.
+
+Since we changed the origin remote url for Work repos, some VS Code extensions might not behave properly. I faced problems using Git Blame and Git Link. If you use extensions like these, here's a bonus tip on how to fix them.
+
+First, make a dedicated VS Code workspace for your Work repos. It's a great way to keep your VS Code settings scoped to projects. Then using Command Palette open the `Workspace Settings (JSON)`. Copy the highlighted lines from below and paste them inside the `settings` key.
+
+```json {4,5}
+{
+	"folders": [...],
+	"settings": {
+		"gitblame.remoteName": "original",
+		"gitlink.defaultRemote": "original"
+	}
+}
+```
+<CodeDescription>Content of work.code-workspace</CodeDescription>
+
+Do you remember we added a dedicated git remote called `original` to store the actual url of the Work repo? Here we're telling the extensions to use that remote when interacting with GitHub.
+
+## Conclusion
+
+I know it's a chore going through all these steps, but at least now you have one place for future reference. Share it with new joiners in your team who are also considering multiple account setup. It might save them some hours and a couple of hair strands.
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}
