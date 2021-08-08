@@ -74,7 +74,7 @@ const Home = () => {
               Hey, I'm <span className="text-gray-700 underline">Aditya.</span>
             </h1>
             <p className="mt-4 lg:mt-6 text-gray-600 text-base lg:text-lg xl:text-xl">
-              Frontend developer at HackerRank.
+              Senior Frontend Engineer at Razorpay.
               <br />I love open-sourcing my knowledge through building projects, giving talks and
               writing blogs.
             </p>

@@ -17,7 +17,7 @@ export default function CardTwitter() {
               alt="Work"
               className="w-6 h-6"
             />
-            <span className="ml-2 text-lg">HackerRank</span>
+            <span className="ml-2 text-lg">Razorpay</span>
           </li>
           <li className="flex items-center justify-center ml-4 md:justify-start">
             <img

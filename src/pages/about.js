@@ -16,24 +16,28 @@ const About = () => (
     <main className="mt-16 col-start-2 col-span-10 lg:col-start-2 lg:col-span-5 row-auto">
       <h2 className="mb-8 text-5xl font-bold text-gray-700 font-heading">About Me</h2>
       <p className="text-2xl leading-relaxed text-gray-600">
-        I am a <span className="text-gray-800">Web Developer</span> working as an SDE 1 at{' '}
+        I work as a <span className="text-gray-800">Senior Frontend Engineer</span>
+        <br />
+        at{' '}
         <a
           className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
           target="_blank"
           rel="noreferrer noopener"
-          href="https://hackerrank.com"
+          href="https://razorpay.com"
         >
-          HackerRank
+          Razorpay
         </a>
         .
       </p>
       <p className="mt-6 text-xl leading-relaxed text-gray-600">
         I'm experienced in building rich JavaScript applications with technologies like{' '}
-        <span className="text-gray-800">React.js</span>, Vue.js, Node.js & MongoDB. In the past I worked with GitHub's
-        Probot team to build various GitHub apps during the Google Summer of Code program.
+        <span className="text-gray-800">React.js</span>, Vue.js, Node.js & MongoDB. In the past I
+        worked with GitHub's Probot team to build various GitHub apps during the Google Summer of
+        Code program.
       </p>
       <p className="mt-6 text-xl leading-relaxed text-gray-600">
-        Apart from coding, I love reading fandom about my favorite series like Harry Potter, Naruto and the MCU.
+        Apart from coding, I love reading fandom about my favorite series like Harry Potter, Naruto
+        and the MCU.
       </p>
       <div className="items-center justify-between xl:flex">
         <a
