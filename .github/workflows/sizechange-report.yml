@@ -21,6 +21,6 @@ jobs:
       - name: Size Change Report
         uses: pkg-size/action@v1
         with:
-          build-command: yarn build && yarn export
+          build-command: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
