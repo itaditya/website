@@ -1,4 +1,3 @@
-import React from 'react';
 import myDetails from '../staticData/myDetails.json';
 
 function generateTwitterUrl(meta) {

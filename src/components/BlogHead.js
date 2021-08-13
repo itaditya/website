@@ -12,10 +12,7 @@ export default function BlogHead(props) {
 
   return (
     <Head>
-      <meta charSet="utf-8" />
       <title>{title} | Aditya Agarwal</title>
-      <link rel="icon" href="/favicon.ico" />
-      <meta name="viewport" content="width=device-width" />
       <meta property="article:author" content="https://twitter.com/dev__adi"></meta>
       <meta name="description" content={description} />
       <meta property="og:description" content={description} />
@@ -35,11 +32,6 @@ export default function BlogHead(props) {
       <meta name="twitter:label2" value="Authored By" />
       <meta name="twitter:data2" value="@dev__adi" />
       {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-      <script async src="https://unpkg.com/thesemetrics@latest"></script>
     </Head>
   );
 }
