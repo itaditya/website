@@ -107,41 +107,20 @@ You can check if the right E-mail is coming by running `git config user.email` i
 
 ## Set up remote urls for Work repos differently.
 
-Next, we need to make sure that when we sync our local Work repo to GitHub, it uses the credentials of our Work account instead of Personal account. For Personal repos, no change is required but for each of the Work repos, we need to first change the remote urls.
+When Work repos sync with GitHub, they should use the credentials of our Work account instead of Personal account. For that you'll need to edit the remote urls of Work repos. No change is required in Personal repos.
 
-On GitHub, if your Work repo is at `https://github.com/org_name/repo_name` then usually you would clone it with SSH keys like this 
+You have a Work repo at **github.com/org_name/repo_name** and you've cloned it using the SSH option. Then on your local repo, the origin remote would point to `git@github.com:org_name/repo_name.git`.
 
-```bash
-git clone git@github.com:org_name/repo_name.git
-```
-<CodeDescription>Psst... Don't run this command now</CodeDescription>
-
-In our situation, we need to modify the command a bit. 
-
-```bash
-git clone git@github-work:org_name/repo_name.git
-```
-<CodeDescription>Notice github.com is changed to github-work</CodeDescription>
-
-### What to do If I already have the repos cloned?
-
-You might have cloned some Work repos already and painstakingly set everything up. You wouldn't want to undo all that effort. The easy way out is to just change the url of the `origin` remote.
-
-```bash
-git remote set-url origin git@github-work:org_name/repo_name.git
-```
-<CodeDescription>Run this inside your existing Work repo</CodeDescription>
-
-### Keep the actual url as a different remote
-
-You should also add the actual git url as a separate remote in your Work repos. This will come in handy in the last section of this article.
+We'll copy that url into an `original` remote and set a slightly different url as `origin` remote by running these commands.
 
 ```bash
 git remote add original git@github.com:org_name/repo_name.git
-```
-<CodeDescription>Run this inside each of your Work repo</CodeDescription>
 
-To verify if you've done everything correctly, run `git remote -v` in each of your Work repo. You should see this result.
+git remote set-url origin git@github-work:org_name/repo_name.git
+```
+<CodeDescription>For origin, notice that github.com is changed to github-work</CodeDescription>
+
+To verify if you've done this correctly, run `git remote -v`. The result should be similar to the snippet below. Repeat the remote url change in the remaining Work repos.
 
 ```bash
 origin    git@github-work:org_name/repo_name.git (fetch)
@@ -154,7 +133,7 @@ original  git@github.com:org_name/repo_name.git (push)
 
 ## Link your GitHub accounts with dedicated SSH keys.
 
-In the last section, we changed the remote urls for all of our Work repos. In this section, we'll use that fact to pick the right SSH key when we sync our repo to GitHub. Since you probably haven't set up different SSH keys on GitHub, I'll cover how to do that as well.
+Now that the remote urls of Work repos are different, we can use that to pick the right SSH key when we sync to GitHub. But you may not multiple SSH keys setup, so I'll cover that first.
 
 ### Generate an SSH key pair for both Work & Personal Accounts
 
