@@ -10,58 +10,82 @@ import CardTwitter from '_components/CardTwitter';
 import { PostNextRead } from '_components/PostsSuggestion';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
 
-const mdxComponents = {
-  h1: (props) => (
-    <MDXHeading
-      level={1}
-      className="text-lg md:text-5xl md:leading-5"
-      showAnchorLink={false}
-      {...props}
-    />
-  ),
-  h2: (props) => (
-    <MDXHeading
-      level={2}
-      className="mt-16 text-xl leading-tight md:text-3xl"
-      {...props}
-    ></MDXHeading>
-  ),
-  h3: (props) => (
-    <MDXHeading
-      level={3}
-      className="mt-10 text-lg leading-snug md:text-2xl"
-      {...props}
-    ></MDXHeading>
-  ),
-  p: (props) => <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props}></p>,
-  a: (props) => (
+function Heading2(props) {
+  return <MDXHeading level={2} className="mt-16 text-xl leading-tight md:text-3xl" {...props} />;
+}
+
+function Heading3(props) {
+  return <MDXHeading level={3} className="mt-10 text-lg leading-snug md:text-2xl" {...props} />;
+}
+
+function Paragraph(props) {
+  return <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props} />;
+}
+
+function Anchor(props) {
+  return (
     <a
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"
       {...props}
-    ></a>
-  ),
-  ul: (props) => <ul className="mt-4 ml-8 text-gray-600 list-disc md:text-xl" {...props}></ul>,
-  ol: (props) => <ol className="mt-4 ml-8 text-gray-600 list-decimal md:text-xl" {...props}></ol>,
-  li: (props) => <li className="mt-2 md:text-lg" {...props}></li>,
-  hr: (props) => <hr className="my-16 border-gray-300" {...props}></hr>,
-  img: MDXImage,
-  pre: (props) => <div className="mt-10 mb-4" {...props}></div>,
-  code: CodeBlock,
-  inlineCode: (props) => (
+    />
+  );
+}
+
+function UnorderedList(props) {
+  return <ul className="mt-4 ml-8 text-gray-600 list-disc md:text-xl" {...props} />;
+}
+
+function OrderedList(props) {
+  return <ol className="mt-4 ml-8 text-gray-600 list-decimal md:text-xl" {...props} />;
+}
+
+function ListItem(props) {
+  return <li className="mt-2 md:text-lg" {...props} />;
+}
+
+function HorizontalRule(props) {
+  return <hr className="my-16 border-gray-300" {...props} />;
+}
+
+function PreformattedText(props) {
+  return <div className="mt-10 mb-4" {...props}></div>;
+}
+
+function InlineCode(props) {
+  return (
     <code
       className="px-2 py-1 text-sm bg-gray-200 text-red-700 rounded-md whitespace-nowrap"
       {...props}
-    ></code>
-  ),
-  blockquote: (props) => {
-    return (
-      <blockquote className="border-l-4 border-gray-700 italic pl-5 pb-1 mt-8 blogpost-blockquote" {...props}>
-      </blockquote>
-    );
-  },
+    />
+  );
+}
+
+function BlockQuote(props) {
+  return (
+    <blockquote
+      className="border-l-4 border-gray-700 italic pl-5 pb-1 mt-8 blogpost-blockquote"
+      {...props}
+    />
+  );
+}
+
+const mdxComponents = {
+  h2: Heading2,
+  h3: Heading3,
+  p: Paragraph,
+  a: Anchor,
+  ul: UnorderedList,
+  ol: OrderedList,
+  li: ListItem,
+  hr: HorizontalRule,
+  img: MDXImage,
+  pre: PreformattedText,
+  code: CodeBlock,
+  inlineCode: InlineCode,
+  blockquote: BlockQuote,
 };
 
 function BlogLayout(props) {
@@ -76,7 +100,11 @@ function BlogLayout(props) {
       <SiteNavbar />
       <main className="py-8 mt-10 col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto">
         <article>
-          <MDXHeading level={1} className="text-3xl md:text-5xl md:leading-tight" showAnchorLink={false}>
+          <MDXHeading
+            level={1}
+            className="text-3xl md:text-5xl md:leading-tight"
+            showAnchorLink={false}
+          >
             {meta.title}
           </MDXHeading>
           <PublishAndReadTime post={meta} className="mt-3 mb-8" />

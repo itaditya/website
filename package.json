@@ -7,6 +7,7 @@
     "start": "next dev",
     "build": "next build",
     "export": "next export",
+    "lint": "next lint",
     "gen:post": "node scripts/generatePostFile.js",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -17,10 +18,10 @@
     "@next/mdx": "10.0.2",
     "faunadb": "^2.13.0",
     "nanoid": "^2.1.11",
-    "next": "10.0.2",
+    "next": "^11.1.0",
     "prism-react-renderer": "^1.0.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@contentful/rich-text-html-renderer": "^13.4.0",
@@ -29,6 +30,8 @@
     "babel-plugin-import-glob-array": "^0.2.0",
     "contentful": "^7.14.3",
     "cypress": "^4.3.0",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.0",
     "postcss": "^8.1.7",
     "tailwindcss": "^2.0.1"
   }

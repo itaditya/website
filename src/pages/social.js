@@ -46,7 +46,7 @@ const Social = () => (
       <h2 className="mb-8 text-2xl font-bold text-gray-800 md:text-4xl">Social Links</h2>
       <div className="space-y-5">
         {links.map((link) => (
-          <div>
+          <div key={link.href}>
             <span className="mr-4 font-medium text-gray-800 md:text-xl">{link.title}:</span>
             <a
               className="flex items-center leading-relaxed text-gray-700 hover:text-gray-900 hover:underline"

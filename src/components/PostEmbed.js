@@ -1,5 +1,3 @@
-import React from 'react';
-
 import CodeDescription from '_components/CodeDescription';
 import cn from '_utils/classnames';
 
