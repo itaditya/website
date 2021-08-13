@@ -21,9 +21,7 @@ export const meta = {
   date: '${strDate}',
   description: '',
   readingTime: '6 mins',
-  previewPicUrl: 'https://devadi.netlify.app/previews/${slug}.jpg',
   coverPicUrl: '/covers/${slug}.jpg',
-  canonicalUrl: '',
   tags: [],
 };
 
