@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import myDetails from '../staticData/myDetails.json';
 
 function generateTwitterUrl(meta) {
-  const { title } = meta;
-  const postLink = window.location.href;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=Read "${title}" by @dev__adi. ${postLink}`;
+  const { title, slug } = meta;
+  const { websiteUrl } = myDetails;
+
+  const postUrl = `${websiteUrl}/blog/${slug}`;
+  const tweetPlainContent = `Read "${title}" by @dev__adi.\n\n${postUrl}`;
+  const tweetContent = encodeURIComponent(tweetPlainContent);
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetContent}`;
+
   return twitterUrl;
 }
 
 export function TwitterShare(props) {
   const { meta } = props;
-  const [stateTwitterUrl, setStateTwitterUrl] = useState('https://twitter.com/dev__adi');
-
-  useEffect(() => {
-    const twitterUrl = generateTwitterUrl(meta);
-    setStateTwitterUrl(twitterUrl);
-  }, []);
+  const twitterUrl = generateTwitterUrl(meta);
 
   return (
     <a
-      href={stateTwitterUrl}
+      href={twitterUrl}
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
       style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
