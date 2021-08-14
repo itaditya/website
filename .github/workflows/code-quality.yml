@@ -1,0 +1,13 @@
+name: Code Quality
+on: [push]
+jobs:
+  static-testing:
+    name: Static Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bahmutov/npm-install@v1
+      - name: Typechecking
+        run: yarn tsc
+      - name: Lint
+        run: yarn lint

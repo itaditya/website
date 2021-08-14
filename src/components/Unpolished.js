@@ -1,15 +1,23 @@
+// @ts-check
+
+/**
+ * @typedef { import('./types/Unpolished').PostContentComp } PostContentComp
+ * @typedef { import('./types/Unpolished').UnpolishedProps } UnpolishedProps
+ */
+
 import { useState } from 'react';
 import Link from 'next/link';
 
 import SiteHead from '_components/SiteHead';
 import SiteNavbar from '_components/SiteNavbar';
 import SiteFooter from '_components/SiteFooter';
-import { PublishAndReadTime } from '_components/PostExtraInfo';
+import { PublishDate } from '_components/PostExtraInfo';
 import cn from '_utils/classnames';
 
 import renderContentfulMarkup from '_utils/renderContentfulMarkup';
 
-function PostContent(props) {
+/** @type { PostContentComp } */
+const PostContent = (props) => {
   const { post } = props;
   const [stateExpanded, setStateExpanded] = useState(false);
   const markup = renderContentfulMarkup(post.content);
@@ -24,7 +32,7 @@ function PostContent(props) {
             <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
           </a>
         </Link>
-        <PublishAndReadTime post={post} className="mt-1" />
+        <PublishDate post={post} className="mt-1" />
         <p className="mt-4 mb-6 text-lg text-gray-600">{post.description}</p>
         <div dangerouslySetInnerHTML={{ __html: markup }}></div>
       </div>
@@ -54,7 +62,8 @@ function PostContent(props) {
   );
 }
 
-function Unpolished(props) {
+/** @param { UnpolishedProps } props */
+const Unpolished = (props) => {
   const { posts } = props;
 
   return (

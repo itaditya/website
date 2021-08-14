@@ -1,3 +1,12 @@
+// @ts-check
+
+/**
+ * @typedef { import('next').GetStaticProps } GetStaticProps
+ * @typedef { import('_types/posts').Categories } Categories
+ * @typedef { import('./types/blog').BlogPageProps } BlogPageProps
+ * @typedef { import('./types/blog').SelectChangeHandler } SelectChangeHandler
+ */
+
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -11,21 +20,35 @@ import IconCircleArrow from '_components/icons/IconCircleArrow';
 import { useDeviceWidth } from '_utils/deviceDetails';
 import cn from '_utils/classnames';
 import getPosts from '_utils/getPosts';
-import postsByCategory, { tagNameMapping } from '_utils/postsByCategory';
+import { getPostsByCategory, getCategories, getCategoryName } from '_utils/postsCategory';
 
-export async function getStaticProps() {
-  const posts = await getPosts();
+/** @type { GetStaticProps } */
+export function getStaticProps() {
+  const posts = getPosts();
   const sortedPosts = posts.sort((a, b) => b.date.localeCompare(a.date));
-  const { postsMap, categoryMap } = postsByCategory(sortedPosts);
+  const { postsMap, categoryMap } = getPostsByCategory(sortedPosts);
   return { props: { postsMap, categoryMap } };
 }
 
+/** @param { BlogPageProps } props */
 const Blog = (props) => {
   const { postsMap, categoryMap } = props;
-  const [stateActiveCategory, setStateActiveCategory] = useState('all');
+  const [stateActiveCategory, setStateActiveCategory] = useState(
+    /** @type { Categories } */
+    ('all'),
+  );
   const deviceWidth = useDeviceWidth();
+  const categories = getCategories();
 
   const shownPosts = categoryMap[stateActiveCategory] || [];
+
+  /** @type { SelectChangeHandler } */
+  const handleSelectChange = (event) => {
+    const selectedCategory = event.target.value;
+
+    // @ts-ignore
+    setStateActiveCategory(selectedCategory);
+  };
 
   return (
     <div className="relative grid min-h-screen grid-cols-12 py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid-rows-main-fill">
@@ -64,11 +87,11 @@ const Blog = (props) => {
               <select
                 className="px-2 py-1 bg-gray-100 shadow-md"
                 value={stateActiveCategory}
-                onChange={(event) => setStateActiveCategory(event.target.value)}
+                onChange={handleSelectChange}
               >
-                {Object.keys(categoryMap).map((category) => (
+                {categories.map((category) => (
                   <option key={category} value={category}>
-                    {tagNameMapping[category] || category}
+                    {getCategoryName(category)}
                   </option>
                 ))}
               </select>
@@ -79,7 +102,7 @@ const Blog = (props) => {
               <div>
                 <h4 className="mb-1 text-xl text-gray-800 md:text-2xl">Categories</h4>
                 <ul className="mt-5 text-lg text-gray-700 space-y-2">
-                  {Object.keys(categoryMap)
+                  {categories
                     .filter((category) => category !== 'all')
                     .map((category) => (
                       <li
@@ -92,7 +115,7 @@ const Blog = (props) => {
                         })}
                       >
                         <button onClick={() => setStateActiveCategory(category)}>
-                          {tagNameMapping[category] || category}
+                          {getCategoryName(category)}
                         </button>
                       </li>
                     ))}

@@ -1,3 +1,9 @@
+// @ts-check
+
+/**
+ * @typedef { import('./types/BlogLayout').BlogLayoutProps } BlogLayoutProps
+ */
+
 import { MDXProvider } from '@mdx-js/react';
 
 import SiteNavbar from '_components/SiteNavbar';
@@ -10,18 +16,22 @@ import CardTwitter from '_components/CardTwitter';
 import { PostNextRead } from '_components/PostsSuggestion';
 import { PublishAndReadTime } from '_components/PostExtraInfo';
 
+/** @param { any } props */
 function Heading2(props) {
   return <MDXHeading level={2} className="mt-16 text-xl leading-tight md:text-3xl" {...props} />;
 }
 
+/** @param { any } props */
 function Heading3(props) {
   return <MDXHeading level={3} className="mt-10 text-lg leading-snug md:text-2xl" {...props} />;
 }
 
+/** @param { any } props */
 function Paragraph(props) {
   return <p className="mt-4 text-gray-600 leading-7 md:text-lg md:leading-8" {...props} />;
 }
 
+/** @param { any } props */
 function Anchor(props) {
   return (
     <a
@@ -33,26 +43,32 @@ function Anchor(props) {
   );
 }
 
+/** @param { any } props */
 function UnorderedList(props) {
   return <ul className="mt-4 ml-8 text-gray-600 list-disc md:text-xl" {...props} />;
 }
 
+/** @param { any } props */
 function OrderedList(props) {
   return <ol className="mt-4 ml-8 text-gray-600 list-decimal md:text-xl" {...props} />;
 }
 
+/** @param { any } props */
 function ListItem(props) {
   return <li className="mt-2 md:text-lg" {...props} />;
 }
 
+/** @param { any } props */
 function HorizontalRule(props) {
   return <hr className="my-16 border-gray-300" {...props} />;
 }
 
+/** @param { any } props */
 function PreformattedText(props) {
   return <div className="mt-10 mb-4" {...props}></div>;
 }
 
+/** @param { any } props */
 function InlineCode(props) {
   return (
     <code
@@ -62,6 +78,7 @@ function InlineCode(props) {
   );
 }
 
+/** @param { any } props */
 function BlockQuote(props) {
   return (
     <blockquote
@@ -87,12 +104,13 @@ const mdxComponents = {
   blockquote: BlockQuote,
 };
 
+/** @param { BlogLayoutProps } props */
 function BlogLayout(props) {
   const { meta, children } = props;
 
   return (
     <div className="relative min-h-screen py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill font-body">
-      <BlogHead postInfo={meta} />
+      <BlogHead post={meta} />
       <SiteNavbar />
       <main className="py-8 mt-10 col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto">
         <article>
@@ -100,9 +118,8 @@ function BlogLayout(props) {
             level={1}
             className="text-3xl md:text-5xl md:leading-tight"
             showAnchorLink={false}
-          >
-            {meta.title}
-          </MDXHeading>
+            children={meta.title}
+          />
           <PublishAndReadTime post={meta} className="mt-3 mb-8" />
           <p className="mt-4 mb-8 text-xl text-gray-600 leading-8">{meta.description}</p>
           <MDXProvider components={mdxComponents}>{children}</MDXProvider>
