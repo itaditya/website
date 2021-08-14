@@ -8,6 +8,8 @@
     "build": "next build",
     "export": "next export",
     "lint": "next lint",
+    "tsc": "tsc -p jsconfig.json",
+    "tsc:watch": "yarn tsc --watch",
     "gen:post": "node scripts/generatePostFile.js",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
@@ -21,11 +23,13 @@
     "next": "^11.1.0",
     "prism-react-renderer": "^1.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@contentful/rich-text-html-renderer": "^13.4.0",
     "@percy/cypress": "^2.3.1",
+    "@types/react": "^17.0.19",
     "autoprefixer": "^10.0.2",
     "babel-plugin-import-glob-array": "^0.2.0",
     "contentful": "^7.14.3",

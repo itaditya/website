@@ -1,14 +1,30 @@
+// @ts-check
+
+/**
+ * @typedef { import('./types/getUnpolishedPosts').getUnpolishedPostsFunc } getUnpolishedPostsFunc
+ */
+
 const contentful = require('contentful');
 
-function getUnpolishedPosts({ loadDrafts = false } = {}) {
+/** @type { getUnpolishedPostsFunc } */
+const getUnpolishedPosts = (options = {}) => {
+  const { loadDrafts = false } = options;
+
+  const contentfulToken = process.env.CONTENTFUL_TOKEN;
+  const contentfulPreviewToken = process.env.CONTENTFUL_PREVIEW_TOKEN;
+
+  if (!contentfulToken || !contentfulPreviewToken) {
+    return Promise.reject('Contentful Access Tokens not available');
+  }
+
   let config = {
     space: 'd7968sjydm23',
-    accessToken: process.env.CONTENTFUL_TOKEN,
+    accessToken: contentfulToken,
   };
 
   if (loadDrafts) {
     Object.assign(config, {
-      accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN,
+      accessToken: contentfulPreviewToken,
       host: 'preview.contentful.com',
     });
   }
@@ -19,21 +35,22 @@ function getUnpolishedPosts({ loadDrafts = false } = {}) {
     client
       .getEntries()
       .then((response) => {
-        let { items } = response;
-        items = items.map((item) => {
+        const { items } = response;
+
+        const unpolishedPosts = items.map((item) => {
           return {
             id: item.sys.id,
             date: item.sys.updatedAt,
             ...item.fields,
           };
         });
-        resolve(items);
+        resolve(unpolishedPosts);
       })
       .catch((error) => {
         console.error(error);
         reject(error);
       });
   });
-}
+};
 
 export default getUnpolishedPosts;

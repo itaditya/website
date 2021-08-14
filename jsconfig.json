@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
     "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "pretty": true,
+    "strict": true,
     "paths": {
       "_components/*": ["./components/*"],
       "_utils/*": ["./utils/*"],
-      "_posts/*": ["./pages/blog/*"],
+      "_types/*": ["./types/*"],
+      "_posts/*": ["./pages/blog/*"]
     }
   },
   "include": ["./src/**/*"]
