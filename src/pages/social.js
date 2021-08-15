@@ -36,10 +36,7 @@ const links = [
 ];
 
 const Social = () => (
-  <div
-    className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
-    style={{ gridTemplateRows: 'auto 1fr auto' }}
-  >
+  <div className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill">
     <SiteHead pageName="Social" />
     <SiteNavbar />
     <main className="mt-24 col-start-2 col-span-10 row-auto">

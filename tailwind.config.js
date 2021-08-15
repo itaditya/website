@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       colors: {
         gray: colors.blueGray,
-        lightBlue: colors.lightBlue,
+        sky: colors.sky,
         primary: {
           300: 'hsl(155, 47%, 86%)',
           400: 'hsl(155, 47%, 66%)',
@@ -26,34 +26,18 @@ module.exports = {
           700: 'hsl(202.8, 78.8%, 42.5%)',
         },
         'twitter-background': 'hsl(208.9, 35.1%, 15.1%)',
-        overlay: {
-          100: 'rgba(0, 0, 0, 0.1)',
-          200: 'rgba(0, 0, 0, 0.2)',
-          300: 'rgba(0, 0, 0, 0.3)',
-          400: 'rgba(0, 0, 0, 0.4)',
-          500: 'rgba(0, 0, 0, 0.5)',
-          600: 'rgba(0, 0, 0, 0.6)',
-          700: 'rgba(0, 0, 0, 0.7)',
-          800: 'rgba(0, 0, 0, 0.8)',
-          900: 'rgba(0, 0, 0, 0.9)',
-        },
       },
       transitionDuration: {
         DEFAULT: '200ms',
       },
+      animation: {
+        'fade-in': 'fade-in 0.6s ease-in-out',
+        slide: 'slide 3s linear 1s forwards',
+      },
     },
   },
-  variants: {
-    extend: {
-      textColor: ['visited'],
-    },
-  },
-  plugins: [],
+  mode: 'jit',
   purge: {
-    enabled: process.env.PURGE_CSS,
     content: ['./src/**/*.js'],
-    options: {
-      whitelist: ['html', 'body'],
-    },
   },
 };

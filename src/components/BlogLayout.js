@@ -26,7 +26,6 @@ function Anchor(props) {
   return (
     <a
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
-      style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"
       {...props}
@@ -92,10 +91,7 @@ function BlogLayout(props) {
   const { meta, children } = props;
 
   return (
-    <div
-      className="relative min-h-screen py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 font-body"
-      style={{ gridTemplateRows: 'auto 1fr auto' }}
-    >
+    <div className="relative min-h-screen py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill font-body">
       <BlogHead postInfo={meta} />
       <SiteNavbar />
       <main className="py-8 mt-10 col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto">

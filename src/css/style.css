@@ -10,10 +10,6 @@ html.normal-scroll {
   margin-top: 0;
 }
 
-.animation-fade-in {
-  animation: fade-in 0.6s ease-in-out;
-}
-
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -24,11 +20,7 @@ html.normal-scroll {
   }
 }
 
-.animation-sliding {
-  animation: sliding 3s linear 1s forwards;
-}
-
-@keyframes sliding {
+@keyframes slide {
   to {
     transform: translateX(-455px);
   }
