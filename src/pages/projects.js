@@ -9,10 +9,7 @@ import myProjects from '../staticData/myProjects.json';
 
 const Projects = () => {
   return (
-    <div
-      className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
-      style={{ gridTemplateRows: 'auto 1fr auto' }}
-    >
+    <div className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill">
       <SiteHead pageName="Projects" />
       <SiteNavbar activeLink="projects" />
       <main className="px-8 mt-12 col-span-12 md:col-start-2 md:col-span-10">
@@ -30,7 +27,9 @@ const Projects = () => {
               })}
             >
               <div className="pl-2 mt-3 lg:mt-0">
-                <h3 className="text-xl text-gray-700 md:text-3xl md:leading-relaxed">{project.name}</h3>
+                <h3 className="text-xl text-gray-700 md:text-3xl md:leading-relaxed">
+                  {project.name}
+                </h3>
                 <span className="inline-block px-2 mb-1 text-sm text-blue-800 bg-blue-100 border border-blue-300 rounded-md">
                   {project.label}
                 </span>

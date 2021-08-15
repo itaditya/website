@@ -20,7 +20,6 @@ export function TwitterShare(props) {
     <a
       href={twitterUrl}
       className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
-      style={{ textDecorationColor: 'currentColor' }}
       target="_blank"
       rel="noopener noreferrer"
       children="share it on Twitter"

@@ -40,7 +40,7 @@ function CodeBlock({ metastring, className = '', children }) {
               const lineProps = getLineProps({ line, key: i });
               let newClassNames = `${lineProps.className} px-8 leading-relaxed`;
               if (shouldHighlightLine(i)) {
-                newClassNames += ' bg-overlay-200 py-1';
+                newClassNames += ' bg-black/20 py-1';
                 highlightIndex += 1;
               }
               lineProps.className = newClassNames;

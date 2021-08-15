@@ -7,10 +7,7 @@ import IconExternalLink from '_components/icons/IconExternalLink';
 import IconDownload from '_components/icons/IconDownload';
 
 const About = () => (
-  <div
-    className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
-    style={{ gridTemplateRows: 'auto 1fr auto' }}
-  >
+  <div className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill">
     <SiteHead pageName="About" />
     <SiteNavbar activeLink="about" />
     <main className="mt-16 col-start-2 col-span-10 lg:col-start-2 lg:col-span-5 row-auto">

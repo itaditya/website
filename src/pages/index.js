@@ -24,7 +24,7 @@ function Newsletter() {
       loading="lazy"
       scrolling="no"
       src="https://buttondown.email/itaditya?as_embed=true"
-      className="w-full h-full animation-fade-in"
+      className="w-full h-full animate-fade-in"
     ></iframe>
   );
 }
@@ -61,14 +61,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div
-      className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
-      style={{ gridTemplateRows: 'auto 1fr auto' }}
-    >
+    <div className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill">
       <SiteHead />
       <SiteNavbar />
       <main className="mt-8 col-start-2 col-span-10 row-auto md:mt-24">
-        <div className="flex items-center justify-between" style={{ minHeight: '50vh' }}>
+        <div className="flex items-center justify-between min-h-[50vh]">
           <div className="md:w-1/2">
             <h1 className="text-3xl font-bold tracking-tight text-gray-500 md:text-5xl xl:text-6xl font-heading">
               Hey, I'm <span className="text-gray-700 underline">Aditya.</span>
@@ -79,9 +76,9 @@ const Home = () => {
               writing blogs.
             </p>
           </div>
-          <div className="hidden mt-4 text-5xl text-gray-300 md:block animation-fade-in">
-            <div className="overflow-x-hidden" style={{ width: '360px' }}>
-              <ul className="flex animation-sliding">
+          <div className="hidden mt-4 text-5xl text-gray-300 md:block animate-fade-in">
+            <div className="overflow-x-hidden w-[360px]">
+              <ul className="flex animate-slide">
                 <li>
                   <IconHTML width="2em" height="2em" />
                 </li>
@@ -120,10 +117,10 @@ const Home = () => {
                 focus:outline-none focus:ring-4 focus:ring-blue-300 ring-offset-8 ring-offset-gray-100 transition
               `}
             >
-              <span className="text-4xl text-lightBlue-700">
+              <span className="text-4xl text-sky-700">
                 <IconCircleArrow />
               </span>
-              <span className="mt-3 font-bold text-lightBlue-800">
+              <span className="mt-3 font-bold text-sky-800">
                 Checkout
                 <br />
                 more articles

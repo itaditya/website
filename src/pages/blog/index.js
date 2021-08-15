@@ -28,10 +28,7 @@ const Blog = (props) => {
   const shownPosts = categoryMap[stateActiveCategory] || [];
 
   return (
-    <div
-      className="relative grid min-h-screen grid-cols-12 py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40"
-      style={{ gridTemplateRows: 'auto 1fr auto' }}
-    >
+    <div className="relative grid min-h-screen grid-cols-12 py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid-rows-main-fill">
       <SiteHead pageName="Blog" />
       <SiteNavbar activeLink="blog" />
       <main className="col-span-10 col-start-2 row-auto mt-24">
@@ -52,7 +49,7 @@ const Blog = (props) => {
                         <a>{post.title}</a>
                       </Link>
                     </h3>
-                    <PublishAndReadTime post={post} />
+                    <PublishAndReadTime post={post} className="mt-1" />
                     <p className="hidden mt-3 text-base text-gray-600 lg:block lg:text-base">
                       {post.description}
                     </p>
@@ -90,7 +87,8 @@ const Blog = (props) => {
                         className={cn({
                           'ml-2 transform transition ease-out': true,
                           'text-primary-600': stateActiveCategory === category,
-                          'hover:text-gray-900 hover:translate-x-1': stateActiveCategory !== category,
+                          'hover:text-gray-900 hover:translate-x-1':
+                            stateActiveCategory !== category,
                         })}
                       >
                         <button onClick={() => setStateActiveCategory(category)}>

@@ -4,14 +4,13 @@ import SiteFooter from '_components/SiteFooter';
 import SocialBar from '_components/SocialBar';
 
 const Work = () => (
-  <div
-    className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12"
-    style={{ gridTemplateRows: 'auto 1fr auto' }}
-  >
+  <div className="relative min-h-screen py-8 bg-gray-100 font-body px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill">
     <SiteHead pageName="Work" />
     <SiteNavbar />
     <main className="flex flex-col justify-center mt-16 col-start-2 col-span-10 xl:col-start-3 lg:col-span-5">
-      <h2 className="mb-4 text-lg text-gray-700 md:text-2xl">Currently employed as Senior SDE at</h2>
+      <h2 className="mb-4 text-lg text-gray-700 md:text-2xl">
+        Currently employed as Senior SDE at
+      </h2>
       <img src="/razorpay_logo.png" alt="Razorpay" width="400" />
     </main>
     <aside className="flex flex-col justify-center mt-16 col-start-2 col-span-10 lg:col-start-8 lg:col-span-4">

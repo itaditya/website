@@ -16,4 +16,8 @@
   .scroll-mt {
     scroll-margin-top: theme('margin.8');
   }
+
+  .grid-rows-main-fill {
+    grid-template-rows: auto 1fr auto;
+  }
 }

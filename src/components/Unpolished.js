@@ -24,7 +24,7 @@ function PostContent(props) {
             <h2 className="mt-4 text-2xl text-gray-700 font-heading">{post.title}</h2>
           </a>
         </Link>
-        <PublishAndReadTime post={post} />
+        <PublishAndReadTime post={post} className="mt-1" />
         <p className="mt-4 mb-6 text-lg text-gray-600">{post.description}</p>
         <div dangerouslySetInnerHTML={{ __html: markup }}></div>
       </div>
@@ -58,10 +58,7 @@ function Unpolished(props) {
   const { posts } = props;
 
   return (
-    <div
-      className="grid min-h-screen grid-cols-12 py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 font-body"
-      style={{ gridTemplateRows: 'auto 1fr auto' }}
-    >
+    <div className="grid min-h-screen grid-cols-12 grid-rows-main-fill py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 font-body">
       <SiteHead pageName="Unpolished" />
       <SiteNavbar />
       <aside className="top-0 col-span-10 col-start-2 pt-8 mt-10 lg:h-64 lg:sticky lg:col-start-9 lg:col-span-5 lg:row-start-2 xl:col-start-8 xl:col-span-4">
@@ -74,7 +71,6 @@ function Unpolished(props) {
           <a
             href="https://twitter.com/dev__adi"
             className="text-blue-600 underline hover:text-blue-700 visited:text-indigo-600"
-            style={{ textDecorationColor: 'currentColor' }}
             target="_blank"
             rel="noopener noreferrer"
           >

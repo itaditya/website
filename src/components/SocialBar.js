@@ -8,13 +8,13 @@ export default function SocialBar(props) {
   const { isInsideMenu = false } = props;
 
   const className = {
-    'left-0 flex items-center justify-center px-4 md:fixed md:h-screen md:flex-col animation-fade-in': true,
+    'flex items-center justify-center top-0 left-0 px-4 md:fixed md:h-screen md:flex-col animate-fade-in': true,
     'flex': isInsideMenu,
     'hidden md:flex': !isInsideMenu,
   };
 
   return (
-    <aside className={cn(className)} style={{ top: '0' }}>
+    <aside className={cn(className)}>
       <ul className="flex space-x-2 md:block md:space-x-0 md:space-y-2">
         <li>
           <a

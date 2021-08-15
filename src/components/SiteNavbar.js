@@ -94,13 +94,9 @@ export default function SiteNavbar(props) {
               <IconMenu />
             </button>
             {stateIsExpanded && (
-              <nav
-                className="fixed flex flex-col justify-center bg-gray-50"
-                style={{ top: 0, height: '100vh', width: '100%', left: 0 }}
-              >
+              <nav className="fixed flex flex-col justify-center inset-0 bg-gray-50">
                 <button
-                  className="absolute flex items-center text-lg"
-                  style={{ top: '20px', right: '20px' }}
+                  className="absolute flex items-center top-[20px] right-[20px] text-lg"
                   onClick={handleCloseMenu}
                 >
                   <IconCross className="text-2xl text-gray-700" />
