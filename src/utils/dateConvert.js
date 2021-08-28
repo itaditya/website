@@ -2,8 +2,8 @@ export function getShortDate(isoString) {
   const currentDateInstance = new Date();
   const currentYear = currentDateInstance.getFullYear();
 
-  const dateInstance = new Date(isoString)
-  const month = dateInstance.toLocaleString('default', { month: 'short' });
+  const dateInstance = new Date(isoString);
+  const month = dateInstance.toLocaleString('en', { month: 'short' });
   const year = dateInstance.getFullYear();
   const date = dateInstance.getDate();
 
