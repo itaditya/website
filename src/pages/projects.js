@@ -5,7 +5,7 @@ import SocialBar from '_components/SocialBar';
 import IconExternalLink from '_components/icons/IconExternalLink';
 import SectionPackages from '_components/SectionPackages';
 import cn from '_utils/classnames';
-import myProjects from '../staticData/myProjects.json';
+import myProjects from '_staticData/myProjects.json';
 
 const Projects = () => {
   return (

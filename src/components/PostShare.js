@@ -1,4 +1,4 @@
-import myDetails from '../staticData/myDetails.json';
+import myDetails from '_staticData/myDetails.json';
 
 function generateTwitterUrl(meta) {
   const { title, slug } = meta;

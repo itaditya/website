@@ -1,4 +1,4 @@
-import tags from '../staticData/tags.json';
+import tags from '_staticData/tags.json';
 
 export type CommonPost = {
   title: string;

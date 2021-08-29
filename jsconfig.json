@@ -8,6 +8,7 @@
     "paths": {
       "_components/*": ["./components/*"],
       "_utils/*": ["./utils/*"],
+      "_staticData/*": ["./staticData/*"],
       "_types/*": ["./types/*"],
       "_posts/*": ["./pages/blog/*"]
     }
