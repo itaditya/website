@@ -2,7 +2,7 @@ import cn from '_utils/classnames';
 import IconNpm from '_components/icons/IconNpm';
 import IconGitHub from '_components/icons/IconGitHub';
 import IconGlobe from '_components/icons/IconGlobe';
-import myPackages from '../staticData/myPackages.json';
+import myPackages from '_staticData/myPackages.json';
 
 export default function SectionPackages(props) {
   const { children, className = '' } = props;

@@ -5,7 +5,7 @@
  */
 
 import Head from 'next/head';
-import myDetails from '../staticData/myDetails.json';
+import myDetails from '_staticData/myDetails.json';
 
 /** @param { BlogHeadProps } props */
 export default function BlogHead(props) {
