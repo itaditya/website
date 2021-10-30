@@ -1,0 +1,100 @@
+import BlogLayout from '_components/BlogLayout';
+import MDXImage from '_components/MDXImage';
+import { TwitterShare } from '_components/PostShare';
+import CodeDescription from '_components/CodeDescription';
+
+export const meta = {
+  title: 'Checklist to spot edge cases in API contracts, design mockups & product behaviour',
+  slug: 'edge-case-product-checklist',
+  date: '2021-10-30T11:57:12.831Z',
+  description: `Use this checklist to find holes in team's understanding and prevent them from snowballing into show stoppers`,
+  readingTime: '6 mins',
+  coverPicUrl: '/covers/edge-case-product-checklist.jpg',
+  tags: ['engineering'],
+};
+
+<MDXImage alt="Photo by Alan Tang on Unsplash" src={meta.coverPicUrl} />
+
+## Why you might need this?
+
+1. It can happen that due to many back & forth in meetings, you finalise a solution which address the concerns that were there initially but didn't think of checking what other problems it can cause.
+2. Some user flows were not discussed earlier and during UAT they become show stoppers. This can postpone the deadlines depending on how hard they are to address.
+3. In mockup there could be a cross button which could be a very obvious product need so it wasn't highlighted in requirements as such. Later you'd have to ask for an API to persist user's dismissal.
+4. Since what we FE devs build is closest to the user, we're expected to know / handle all situations that user can land into. On Web that's a hard job because of device variance, unreliable networks etc.
+5. You're the one who has crafted a solution so you're having this unconscious bias of assuming its bullet proof. So you want a checklist to put your solution to the test.
+
+## Checklist
+
+### API contracts
+
+With the rise of SPAs and Microservices, the FE code often plays the role of co-ordinator. But as it runs on client there are more chances of failures. So many things have to be thought through. This checklist covers the general things.
+
+1. To make an API call what's the data you need to send it? Is it available to the client? Or do you need to first get that data from other APIs? Ask the same question for those APIs.
+2. If there are 3 GET APIs needed to show UI, what happens when one of those fail? Partial content / no content with error alert / full page error.
+3. When you need to hit multiple APIs for one user action, what happens if one API fails / some API fail & some pass etc.
+4. If user needs to retry a failed action, can we call all the APIs again starting from first? If not, do we have the GET & PATCH counterparts for all the APIs so we know for which thing we need to skip API call, for which to hit PATCH and for which hit POST?
+5. Does the API contract have the responses of all known situations?
+6. Is there a consistent way to know if API errored or not?
+7. What happens if you send API a field with null value or empty object? Often times API assume that in payload a field wouldn't exist or if it does then it will have valid content.
+8. If different data needs to be shown on different device, does the API provide all of them?
+9. Do you have APIs to tell you if user is initial, progress or end state of a feature?
+10. What happens when API returns an error which you haven't accounted for? Will your whole app crash or you have a catch-all error screen or you isolate all errors of one feature in that feature's UI?
+
+### Design Mockups
+
+It's very hard to create mockups for all the devices user can visit your app with. Or how different kinds of content would look on the static mockup. This checklist can help you close those decisions early.
+
+1. How will the feature look on different devices with smaller or larger widths than mockups? Will the mobile UI be very different from desktop version or do you need only small responsive adjustments.
+2. What will happen if there's more lengthy content than there is space for in mockups? Do you need to add text clipping or text expand or tooltip with full content?
+3. If there's important content in tooltips, how will mobile users see it since hover is only possible with a mouse.
+4. Absolutely positioned illustrations can overlap with interactive UI on smaller widths. Will the UI still be readable and interactive?
+5. Will the UI work correctly when half of the vertical space is taken by virtual keyboard on mobile? Do users need to close the keyboard to complete main actions?
+6. What's the hover / focus / active design for an interactive element?
+7. Are there any animated transitions that need to be added?
+8. What if there are no items to show in a feature's list view?
+9. If a feature has multiple steps what is the initial, progress, end state UI in different pages?
+10. What is the loading, error, success states of some UI.
+11. Is your feature only allowed for some user roles? If so, what will users with other roles see?
+12. If accessing a feature requires certain verifications to complete like email verification, phone verification how will the user be blocked from that feature and how will they be notified to complete those verification?
+13. Will the form validation run on input change, blur or submit? Will validations errors be shown below each field?
+14. If form validation fails on server, how will that be shown to user.
+
+### Product behaviour
+
+Users often interact with the application in ways you wouldn't expect. During review a bug might pop up which is hard to fix with the current implementation constraints. So now the whole team has to rethink and introduce small hacks to let the feature ship as soon as possible. With an upfront rigorous analysis of the requirements this can be avoided. Use this checklist as a conversation starter.
+
+1. If on one page, your feature shows some popups what happens when other features also shows their popup? Do the popups overlap each other or is there co-ordination logic to prioritise them?
+2. If a feature takes multiple steps to complete, what if user tries to do them out of order?
+3. If user completes one step of a multi-step form, are they allowed to edit it later? How will you get the previous filled data?
+4. If they are allowed to edit data in previous step, what happens to data filled in the steps after that one? Does that become invalid and they have to re-fill those?
+5. What if user does things half way and exit the page? How will you bring them back to their last checkpoint.
+6. Is interactive items usable with keyboard? Does the form submit with Enter key?
+7. If request takes a long time, will you block user till it completes or let them do other things.
+8. What if user exits your feature while request is in-progress? Do you cancel the calls or would it complete in background? Will user be notified if it succeeds? Will the notification interrupt user if they are on another feature?
+9. If you show a celebration UI to notify user they have completed all the steps. will that keep coming or will it come only once or user has to permanently dismiss it or will it go away after some days automatically?
+10. If user has reached end state of your feature, what will they be shown? Suppose on home there was a promo card as entry point, is it supposed to stop coming?
+11. If your app has session timeout, what will happen if it times-out in the middle of a user action?
+12. If user falls into an inconsistent state, how will they be brought back to working state?
+
+### Misc
+
+1. If you roll out a feature behind feature flags, how hard will it be to remove the feature flag to make the feature GA?
+2. Do the internal tracking metrics provided to you covering all important feature interactions? card viewed, page visit, button & link click, modal open, form fill, form submit etc.
+3. If the feature is rolled out with a marketing campaign, how will the analytics attribute the metrics to that campaign?
+4. Since client & server code would often have slightly different times of deployment (say 40 mins gap), how do you make sure that new server code + old client or old server + new client code keeps working?
+5. If you're using local storage to store things like my_modal_closed, what will happen if user logs into the account with different device?
+6. Are you properly deprecating a Local Storage key? What if you remove the key from your code but later another dev adds the same key for different purpose? Their feature might behave weirdly for some clients who had different data saved in that key.
+7. If you're building a generic solution to be used by other devs, is there an escape hatch that can be used to ship stuff that doesn't fit within the first class solution?
+8. If you're adding a DX tool, how much does it increase build time & overall deployment time?
+9. If you're adding a client library how much does it increase the bundle size? Is there another library in the project that can be made to do what you want?
+10. If you're integration a SASS service, what's the performance impact? Will it become a critical bottleneck? Are there privacy implications?
+
+## That section in the end of every tech article which nobody reads.
+
+As you might have noticed, most points are generally applicable but there would be lot of cases where you need lot of context to figure out the edge cases. I'd highly recommend you to keep atleast a private list of those for reference.
+
+I'll keep updating this list as I gain more experience. If you have some items to add, suggest them to me on Twitter. You can <TwitterShare meta={meta} children="share this article on Twitter" /> if you like.
+
+export default function Post({ children }) {
+  return <BlogLayout meta={meta}>{children}</BlogLayout>;
+}
