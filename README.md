@@ -7,3 +7,4 @@ This repo contains the source code + posts for my [personal website](https://dev
 1. Run `yarn gen:post slug-of-article`.
 1. Stop server, clear `.next` and restart.
 1. In `blog-previews` repo, run `yarn generate` then `yarn copy`.
+1. Change the "Hot off the press" article.

@@ -19,6 +19,7 @@ const categoryNameMapping = {
   javascript: 'JavaScript',
   react: 'React',
   state_management: 'State Management',
+  engineering: 'Engineering',
   mongodb: 'MongoDB',
   tailwindcss: 'TailwindCSS',
   design_systems: 'Design Systems',

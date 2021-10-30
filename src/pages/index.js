@@ -130,8 +130,10 @@ const Home = () => {
         </section>
         <section className="mt-8 text-lg md:text-xl md:flex" ref={latestArticleRef}>
           <h1 className="font-bold text-primary-600">Hot off the press:</h1>
-          <Link href="/blog/git-multiple-github-accounts">
-            <a className="md:ml-2 hover:underline">Setup Git for work & personal GitHub accounts</a>
+          <Link href="/blog/edge-case-product-checklist">
+            <a className="max-w-lg md:ml-2 hover:underline">
+              Checklist to spot edge cases in API contracts, design mockups & product behaviour
+            </a>
           </Link>
         </section>
         <SectionPackages>
