@@ -112,7 +112,7 @@ function BlogLayout(props) {
     <div className="relative min-h-screen py-8 bg-gray-100 px:4 sm:px-24 lg:px-32 xl:px-40 grid grid-cols-12 grid-rows-main-fill font-body">
       <BlogHead post={meta} />
       <SiteNavbar />
-      <main className="py-8 mt-10 col-start-2 col-span-10 xl:col-start-4 xl:col-span-6 row-auto">
+      <main className="pt-20 pb-8 col-start-2 col-span-10 xl:px-10 xl:col-start-3 xl:col-span-8 2xl:col-start-4 2xl:col-span-6 row-auto">
         <article>
           <MDXHeading
             level={1}
