@@ -14,17 +14,21 @@ function convertToSlug(Text = '') {
 }
 
 const anchorTextLevelMapping = {
-  '1': 'text-2xl -ml-10',
-  '2': 'text-xl',
-  '3': 'text-md',
+  1: 'text-2xl -ml-10',
+  2: 'text-xl',
+  3: 'text-md',
 };
 
 /** @param { MDXHeadingProps } props */
 export default function MDXHeading(props) {
   const { level = 3, className = '', children, showAnchorLink = true, ...restProps } = props;
 
-  const fullClassName = `group flex items-baseline text-gray-800 font-bold font-heading scroll-mt ${className}`;
-  const fullAnchorClassName = `inline -ml-8 mr-2 text-xl text-gray-800 opacity-0 group-hover:opacity-100 focus:opacity-100 transition ${anchorTextLevelMapping[level]}`;
+  const fullClassName = `group flex items-baseline text-gray-800 target:text-primary-700 font-bold font-heading scroll-mt ${className}`;
+  const fullAnchorClassName = `
+    inline -ml-8 mr-2 text-xl opacity-0 transition
+    group-hover:opacity-100 group-target:opacity-100 focus:opacity-100
+    ${anchorTextLevelMapping[level]}
+  `;
   const slug = convertToSlug(children);
 
   /** @type { HeadingTag } */
