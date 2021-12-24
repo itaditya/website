@@ -108,7 +108,7 @@ const Blog = (props) => {
                       <li
                         key={category}
                         className={cn({
-                          'ml-2 transform transition ease-out': true,
+                          'ml-2 transition ease-out': true,
                           'text-primary-600': stateActiveCategory === category,
                           'hover:text-gray-900 hover:translate-x-1':
                             stateActiveCategory !== category,

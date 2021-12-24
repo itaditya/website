@@ -9,8 +9,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        gray: colors.blueGray,
-        sky: colors.sky,
+        current: 'currentColor',
+        gray: colors.slate,
         primary: {
           300: 'hsl(155, 47%, 86%)',
           400: 'hsl(155, 47%, 66%)',
@@ -36,8 +36,5 @@ module.exports = {
       },
     },
   },
-  mode: 'jit',
-  purge: {
-    content: ['./src/**/*.js'],
-  },
+  content: ['./src/**/*.js'],
 };
