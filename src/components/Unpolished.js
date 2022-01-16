@@ -5,7 +5,7 @@
  * @typedef { import('./types/Unpolished').UnpolishedProps } UnpolishedProps
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import SiteHead from '_components/SiteHead';
@@ -16,11 +16,32 @@ import cn from '_utils/classnames';
 
 import renderContentfulMarkup from '_utils/renderContentfulMarkup';
 
+function getPostIdFromUrl() {
+  const { hash } = window.location;
+  const postId = hash.substring(1);
+
+  if (postId.length === 0) {
+    return null;
+  }
+
+  return postId;
+}
+
 /** @type { PostContentComp } */
 const PostContent = (props) => {
   const { post } = props;
+  const postId = post.id;
   const [stateExpanded, setStateExpanded] = useState(false);
   const markup = renderContentfulMarkup(post.content);
+
+  useEffect(() => {
+    const postIdFromUrl = getPostIdFromUrl();
+
+    if (postIdFromUrl && postIdFromUrl === postId) {
+      setStateExpanded(true);
+    }
+  }, [postId]);
+
   return (
     <article
       id={post.id}
@@ -60,7 +81,7 @@ const PostContent = (props) => {
       {!stateExpanded && <div className="pb-10"></div>}
     </article>
   );
-}
+};
 
 /** @param { UnpolishedProps } props */
 const Unpolished = (props) => {
@@ -95,6 +116,6 @@ const Unpolished = (props) => {
       <SiteFooter />
     </div>
   );
-}
+};
 
 export default Unpolished;
