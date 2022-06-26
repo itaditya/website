@@ -1,5 +1,32 @@
 [
   {
+    "name": "Solid Command Palette",
+    "description": "Search and launch quick actions with keyboard",
+    "links": {
+      "github": "https://github.com/itaditya/solid-command-palette",
+      "website": "https://solid-command-palette.vercel.app",
+      "npm": "https://www.npmjs.com/package/solid-command-palette"
+    }
+  },
+  {
+    "name": "MSW Storybook Addon",
+    "description": "Mock API requests inside Storybook",
+    "links": {
+      "github": "https://github.com/mswjs/msw-storybook-addon",
+      "website": "https://msw-sb.vercel.app",
+      "npm": "https://www.npmjs.com/package/msw-storybook-addon"
+    }
+  },
+  {
+    "name": "Tailwind Tokens",
+    "description": "Exported as CSS variables, SASS map & variables, JSON, ESM & CJS",
+    "links": {
+      "github": "https://github.com/itaditya/tw-universal-tokens",
+      "website": "https://tw-tokens.netlify.app/",
+      "npm": "https://www.npmjs.com/package/tw-universal-tokens"
+    }
+  },
+  {
     "name": "Birla",
     "description": "Generate React component files in one command",
     "links": {
@@ -9,7 +36,16 @@
     }
   },
   {
-    "name": "Circlebars",
+    "name": "Variants Storybook Addon",
+    "description": "Show all variants of a component in a grid",
+    "links": {
+      "github": "https://github.com/itaditya/storybook-addon-variants",
+      "website": "https://storybook-addon-variants.vercel.app/?path=/story/example-button--primary&globals=variantsAddon:true",
+      "npm": "https://www.npmjs.com/package/storybook-addon-variants"
+    }
+  },
+  {
+    "name": "Circle Bars",
     "description": "Circular progress bars made easy",
     "links": {
       "github": "https://github.com/itaditya/circlebars",
@@ -18,7 +54,7 @@
     }
   },
   {
-    "name": "Optimisitc Toggle",
+    "name": "Optimistic Toggle",
     "description": "Respond to user actions without waiting on API",
     "links": {
       "github": "https://github.com/interviewstreet/react-optimistic-toggle",
@@ -27,8 +63,8 @@
     }
   },
   {
-    "name": "Mentions Plugin",
-    "description": "Detects if a GitHub user is mentioned in a comment.",
+    "name": "Mentions Probot Plugin",
+    "description": "Get notified when users are mentioned in GitHub comments",
     "links": {
       "github": "https://github.com/itaditya/probot-on-mention",
       "website": "https://github.com/itaditya/probot-on-mention/blob/master/README.md",

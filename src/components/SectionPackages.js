@@ -11,12 +11,12 @@ export default function SectionPackages(props) {
       className={cn({ 'mt-56 flex md:flex flex-col items-center': true, [className]: true })}
     >
       <h2 className="text-4xl font-bold text-center text-gray-700">Open Source Tools</h2>
-      <div className="grid gap-x-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 w-full mt-16">
+      <div className="grid gap-x-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 w-full mt-16">
         {myPackages.map((pkg) => (
-          <article className="px-4 py-6 text-center bg-white rounded-lg shadow-xl" key={pkg.name}>
-            <h3 className="w-full text-2xl text-gray-700">{pkg.name}</h3>
-            <p className="mt-3 text-gray-500">{pkg.description}</p>
-            <ul className="flex items-center px-8 mt-6 justify-evenly">
+          <article className="relative px-4 py-6 text-center bg-white rounded-lg shadow-xl" key={pkg.name}>
+            <h3 className="w-full text-xl text-gray-700 truncate">{pkg.name}</h3>
+            <p className="mt-3 mb-12 text-gray-500">{pkg.description}</p>
+            <ul className="absolute flex items-center justify-center gap-2 px-8 inset-x-0 bottom-3">
               <li>
                 <a
                   href={pkg.links.website}
