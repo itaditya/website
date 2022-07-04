@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { PostsPopularList } from '_components/PostsSuggestion';
 import SiteHead from '_components/SiteHead';
@@ -33,14 +34,28 @@ export function getStaticProps() {
 /** @param { BlogPageProps } props */
 const Blog = (props) => {
   const { postsMap, categoryMap } = props;
-  const [stateActiveCategory, setStateActiveCategory] = useState(
-    /** @type { Categories } */
-    ('all'),
-  );
+  // const [stateActiveCategory, setStateActiveCategory] = useState(
+  //   /** @type { Categories } */
+  //   ('all'),
+  // );
+  const router = useRouter();
+  console.log(`router.query`, router.query); // aditodo remove this
   const deviceWidth = useDeviceWidth();
   const categories = getCategories();
 
+  /** @type { Categories } */
+  const stateActiveCategory = router.query.category || 'all';
   const shownPosts = categoryMap[stateActiveCategory] || [];
+
+  function setStateActiveCategory(selectedCategory) {
+    router.push({
+      query: {
+        category: selectedCategory,
+      },
+    }, undefined, {
+      scroll: false,
+    });
+  }
 
   /** @type { SelectChangeHandler } */
   const handleSelectChange = (event) => {
