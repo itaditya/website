@@ -33,7 +33,7 @@ function CodeBlock({ metastring, className = '', children }) {
   return (
     <Highlight {...defaultProps} code={children} language={language} theme={theme}>
       {({ className = '', style, tokens, getLineProps, getTokenProps }) => {
-        const fullClassName = `mb-2 pt-6 rounded-md match-braces overflow-auto highlight-diff ${className}`;
+        const fullClassName = `mb-2 rounded-md match-braces overflow-auto highlight-diff ${className}`;
         return (
           <pre className={fullClassName} style={style}>
             {tokens.map((line, i) => {
